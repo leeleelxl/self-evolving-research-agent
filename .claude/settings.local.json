@@ -1,0 +1,10 @@
+{
+  "hooks": {
+    "PreCompact": [
+      {
+        "type": "command",
+        "command": "cat <<'HOOK_EOF'\n请在压缩前执行以下操作：\n1. 更新 memory/status.md — 记录当前进度和下一步行动\n2. 更新 memory/tasks.md — 标记已完成的任务\n3. 如果有重要的技术发现或踩坑，追加到 memory/retro.md\nHOOK_EOF"
+      }
+    ]
+  }
+}

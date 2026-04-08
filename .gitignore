@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.venv/
+
+# Data
+data/*.pdf
+data/*.jsonl
+*.db
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Experiments (large result files)
+experiments/results/*.json
+
+# Environment
+.env
