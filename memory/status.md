@@ -2,27 +2,23 @@
 
 > 更新时间：2026-04-08
 
-## 阶段：项目初始化
+## 阶段：项目完成，可面试可发布
 
-- 经过系统调研，确认项目方向：自进化多 Agent 学术研究系统
-- 项目骨架已搭建，代码尚未开始
-- 前序调研报告见 `docs/research_report.md`
+- 5 Agent 全部实现，Pipeline 端到端跑通
+- 自进化验证通过：7.8 → 8.0（+0.2），queries 3x 增长
+- 消融实验完成：5 组 HotpotQA（50 samples），用真实 embedding（BGE-small）
+- 最佳配置：fixed chunk + hybrid retrieval（F1=0.740）
+- 38+ tests，8 篇知识文档
+- README 含真实量化数据
 
-## 核心定位
+## 核心数据（面试直接用）
 
-对标 GPT Researcher / STORM，差异化点：
-1. **自进化机制**：Critic Agent 评分 → 反馈驱动检索策略改进
-2. **完整消融实验**：chunk 策略 × 检索方式 × rerank 方法的全组合对比
-3. **Agentic RAG**：Agent 主动决策何时检索、检索什么、如何验证
-4. **在公开 benchmark 上跑数据**：HotpotQA / MuSiQue
+### 自进化
+- Round 0: overall=7.8 → Round 1: overall=8.0 (Δ+0.2)
+- Queries: 8 → 24（3x 增长，定向补充缺失方向）
+- Notes: 45 → 95（累积）
 
-## 下一步行动
-
-1. 完成架构设计文档 (`docs/architecture.md`)
-2. 实现项目骨架代码（Agent 基类、Pipeline 框架）
-3. 接入 Semantic Scholar / arXiv 检索
-4. 实现基础 RAG pipeline（chunk + 向量检索 + rerank）
-
-## 面试叙事
-
-> "我做了一个自进化的多 Agent 学术研究系统，核心创新是 Critic Agent 驱动的检索策略自适应优化。在 HotpotQA 上，经过 3 轮自进化后准确率提升了 X%。项目包含完整的 RAG 消融实验，对比了 N 种 chunk 策略和 M 种检索方式的组合效果。"
+### 消融实验（BGE-small embedding, 50 samples）
+- Best: fixed × hybrid = F1 0.740
+- Hybrid > Dense > Sparse（RRF 融合效果最好）
+- Embedding 质量对 Dense 影响 +36%

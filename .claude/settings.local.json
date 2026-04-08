@@ -1,9 +1,23 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(gh api:*)",
+      "Bash(curl -s https://api.ai.ohfi.com.cn/v1/models -H \"Authorization: Bearer sk-6c21b9e5d527c72902552432d014ddeb6969d0bc220144cb4c80b8371332ac90\")",
+      "Bash(python3 -c \"import sys,json; data=json.load\\(sys.stdin\\); [print\\(m['id']\\) for m in data['data']]\")",
+      "Bash(curl:*)",
+      "Bash(python:*)"
+    ]
+  },
   "hooks": {
     "PreCompact": [
       {
-        "type": "command",
-        "command": "cat <<'HOOK_EOF'\n请在压缩前执行以下操作：\n1. 更新 memory/status.md — 记录当前进度和下一步行动\n2. 更新 memory/tasks.md — 标记已完成的任务\n3. 如果有重要的技术发现或踩坑，追加到 memory/retro.md\nHOOK_EOF"
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '请在压缩前更新: memory/status.md (进度) + memory/tasks.md (任务) + memory/retro.md (经验)'"
+          }
+        ]
       }
     ]
   }
