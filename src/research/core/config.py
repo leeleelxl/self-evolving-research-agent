@@ -90,7 +90,11 @@ class PipelineConfig(BaseModel):
     llm: LLMConfig = Field(default_factory=LLMConfig)
     critic_model: str = Field(
         default="gpt-4o",
-        description="Critic 可用更强的模型以确保评估质量",
+        description="Critic 主模型",
+    )
+    critic_secondary_model: str = Field(
+        default="claude-sonnet-4-6-20250514",
+        description="Critic 副模型（交叉验证，设为空字符串禁用）",
     )
 
     # RAG pipeline

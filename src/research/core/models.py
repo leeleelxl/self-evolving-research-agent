@@ -151,12 +151,19 @@ class CriticScores(BaseModel):
 
     四个维度的设计参考了学术论文审稿的评估标准。
     每个维度 0-10 分，便于量化追踪自进化效果。
+
+    支持 Multi-LLM 交叉评估：当使用双模型时，
+    scores 是均值，cross_model_spread 记录各维度分歧度。
     """
 
     coverage: float = Field(ge=0, le=10, description="文献覆盖度")
     depth: float = Field(ge=0, le=10, description="分析深度")
     coherence: float = Field(ge=0, le=10, description="逻辑连贯性")
     accuracy: float = Field(ge=0, le=10, description="事实准确性")
+    cross_model_spread: dict[str, float] = Field(
+        default_factory=dict,
+        description="双模型评分分歧度（各维度的 |model1 - model2|），为空表示单模型",
+    )
 
     @property
     def overall(self) -> float:
