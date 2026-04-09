@@ -65,6 +65,24 @@ class RerankConfig(BaseModel):
     top_k: int = Field(default=10, description="rerank 后保留的 chunk 数")
 
 
+class KnowledgeBaseConfig(BaseModel):
+    """KnowledgeBase 配置 — 控制论文知识库的构建和检索"""
+
+    enabled: bool = Field(
+        default=True,
+        description="是否启用 KnowledgeBase 过滤（关闭则 Reader 读所有论文）",
+    )
+    top_k_per_question: int = Field(
+        default=10,
+        ge=1,
+        description="每个子问题从知识库检索的论文数",
+    )
+    embedding_model: str = Field(
+        default="BAAI/bge-small-en-v1.5",
+        description="Embedding 模型名称",
+    )
+
+
 class PipelineConfig(BaseModel):
     """Pipeline 总配置 — 一次实验的完整参数"""
 
@@ -79,6 +97,7 @@ class PipelineConfig(BaseModel):
     chunk: ChunkConfig = Field(default_factory=ChunkConfig)
     retrieval: RetrievalConfig = Field(default_factory=RetrievalConfig)
     rerank: RerankConfig = Field(default_factory=RerankConfig)
+    knowledge_base: KnowledgeBaseConfig = Field(default_factory=KnowledgeBaseConfig)
 
     # 自进化
     max_iterations: int = Field(

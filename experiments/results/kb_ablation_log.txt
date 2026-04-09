@@ -1,0 +1,300 @@
+KnowledgeBase Ablation Experiment
+Question: What are the recent advances in retrieval-augmented generation (RAG) for large language models?
+Timestamp: 2026-04-09T10:01:07.211092
+
+============================================================
+Running: KB disabled
+============================================================
+
+[2m02:01:07[0m [1mpipeline_start                [0m [36mcomponent[0m=[35mpipeline[0m [36mquestion[0m=[35m'What are the recent advances in retrieval-augmented generation (RAG) for large language models?'[0m
+[2m02:01:07[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m0[0m
+[2m02:01:07[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mFalse[0m [36miteration[0m=[35m0[0m
+[2m02:01:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in retrieval-augmented generation (RAG) for large la'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m02:01:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2690[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m02:01:12[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m7[0m [36msub_questions[0m=[35m5[0m
+[2m02:01:12[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m7[0m
+[2m02:01:12[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey review'[0m
+[2m02:01:12[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'RAG architectures dense sparse hybrid retrieval "large language model"'[0m
+[2m02:01:12[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval augmented" LLMs multi-hop retrieval routing contrastive learning'[0m
+[2m02:01:18[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey review'[0m
+[2m02:01:18[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG architectures dense sparse hybrid retrieval "large language model"'[0m
+[2m02:01:18[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'hallucination mitigation factuality robustness "retrieval-augmented" generation'[0m
+[2m02:01:24[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'hallucination mitigation factuality robustness "retrieval-augmented" generation'[0m
+[2m02:01:34[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG architectures dense sparse hybrid retrieval "large language model"'[0m
+[2m02:01:34[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'evaluation benchmarks for retrieval-augmented generation open-domain QA LLM'[0m
+[2m02:01:35[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m19[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey review'[0m
+[2m02:01:35[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'efficient scalable RAG systems latency optimization indexing "vector database"'[0m
+[2m02:01:39[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'evaluation benchmarks for retrieval-augmented generation open-domain QA LLM'[0m
+[2m02:01:39[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'hallucination mitigation factuality robustness "retrieval-augmented" generation'[0m
+[2m02:01:39[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'domain-specific RAG legal biomedical code assistants "retrieval-augmented"'[0m
+[2m02:01:44[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'domain-specific RAG legal biomedical code assistants "retrieval-augmented"'[0m
+[2m02:01:55[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'evaluation benchmarks for retrieval-augmented generation open-domain QA LLM'[0m
+[2m02:01:59[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m19[0m [36mquery[0m=[35m'domain-specific RAG legal biomedical code assistants "retrieval-augmented"'[0m
+[2m02:01:59[0m [1mquery_failed                  [0m [36magent[0m=[35mRetriever[0m [36merror[0m=[35m"Client error '429 Unknown Error' for url 'https://export.arxiv.org/api/query?search_query=all%3A%22retrieval+augmented%22+LLMs+multi-hop+retrieval+routing+contrastive+learning&start=0&max_results=20&sortBy=relevance'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"[0m [36mquery[0m=[35m'"retrieval augmented" LLMs multi-hop retrieval routing contrastive learning'[0m
+[2m02:01:59[0m [1mquery_failed                  [0m [36magent[0m=[35mRetriever[0m [36merror[0m=[35m"Client error '429 Unknown Error' for url 'https://export.arxiv.org/api/query?search_query=all%3Aefficient+scalable+RAG+systems+latency+optimization+indexing+%22vector+database%22&start=0&max_results=20&sortBy=relevance'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"[0m [36mquery[0m=[35m'efficient scalable RAG systems latency optimization indexing "vector database"'[0m
+[2m02:01:59[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m58[0m
+[2m02:01:59[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m57[0m
+[2m02:01:59[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m50[0m
+[2m02:01:59[0m [1mreading_start                 [0m [36magent[0m=[35mReader[0m [36mnum_papers[0m=[35m50[0m
+[2m02:01:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:01:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:01:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:01:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:01:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1829[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2549[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1841[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:05[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1817[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:07[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2137[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:07[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2220[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:08[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2489[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:08[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2196[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2297[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2242[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:13[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2103[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:13[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:13[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2373[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:13[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:14[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2189[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:14[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2457[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:16[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2020[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:16[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:17[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2108[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:17[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:19[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2141[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:19[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:21[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2375[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:21[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:24[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2747[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:24[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:24[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2793[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:24[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:26[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2070[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:28[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2065[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:28[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:28[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1667[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:28[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:31[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2403[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:31[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:32[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2209[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:32[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:32[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2240[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:32[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2669[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:33[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:36[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2147[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:36[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:36[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2291[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:36[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:37[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2355[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:37[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:40[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2375[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:40[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:41[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1782[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:41[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:41[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2329[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:41[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:41[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2364[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:41[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:44[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2204[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:44[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:45[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2054[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:45[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:46[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2359[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:46[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:46[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2221[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:46[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:48[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2224[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:48[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:49[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2276[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:49[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:49[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1808[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:49[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:52[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2670[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:52[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:53[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2744[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:53[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:53[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2655[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:53[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:54[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2313[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:54[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:02:57[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2821[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:58[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2432[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:58[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2636[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:02:58[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2521[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:03:01[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1941[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:03:01[0m [1mreading_done                  [0m [36magent[0m=[35mReader[0m [36mkept[0m=[35m50[0m [36mtotal[0m=[35m50[0m
+[2m02:03:01[0m [1mwriting                       [0m [36magent[0m=[35mWriter[0m [36mnum_notes[0m=[35m50[0m
+[2m02:03:01[0m [1mgenerating_structured         [0m [36magent[0m=[35mWriter[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mResearchReport[0m
+[2m02:04:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m32268[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchReport[0m
+[2m02:04:09[0m [1mwriting_done                  [0m [36magent[0m=[35mWriter[0m [36msections[0m=[35m5[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models'[0m
+[2m02:04:09[0m [1mevaluating                    [0m [36magent[0m=[35mCritic[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models'[0m
+[2m02:04:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mCritic[0m [36mmessage_preview[0m=[35m'## Original Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) f'[0m [36mmodel[0m=[35mCriticFeedback[0m
+[2m02:04:24[0m [1mstructured_output             [0m [36mjson_len[0m=[35m9183[0m [36mmodel[0m=[35mgpt-4o[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m02:04:24[0m [1mevaluation_done               [0m [36maccuracy[0m=[35m8.7[0m [36magent[0m=[35mCritic[0m [36mcoherence[0m=[35m8.2[0m [36mcoverage[0m=[35m7.5[0m [36mdepth[0m=[35m7.8[0m [36mis_satisfactory[0m=[35mTrue[0m [36moverall[0m=[35m8.05[0m
+[2m02:04:24[0m [1miteration_end                 [0m [36mcomponent[0m=[35mpipeline[0m [36mis_satisfactory[0m=[35mTrue[0m [36miteration[0m=[35m0[0m [36mkb_filtered[0m=[35mFalse[0m [36moverall_score[0m=[35m8.05[0m [36mpapers_retrieved[0m=[35m50[0m [36mpapers_to_read[0m=[35m50[0m [36mtotal_notes[0m=[35m50[0m
+[2m02:04:24[0m [1mpipeline_converged            [0m [36mcomponent[0m=[35mpipeline[0m [36miterations[0m=[35m1[0m
+
+============================================================
+Running: KB enabled
+============================================================
+
+[2m02:04:24[0m [1mpipeline_start                [0m [36mcomponent[0m=[35mpipeline[0m [36mquestion[0m=[35m'What are the recent advances in retrieval-augmented generation (RAG) for large language models?'[0m
+[2m02:04:24[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m0[0m
+[2m02:04:24[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mFalse[0m [36miteration[0m=[35m0[0m
+[2m02:04:24[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in retrieval-augmented generation (RAG) for large la'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m02:04:29[0m [1mstructured_output             [0m [36mjson_len[0m=[35m3250[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m02:04:29[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m9[0m [36msub_questions[0m=[35m5[0m
+[2m02:04:29[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m9[0m
+[2m02:04:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models architectures survey'[0m
+[2m02:04:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'RAG architectures dense retrievers hybrid retrievers knowledge-augmented language models'[0m
+[2m02:04:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'trainable retrievers end-to-end RAG contrastive learning knowledge-intensive NLP'[0m
+[2m02:04:35[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models architectures survey'[0m
+[2m02:04:35[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG architectures dense retrievers hybrid retrievers knowledge-augmented language models'[0m
+[2m02:04:35[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'trainable retrievers end-to-end RAG contrastive learning knowledge-intensive NLP'[0m
+[2m02:04:51[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'trainable retrievers end-to-end RAG contrastive learning knowledge-intensive NLP'[0m
+[2m02:04:51[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"end-to-end" RAG joint retriever generator optimization large language models'[0m
+[2m02:04:51[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models architectures survey'[0m
+[2m02:04:51[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"multi-hop" retrieval augmented generation reasoning toolformer tool-use RAG'[0m
+[2m02:04:51[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG architectures dense retrievers hybrid retrievers knowledge-augmented language models'[0m
+[2m02:04:51[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'evaluation of retrieval-augmented generation hallucination faithfulness grounding benchmarks'[0m
+[2m02:04:56[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'evaluation of retrieval-augmented generation hallucination faithfulness grounding benchmarks'[0m
+[2m02:04:56[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'RAG evaluation metrics retrieval fidelity answer correctness open-domain QA benchmarks'[0m
+[2m02:05:01[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG evaluation metrics retrieval fidelity answer correctness open-domain QA benchmarks'[0m
+[2m02:05:12[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'evaluation of retrieval-augmented generation hallucination faithfulness grounding benchmarks'[0m
+[2m02:05:12[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'efficient RAG latency-aware retrieval scalable vector databases routing compression'[0m
+[2m02:05:17[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG evaluation metrics retrieval fidelity answer correctness open-domain QA benchmarks'[0m
+[2m02:05:17[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'domain-specific retrieval augmented generation code models multi-modal RAG long-context'[0m
+[2m02:05:26[0m [1marxiv_request_error           [0m [36merror[0m=[35m[0m [36mquery[0m=[35m'"end-to-end" RAG joint retriever generator optimization large language models'[0m
+[2m02:05:26[0m [1mquery_failed                  [0m [36magent[0m=[35mRetriever[0m [36merror[0m=[35m"Client error '429 Unknown Error' for url 'https://export.arxiv.org/api/query?search_query=all%3A%22multi-hop%22+retrieval+augmented+generation+reasoning+toolformer+tool-use+RAG&start=0&max_results=20&sortBy=relevance'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"[0m [36mquery[0m=[35m'"multi-hop" retrieval augmented generation reasoning toolformer tool-use RAG'[0m
+[2m02:05:26[0m [1mquery_failed                  [0m [36magent[0m=[35mRetriever[0m [36merror[0m=[35m"Client error '429 Unknown Error' for url 'https://export.arxiv.org/api/query?search_query=all%3Aefficient+RAG+latency-aware+retrieval+scalable+vector+databases+routing+compression&start=0&max_results=20&sortBy=relevance'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"[0m [36mquery[0m=[35m'efficient RAG latency-aware retrieval scalable vector databases routing compression'[0m
+[2m02:05:26[0m [1mquery_failed                  [0m [36magent[0m=[35mRetriever[0m [36merror[0m=[35m"Client error '429 Unknown Error' for url 'https://export.arxiv.org/api/query?search_query=all%3Adomain-specific+retrieval+augmented+generation+code+models+multi-modal+RAG+long-context&start=0&max_results=20&sortBy=relevance'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429"[0m [36mquery[0m=[35m'domain-specific retrieval augmented generation code models multi-modal RAG long-context'[0m
+[2m02:05:26[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m0[0m
+[2m02:05:26[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m0[0m
+[2m02:05:26[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m0[0m
+[2m02:05:26[0m [1mno_papers_found               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m0[0m
+[2m02:05:26[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m1[0m
+[2m02:05:26[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mFalse[0m [36miteration[0m=[35m1[0m
+[2m02:05:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in retrieval-augmented generation (RAG) for large la'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m02:05:32[0m [1mstructured_output             [0m [36mjson_len[0m=[35m3187[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m02:05:32[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m10[0m [36msub_questions[0m=[35m5[0m
+[2m02:05:32[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m10[0m
+[2m02:05:32[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m30[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey'[0m
+[2m02:05:32[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m30[0m [36mquery[0m=[35m'RAG architectures dense passage retrieval LLMs'[0m
+[2m02:05:32[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'advanced retrieval-augmented generation hybrid retrieval reranking LLM'[0m
+[2m02:05:38[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG architectures dense passage retrieval LLMs'[0m
+[2m02:05:38[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'advanced retrieval-augmented generation hybrid retrieval reranking LLM'[0m
+[2m02:05:39[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m29[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey'[0m
+[2m02:05:39[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'"retrieval augmented" generation system design multi-step retrieval'[0m
+[2m02:05:53[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'advanced retrieval-augmented generation hybrid retrieval reranking LLM'[0m
+[2m02:05:53[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'training retrieval-augmented generation end-to-end differentiable retriever'[0m
+[2m02:05:53[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG architectures dense passage retrieval LLMs'[0m
+[2m02:05:53[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'fine-tuning and alignment methods for retrieval augmented LLMs'[0m
+[2m02:05:58[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'training retrieval-augmented generation end-to-end differentiable retriever'[0m
+[2m02:06:14[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'training retrieval-augmented generation end-to-end differentiable retriever'[0m
+[2m02:06:14[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'evaluation benchmarks for retrieval-augmented generation faithfulness grounding'[0m
+[2m02:06:14[0m [1marxiv_request_error           [0m [36merror[0m=[35m[0m [36mquery[0m=[35m'"retrieval augmented" generation system design multi-step retrieval'[0m
+[2m02:06:14[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'hallucination reduction in retrieval augmented large language models'[0m
+[2m02:06:20[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'evaluation benchmarks for retrieval-augmented generation faithfulness grounding'[0m
+[2m02:06:29[0m [1marxiv_request_error           [0m [36merror[0m=[35m[0m [36mquery[0m=[35m'fine-tuning and alignment methods for retrieval augmented LLMs'[0m
+[2m02:06:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'efficient scalable RAG systems indexing caching latency optimization'[0m
+[2m02:06:34[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'evaluation benchmarks for retrieval-augmented generation faithfulness grounding'[0m
+[2m02:06:34[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'domain-specific RAG applications legal medical scientific question answering'[0m
+[2m02:06:34[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'efficient scalable RAG systems indexing caching latency optimization'[0m
+[2m02:06:39[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'domain-specific RAG applications legal medical scientific question answering'[0m
+[2m02:06:49[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'efficient scalable RAG systems indexing caching latency optimization'[0m
+[2m02:06:49[0m [1marxiv_request_error           [0m [36merror[0m=[35m[0m [36mquery[0m=[35m'hallucination reduction in retrieval augmented large language models'[0m
+[2m02:06:55[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m19[0m [36mquery[0m=[35m'domain-specific RAG applications legal medical scientific question answering'[0m
+[2m02:06:55[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m48[0m
+[2m02:06:55[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m48[0m
+[2m02:06:55[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m48[0m
+[2m02:06:55[0m [1mloading_embedding_model       [0m [36mmodel[0m=[35mBAAI/bge-small-en-v1.5[0m
+[2m02:06:55[0m [1mindexing_papers               [0m [36mcomponent[0m=[35mknowledge_base[0m [36mcount[0m=[35m48[0m
+[2m02:06:58[0m [1mindexing_done                 [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnew_chunks[0m=[35m163[0m [36mnew_papers[0m=[35m48[0m [36mtotal_index_size[0m=[35m163[0m
+[2m02:06:58[0m [1mretrieve_for_questions        [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnum_questions[0m=[35m5[0m [36mtotal_unique_papers[0m=[35m21[0m
+[2m02:06:58[0m [1mkb_filter                     [0m [36mcomponent[0m=[35mpipeline[0m [36mkb_total_indexed[0m=[35m48[0m [36mrelevant_papers[0m=[35m21[0m [36mtotal_papers[0m=[35m48[0m
+[2m02:06:58[0m [1mreading_start                 [0m [36magent[0m=[35mReader[0m [36mnum_papers[0m=[35m21[0m
+[2m02:06:58[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:06:58[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:06:58[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:06:58[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:06:58[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:02[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1941[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:02[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:02[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2176[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:02[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2116[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:05[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1896[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:08[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2311[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:08[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:08[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2063[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:08[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2141[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:11[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1951[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:11[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1896[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2216[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:15[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1848[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:15[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:15[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1750[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:15[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2435[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:16[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:17[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2295[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:17[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:18[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1881[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:18[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:19[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2082[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:19[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m02:07:19[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2083[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:21[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1834[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:24[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2340[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:24[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2986[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:24[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2042[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m02:07:24[0m [1mreading_done                  [0m [36magent[0m=[35mReader[0m [36mkept[0m=[35m21[0m [36mtotal[0m=[35m21[0m
+[2m02:07:24[0m [1mwriting                       [0m [36magent[0m=[35mWriter[0m [36mnum_notes[0m=[35m21[0m
+[2m02:07:24[0m [1mgenerating_structured         [0m [36magent[0m=[35mWriter[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mResearchReport[0m
+[2m02:08:17[0m [1mstructured_output             [0m [36mjson_len[0m=[35m26505[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchReport[0m
+[2m02:08:17[0m [1mwriting_done                  [0m [36magent[0m=[35mWriter[0m [36msections[0m=[35m5[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models: Architectures, Optimization, Evaluation, and Applications'[0m
+[2m02:08:17[0m [1mevaluating                    [0m [36magent[0m=[35mCritic[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models: Architectures, Optimization, Evaluation, and Applications'[0m
+[2m02:08:17[0m [1mgenerating_structured         [0m [36magent[0m=[35mCritic[0m [36mmessage_preview[0m=[35m'## Original Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) f'[0m [36mmodel[0m=[35mCriticFeedback[0m
+[2m02:08:36[0m [1mstructured_output             [0m [36mjson_len[0m=[35m8150[0m [36mmodel[0m=[35mgpt-4o[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m02:08:36[0m [1mevaluation_done               [0m [36maccuracy[0m=[35m8.5[0m [36magent[0m=[35mCritic[0m [36mcoherence[0m=[35m8.5[0m [36mcoverage[0m=[35m7.5[0m [36mdepth[0m=[35m7.5[0m [36mis_satisfactory[0m=[35mTrue[0m [36moverall[0m=[35m8.0[0m
+[2m02:08:36[0m [1miteration_end                 [0m [36mcomponent[0m=[35mpipeline[0m [36mis_satisfactory[0m=[35mTrue[0m [36miteration[0m=[35m1[0m [36mkb_filtered[0m=[35mTrue[0m [36moverall_score[0m=[35m8.0[0m [36mpapers_retrieved[0m=[35m48[0m [36mpapers_to_read[0m=[35m21[0m [36mtotal_notes[0m=[35m21[0m
+[2m02:08:36[0m [1mpipeline_converged            [0m [36mcomponent[0m=[35mpipeline[0m [36miterations[0m=[35m2[0m
+
+============================================================
+KB ABLATION RESULTS
+============================================================
+
+Without KB:
+  Overall: 8.1 (cov=7.5 dep=7.8 coh=8.2 acc=8.7)
+  Papers read: 50 → 50 notes
+  Time: 196.9s
+
+With KB:
+  Overall: 8.0 (cov=7.5 dep=7.5 coh=8.5 acc=8.5)
+  Papers read: 48 → 21 notes
+  Time: 251.4s
+
+  Delta: 8.1 → 8.0 (Δ-0.1)
+
+Results saved to: /Users/lxl/.openclaw/code/research-agent/experiments/results/kb_ablation.json

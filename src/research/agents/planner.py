@@ -66,12 +66,15 @@ This is iteration {iteration}. The Critic Agent evaluated the previous survey an
 ### Suggested new queries:
 {new_queries}
 
+## Previously Executed Queries (DO NOT repeat these)
+{previous_queries}
+
 ## Your Task
 Based on the feedback above, create an IMPROVED search strategy:
 1. Add new sub-questions to address missing aspects
-2. Generate new search queries targeting the weak areas
+2. Generate NEW search queries targeting the weak areas — DO NOT repeat previous queries listed above
 3. Update focus areas to emphasize what's lacking
-4. Add previously covered topics to exclude_terms to avoid redundant retrieval
+4. Set exclude_terms to the key topics already well-covered, so retrieval focuses on gaps
 
 Keep the original sub-questions that are still relevant, and ADD new ones.
 Set iteration to {iteration}.
@@ -102,6 +105,7 @@ class PlannerAgent(BaseAgent):
         question: str,
         feedback: CriticFeedback | None = None,
         iteration: int = 0,
+        previous_queries: list[str] | None = None,
     ) -> ResearchPlan:
         """生成或更新研究计划
 
@@ -109,11 +113,14 @@ class PlannerAgent(BaseAgent):
             question: 研究问题
             feedback: 上一轮 Critic 的反馈（首轮为 None）
             iteration: 当前迭代轮次
+            previous_queries: 之前已执行的检索 query（避免重复）
         """
         if feedback is None or iteration == 0:
             prompt = self._build_initial_prompt(question)
         else:
-            prompt = self._build_refine_prompt(question, feedback, iteration)
+            prompt = self._build_refine_prompt(
+                question, feedback, iteration, previous_queries or [],
+            )
 
         self.logger.info("planning", iteration=iteration, has_feedback=feedback is not None)
 
@@ -138,7 +145,13 @@ class PlannerAgent(BaseAgent):
         question: str,
         feedback: CriticFeedback,
         iteration: int,
+        previous_queries: list[str],
     ) -> str:
+        prev_queries_text = (
+            "\n".join(f"- {q}" for q in previous_queries)
+            if previous_queries
+            else "- (first iteration, no previous queries)"
+        )
         return REFINE_PROMPT_TEMPLATE.format(
             question=question,
             iteration=iteration,
@@ -149,4 +162,5 @@ class PlannerAgent(BaseAgent):
             missing_aspects="\n".join(f"- {a}" for a in feedback.missing_aspects),
             improvement_suggestions="\n".join(f"- {s}" for s in feedback.improvement_suggestions),
             new_queries="\n".join(f"- {q}" for q in feedback.new_queries) if feedback.new_queries else "- (none suggested)",
+            previous_queries=prev_queries_text,
         )

@@ -47,6 +47,7 @@
 | 05 | [Multi-Agent Orchestration](05-multi-agent-orchestration.md) | `pipeline/research.py`, 所有 agents/ | 字节/阿里必问 |
 | 06 | [Prompt Engineering](06-prompt-engineering-for-agents.md) | 所有 agents/ 的 prompt | 所有大厂 |
 | 07 | [Testing Agent Systems](07-testing-agent-systems.md) | tests/ | 加分项 |
+| 08 | [RAG Pipeline 集成](08-rag-pipeline-integration.md) | `retrieval/knowledge_base.py`, `pipeline/research.py` | 阿里/字节必问 |
 
 ## 推荐学习资源（通用）
 

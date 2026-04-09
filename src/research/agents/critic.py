@@ -45,10 +45,13 @@ Scoring guidelines (0-10 scale):
   - 5-7: Generally coherent but some disconnected parts
   - 0-4: Disjointed, no clear narrative
 
-- Accuracy (准确性): Are claims supported by cited papers? Any factual errors?
-  - 8-10: All claims well-supported, no obvious errors
-  - 5-7: Mostly accurate, minor unsupported claims
-  - 0-4: Significant factual errors or unsupported claims
+- Accuracy (准确性): Are claims consistent with what the cited papers state?
+  Note: This survey is based on paper abstracts, not full text. \
+  Score accuracy based on whether claims are consistent with abstract-level information. \
+  Do NOT penalize for lacking details that would only be in the full paper.
+  - 8-10: Claims accurately reflect the cited papers' abstracts
+  - 5-7: Mostly accurate, some claims slightly overstate abstract content
+  - 0-4: Clear contradictions with cited papers or fabricated claims
 
 Be honest and critical. A score of 5 is average, not bad. Reserve 8+ for genuinely good work.
 """

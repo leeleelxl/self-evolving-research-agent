@@ -79,8 +79,12 @@ class BaseAgent(ABC):
         self,
         user_message: str,
         response_model: type[T],
+        max_retries: int = 1,
     ) -> T:
         """结构化输出 — 让 LLM 直接返回 Pydantic 模型实例
+
+        内置重试: LLM 偶尔返回不合法 JSON 或缺失字段，重试 1 次通常能解决。
+        重试对上层透明，Agent 子类不需要关心。
 
         大部分 Agent 的核心调用方式。示例:
             plan = await self.generate_structured(
@@ -93,11 +97,25 @@ class BaseAgent(ABC):
             model=response_model.__name__,
             message_preview=user_message[:100],
         )
-        return await self.llm.generate_structured(
-            messages=[{"role": "user", "content": user_message}],
-            response_model=response_model,
-            system=self._build_system_prompt(),
-        )
+
+        last_error: Exception | None = None
+        for attempt in range(1 + max_retries):
+            try:
+                return await self.llm.generate_structured(
+                    messages=[{"role": "user", "content": user_message}],
+                    response_model=response_model,
+                    system=self._build_system_prompt(),
+                )
+            except Exception as e:
+                last_error = e
+                if attempt < max_retries:
+                    self.logger.warning(
+                        "structured_output_retry",
+                        attempt=attempt + 1,
+                        error=str(e)[:200],
+                    )
+
+        raise last_error  # type: ignore[misc]
 
     def _build_system_prompt(self) -> str:
         """构建 system prompt — 包含角色描述"""
