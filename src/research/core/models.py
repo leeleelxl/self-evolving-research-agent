@@ -220,3 +220,7 @@ class PipelineResult(BaseModel):
     report: ResearchReport
     evolution_log: list[EvolutionRecord] = Field(default_factory=list)
     total_iterations: int
+    papers: list[Paper] = Field(
+        default_factory=list,
+        description="Pipeline 中索引的所有论文（用于 post-hoc 引用质量验证）",
+    )

@@ -78,6 +78,7 @@ class ResearchPipeline:
 
         self._evolution_log = []
         all_notes: list[PaperNote] = []
+        all_papers_map: dict[str, Paper] = {}  # 跨轮累积所有论文
         seen_paper_ids: set[str] = set()  # 跨轮去重
         previous_queries: list[str] = []  # 已执行的 query，传给 Planner 避免重复
         feedback: CriticFeedback | None = None
@@ -103,6 +104,10 @@ class ResearchPipeline:
                 if not papers:
                     self.logger.warning("no_papers_found", iteration=iteration)
                     continue
+
+                # 收集论文（用于 post-hoc 引用验证）
+                for p in papers:
+                    all_papers_map[p.paper_id] = p
 
                 # ── Step 3: KnowledgeBase 过滤 ──
                 papers_to_read = self._filter_by_knowledge_base(papers, plan)
@@ -174,6 +179,7 @@ class ResearchPipeline:
             report=report,
             evolution_log=self._evolution_log,
             total_iterations=len(self._evolution_log),
+            papers=list(all_papers_map.values()),
         )
 
     def _filter_by_knowledge_base(

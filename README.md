@@ -110,6 +110,29 @@ KnowledgeBase 将 RAG 组件（chunking + embedding + indexing）接入 Pipeline
 2. **Embedding 质量决定 Dense 效果**：使用真实 embedding（BGE-small）后，Dense retrieval F1 从 0.518 → 0.707（+36%）
 3. **Fixed chunk 在短文本场景最优**：HotpotQA 段落较短（~100 词），固定切分不会切断语义，overhead 最低
 
+## 引用质量验证（非 LLM 指标）
+
+用 embedding 余弦相似度验证 Writer 的每条引用是否真有内容支撑——完全不依赖 LLM 判断：
+
+| 指标 | 值 |
+|------|-----|
+| **Citation Grounding Rate** | **100%**（124/124 checked） |
+| Avg Similarity | 0.836 |
+| Missing Citations（幻觉引用） | 11/135 = 8.1% |
+
+**解读**：Writer 引用的论文全部和 section 内容高度相关（avg sim 0.836），但有 8% 的引用指向了 Pipeline 中不存在的论文 ID（幻觉引用，已知局限）。
+
+## 外部 Ground Truth 对标
+
+用学术界公认的 "essential papers" 列表检查 Pipeline 的检索覆盖度：
+
+| 领域 | Reference Recall | Found/Total |
+|------|-----------------|-------------|
+| RAG | 21.4% | 3/14 |
+| Agents | 0.0% | 0/9 |
+
+**已知局限**：检索偏向近期论文，经典基础工作（DPR、REALM、ColBERT 等 2020 年论文）覆盖不足。对标 SurGE benchmark (arXiv:2508.15658) 的结论：即使最好的 Agent 系统 reference recall 也不到 9%。改进方向：citation-chain 爬取追溯基础工作。
+
 ## Quick Start
 
 ```bash
@@ -143,7 +166,7 @@ src/research/
 └── evaluation/     # 评估框架
 
 experiments/        # 可复现的实验脚本
-docs/learning/      # Agent 知识学习文档（8 篇）
+docs/learning/      # Agent 知识学习文档（9 篇）
 ```
 
 ## 技术栈

@@ -1,0 +1,681 @@
+Reference Recall Experiment
+Timestamp: 2026-04-09T12:52:23.298717
+
+============================================================
+Benchmark: rag
+Question: What are the recent advances in retrieval-augmented generation (RAG) for large language models?
+Essential papers: 14
+============================================================
+
+[2m04:52:23[0m [1mmulti_llm_critic              [0m [36magent[0m=[35mCritic[0m [36mprimary[0m=[35mgpt-4o[0m [36msecondary[0m=[35mclaude-sonnet-4-6-20250514[0m
+[2m04:52:23[0m [1mpipeline_start                [0m [36mcomponent[0m=[35mpipeline[0m [36mquestion[0m=[35m'What are the recent advances in retrieval-augmented generation (RAG) for large language models?'[0m
+[2m04:52:23[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m0[0m
+[2m04:52:23[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mFalse[0m [36miteration[0m=[35m0[0m
+[2m04:52:23[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in retrieval-augmented generation (RAG) for large la'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m04:52:29[0m [1mstructured_output             [0m [36mjson_len[0m=[35m3313[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m04:52:29[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m10[0m [36msub_questions[0m=[35m5[0m
+[2m04:52:29[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m10[0m
+[2m04:52:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey advances'[0m
+[2m04:52:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'RAG architectures dense retrievers hybrid retrieval contrastive learning "large language models"'[0m
+[2m04:52:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'"retrieval augmented" generation scalable vector databases indexing "LLM"'[0m
+[2m04:52:30[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG architectures dense retrievers hybrid retrieval contrastive learning "large language models"'[0m
+[2m04:52:30[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey advances'[0m
+[2m04:52:30[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval augmented" generation scalable vector databases indexing "LLM"'[0m
+[2m04:52:40[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG architectures dense retrievers hybrid retrieval contrastive learning "large language models"'[0m
+[2m04:52:40[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'hallucination mitigation in retrieval-augmented generation factuality grounding LLMs'[0m
+[2m04:52:41[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"retrieval augmented" generation scalable vector databases indexing "LLM"'[0m
+[2m04:52:41[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'RAG evaluation benchmarks open-domain QA long-context LLMs "retrieval-augmented"'[0m
+[2m04:52:41[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG evaluation benchmarks open-domain QA long-context LLMs "retrieval-augmented"'[0m
+[2m04:52:41[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'hallucination mitigation in retrieval-augmented generation factuality grounding LLMs'[0m
+[2m04:52:42[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m24[0m [36mquery[0m=[35m'"retrieval-augmented generation" large language models survey advances'[0m
+[2m04:52:42[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'domain-specific retrieval-augmented generation biomedical legal code search'[0m
+[2m04:52:43[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m24[0m [36mquery[0m=[35m'domain-specific retrieval-augmented generation biomedical legal code search'[0m
+[2m04:52:43[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'"retrieval-augmented generation" mixture-of-experts routing adaptive retrieval'[0m
+[2m04:52:45[0m [1marxiv_results                 [0m [36mcount[0m=[35m25[0m [36mquery[0m=[35m'"retrieval-augmented generation" mixture-of-experts routing adaptive retrieval'[0m
+[2m04:52:45[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'end-to-end trainable RAG differentiable retrieval in-context learning with external memory'[0m
+[2m04:52:47[0m [1marxiv_results                 [0m [36mcount[0m=[35m25[0m [36mquery[0m=[35m'end-to-end trainable RAG differentiable retrieval in-context learning with external memory'[0m
+[2m04:52:47[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'efficient RAG latency-aware retrieval caching index compression for LLMs'[0m
+[2m04:52:49[0m [1marxiv_results                 [0m [36mcount[0m=[35m25[0m [36mquery[0m=[35m'efficient RAG latency-aware retrieval caching index compression for LLMs'[0m
+[2m04:52:49[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m25[0m [36mquery[0m=[35m'multimodal retrieval augmented generation images code speech "large language models"'[0m
+[2m04:52:51[0m [1marxiv_results                 [0m [36mcount[0m=[35m25[0m [36mquery[0m=[35m'multimodal retrieval augmented generation images code speech "large language models"'[0m
+[2m04:52:52[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG evaluation benchmarks open-domain QA long-context LLMs "retrieval-augmented"'[0m
+[2m04:52:52[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'hallucination mitigation in retrieval-augmented generation factuality grounding LLMs'[0m
+[2m04:52:52[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m148[0m
+[2m04:52:52[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m126[0m
+[2m04:52:52[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m50[0m
+[2m04:52:52[0m [1mloading_embedding_model       [0m [36mmodel[0m=[35mBAAI/bge-small-en-v1.5[0m
+[2m04:52:52[0m [1mindexing_papers               [0m [36mcomponent[0m=[35mknowledge_base[0m [36mcount[0m=[35m50[0m
+[2m04:52:55[0m [1mindexing_done                 [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnew_chunks[0m=[35m164[0m [36mnew_papers[0m=[35m50[0m [36mtotal_index_size[0m=[35m164[0m
+[2m04:52:55[0m [1mretrieve_for_questions        [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnum_questions[0m=[35m5[0m [36mtotal_unique_papers[0m=[35m22[0m
+[2m04:52:55[0m [1mkb_filter                     [0m [36mcomponent[0m=[35mpipeline[0m [36mkb_total_indexed[0m=[35m50[0m [36mrelevant_papers[0m=[35m22[0m [36mtotal_papers[0m=[35m50[0m
+[2m04:52:55[0m [1mreading_start                 [0m [36magent[0m=[35mReader[0m [36mnum_papers[0m=[35m22[0m
+[2m04:52:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2001[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2056[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1909[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2349[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:52:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:00[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1887[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:00[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2151[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1889[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1924[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2301[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2190[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:06[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2066[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:06[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:06[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2072[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:06[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:07[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2406[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:08[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2269[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:08[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:08[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2294[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:08[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:10[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2390[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:10[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:10[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2595[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:10[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:53:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2321[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:13[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2559[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:13[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2429[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:15[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2054[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:15[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2666[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:53:15[0m [1mreading_done                  [0m [36magent[0m=[35mReader[0m [36mkept[0m=[35m22[0m [36mtotal[0m=[35m22[0m
+[2m04:53:15[0m [1mwriting                       [0m [36magent[0m=[35mWriter[0m [36mnum_notes[0m=[35m22[0m
+[2m04:53:15[0m [1mgenerating_structured         [0m [36magent[0m=[35mWriter[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mResearchReport[0m
+[2m04:54:00[0m [1mstructured_output             [0m [36mjson_len[0m=[35m33575[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchReport[0m
+[2m04:54:00[0m [1mwriting_done                  [0m [36magent[0m=[35mWriter[0m [36msections[0m=[35m5[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models'[0m
+[2m04:54:00[0m [1mevaluating                    [0m [36magent[0m=[35mCritic[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models'[0m
+[2m04:54:00[0m [1mgenerating_structured         [0m [36magent[0m=[35mCritic[0m [36mmessage_preview[0m=[35m'## Original Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) f'[0m [36mmodel[0m=[35mCriticFeedback[0m
+[2m04:54:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m9467[0m [36mmodel[0m=[35mgpt-4o[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m04:54:37[0m [1mstructured_output             [0m [36mjson_len[0m=[35m5134[0m [36mmodel[0m=[35mclaude-sonnet-4-6-20250514[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m04:54:37[0m [1mcross_evaluation              [0m [36magent[0m=[35mCritic[0m [36mmax_spread[0m=[35m1.3000000000000007[0m [36mmerged_overall[0m=[35m7.7[0m [36mprimary_overall[0m=[35m8.15[0m [36msecondary_overall[0m=[35m7.25[0m [36mspread[0m=[35m{'coverage': 1.2999999999999998, 'depth': 0.5, 'coherence': 0.5, 'accuracy': 1.3000000000000007}[0m
+[2m04:54:37[0m [1mevaluation_done               [0m [36maccuracy[0m=[35m8.2[0m [36magent[0m=[35mCritic[0m [36mcoherence[0m=[35m8.2[0m [36mcoverage[0m=[35m7.2[0m [36mcross_model[0m=[35mTrue[0m [36mdepth[0m=[35m7.2[0m [36mis_satisfactory[0m=[35mFalse[0m [36moverall[0m=[35m7.7[0m
+[2m04:54:37[0m [1miteration_end                 [0m [36mcomponent[0m=[35mpipeline[0m [36mis_satisfactory[0m=[35mFalse[0m [36miteration[0m=[35m0[0m [36mkb_filtered[0m=[35mTrue[0m [36moverall_score[0m=[35m7.7[0m [36mpapers_retrieved[0m=[35m50[0m [36mpapers_to_read[0m=[35m22[0m [36mtotal_notes[0m=[35m22[0m
+[2m04:54:37[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m1[0m
+[2m04:54:37[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mTrue[0m [36miteration[0m=[35m1[0m
+[2m04:54:37[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in retrieval-augmented generation (RAG) for large la'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m04:54:56[0m [1mstructured_output             [0m [36mjson_len[0m=[35m12158[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m04:54:56[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m40[0m [36msub_questions[0m=[35m17[0m
+[2m04:54:56[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m40[0m
+[2m04:54:56[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval augmented generation" chunking hierarchical segmentation context window 2023 2024'[0m
+[2m04:54:56[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"RAG" chunk optimization context packing compression hierarchical retrieval'[0m
+[2m04:54:56[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"RAG" "query rewriting" OR "query reformulation" OR "multi-query retrieval" OR "HyDE"'[0m
+[2m04:54:56[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"RAG" "query rewriting" OR "query reformulation" OR "multi-query retrieval" OR "HyDE"'[0m
+[2m04:54:56[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval augmented generation" chunking hierarchical segmentation context window 2023 2024'[0m
+[2m04:54:57[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"RAG" chunk optimization context packing compression hierarchical retrieval'[0m
+[2m04:54:57[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented" prompting chain-of-thought guided query expansion iterative retrieval'[0m
+[2m04:54:59[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented" prompting chain-of-thought guided query expansion iterative retrieval'[0m
+[2m04:54:59[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented pretraining" OR "RAPT" OR "retrieval augmented instruction tuning"'[0m
+[2m04:54:59[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval-augmented pretraining" OR "RAPT" OR "retrieval augmented instruction tuning"'[0m
+[2m04:55:07[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"RAG" "query rewriting" OR "query reformulation" OR "multi-query retrieval" OR "HyDE"'[0m
+[2m04:55:07[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval augmented" instruction tuning large language models joint retriever generator training'[0m
+[2m04:55:07[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"retrieval augmented generation" chunking hierarchical segmentation context window 2023 2024'[0m
+[2m04:55:07[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"in-context retrieval" LLM memory-augmented models external memory key-value cache'[0m
+[2m04:55:08[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"in-context retrieval" LLM memory-augmented models external memory key-value cache'[0m
+[2m04:55:09[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"retrieval augmented" instruction tuning large language models joint retriever generator training'[0m
+[2m04:55:09[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'KV-cache retrieval memory-augmented transformer "retrieval-augmented"'[0m
+[2m04:55:10[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"retrieval-augmented pretraining" OR "RAPT" OR "retrieval augmented instruction tuning"'[0m
+[2m04:55:10[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"RAG" failure modes retrieval-induced hallucination context overload citation faithfulness'[0m
+[2m04:55:11[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"RAG" failure modes retrieval-induced hallucination context overload citation faithfulness'[0m
+[2m04:55:11[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'KV-cache retrieval memory-augmented transformer "retrieval-augmented"'[0m
+[2m04:55:11[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval augmented generation" safety "prompt injection" "privacy"'[0m
+[2m04:55:13[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"retrieval augmented generation" safety "prompt injection" "privacy"'[0m
+[2m04:55:13[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'multilingual "retrieval augmented generation" cross-lingual RAG benchmarks'[0m
+[2m04:55:14[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'multilingual "retrieval augmented generation" cross-lingual RAG benchmarks'[0m
+[2m04:55:18[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"in-context retrieval" LLM memory-augmented models external memory key-value cache'[0m
+[2m04:55:18[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'cross-lingual retrieval-augmented QA multilingual retriever benchmark'[0m
+[2m04:55:20[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'cross-lingual retrieval-augmented QA multilingual retriever benchmark'[0m
+[2m04:55:20[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"RAG" evaluation faithfulness metrics entailment-based citation precision recall'[0m
+[2m04:55:21[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"RAG" evaluation faithfulness metrics entailment-based citation precision recall'[0m
+[2m04:55:21[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m0[0m [36mquery[0m=[35m'"RAG" failure modes retrieval-induced hallucination context overload citation faithfulness'[0m
+[2m04:55:21[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'attribution faithfulness grounding metrics "retrieval augmented"'[0m
+[2m04:55:23[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'attribution faithfulness grounding metrics "retrieval augmented"'[0m
+[2m04:55:23[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented generation" latency cost throughput ANN index GPU batching'[0m
+[2m04:55:23[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval-augmented generation" latency cost throughput ANN index GPU batching'[0m
+[2m04:55:24[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'multilingual "retrieval augmented generation" cross-lingual RAG benchmarks'[0m
+[2m04:55:24[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'system-level RAG vector index configuration caching incremental indexing observability'[0m
+[2m04:55:26[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'system-level RAG vector index configuration caching incremental indexing observability'[0m
+[2m04:55:26[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'privacy-preserving retrieval augmented generation encrypted index federated RAG'[0m
+[2m04:55:27[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'privacy-preserving retrieval augmented generation encrypted index federated RAG'[0m
+[2m04:55:31[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"RAG" evaluation faithfulness metrics entailment-based citation precision recall'[0m
+[2m04:55:31[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'on-device retrieval secure enclave "retrieval-augmented" differential privacy'[0m
+[2m04:55:33[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'on-device retrieval secure enclave "retrieval-augmented" differential privacy'[0m
+[2m04:55:33[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"long-context" LLMs vs retrieval-augmented generation comparative study'[0m
+[2m04:55:34[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"long-context" LLMs vs retrieval-augmented generation comparative study'[0m
+[2m04:55:34[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"retrieval-augmented generation" latency cost throughput ANN index GPU batching'[0m
+[2m04:55:34[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'hybrid long-context models with retrieval augmented generation benchmark'[0m
+[2m04:55:36[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'hybrid long-context models with retrieval augmented generation benchmark'[0m
+[2m04:55:36[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"GraphRAG" scalability construction pipeline system design'[0m
+[2m04:55:37[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"GraphRAG" scalability construction pipeline system design'[0m
+[2m04:55:38[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m19[0m [36mquery[0m=[35m'privacy-preserving retrieval augmented generation encrypted index federated RAG'[0m
+[2m04:55:38[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'graph-based retrieval augmented generation knowledge graph RAG scalability'[0m
+[2m04:55:40[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'graph-based retrieval augmented generation knowledge graph RAG scalability'[0m
+[2m04:55:40[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"agentic" RAG RL-based search planner tool use evaluation'[0m
+[2m04:55:41[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"agentic" RAG RL-based search planner tool use evaluation'[0m
+[2m04:55:45[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"long-context" LLMs vs retrieval-augmented generation comparative study'[0m
+[2m04:55:45[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'controller-based retrieval planning iterative RAG reinforcement learning'[0m
+[2m04:55:46[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'controller-based retrieval planning iterative RAG reinforcement learning'[0m
+[2m04:55:46[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"RAG" corpus management data freshness knowledge base versioning de-duplication'[0m
+[2m04:55:47[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"RAG" corpus management data freshness knowledge base versioning de-duplication'[0m
+[2m04:55:48[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m17[0m [36mquery[0m=[35m'"GraphRAG" scalability construction pipeline system design'[0m
+[2m04:55:48[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'incremental indexing corpus freshness production RAG systems'[0m
+[2m04:55:50[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'incremental indexing corpus freshness production RAG systems'[0m
+[2m04:55:50[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'retrieval augmented generation REALM DPR FiD RETRO Atlas survey'[0m
+[2m04:55:51[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'retrieval augmented generation REALM DPR FiD RETRO Atlas survey'[0m
+[2m04:55:52[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"agentic" RAG RL-based search planner tool use evaluation'[0m
+[2m04:55:52[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'self-RAG corrective RAG adaptive retrieval query rewriting large language models'[0m
+[2m04:55:54[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'self-RAG corrective RAG adaptive retrieval query rewriting large language models'[0m
+[2m04:55:54[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'ColBERT reranking late interaction retrieval augmented generation'[0m
+[2m04:55:54[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'ColBERT reranking late interaction retrieval augmented generation'[0m
+[2m04:55:58[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m0[0m [36mquery[0m=[35m'"RAG" corpus management data freshness knowledge base versioning de-duplication'[0m
+[2m04:55:58[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'multi-stage retrieval cross-encoder reranker for RAG pipelines'[0m
+[2m04:55:58[0m [1marxiv_request_error           [0m [36merror[0m=[35m[0m [36mquery[0m=[35m'multi-stage retrieval cross-encoder reranker for RAG pipelines'[0m
+[2m04:55:58[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'RAG chunking segmentation context compression metadata-aware retrieval survey'[0m
+[2m04:55:59[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'RAG chunking segmentation context compression metadata-aware retrieval survey'[0m
+[2m04:56:01[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'retrieval augmented generation REALM DPR FiD RETRO Atlas survey'[0m
+[2m04:56:01[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'joint training retriever generator hard negative mining retrieval augmented generation'[0m
+[2m04:56:03[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'joint training retriever generator hard negative mining retrieval augmented generation'[0m
+[2m04:56:03[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'retrieve-or-not adaptive retrieval decision language models'[0m
+[2m04:56:04[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m16[0m [36mquery[0m=[35m'retrieve-or-not adaptive retrieval decision language models'[0m
+[2m04:56:04[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'adaptive retrieval control self-reflective RAG loop'[0m
+[2m04:56:05[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'ColBERT reranking late interaction retrieval augmented generation'[0m
+[2m04:56:05[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'long context versus RAG hybrid retrieval augmented generation benchmark'[0m
+[2m04:56:06[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'long context versus RAG hybrid retrieval augmented generation benchmark'[0m
+[2m04:56:06[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'adaptive retrieval control self-reflective RAG loop'[0m
+[2m04:56:06[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'RAG faithfulness attribution citation grounding evaluation benchmark'[0m
+[2m04:56:07[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'RAG faithfulness attribution citation grounding evaluation benchmark'[0m
+[2m04:56:07[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'prompt injection retrieved documents RAG security survey'[0m
+[2m04:56:08[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'prompt injection retrieved documents RAG security survey'[0m
+[2m04:56:10[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'RAG chunking segmentation context compression metadata-aware retrieval survey'[0m
+[2m04:56:10[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'RAG security threats privacy leakage adversarial retrieval'[0m
+[2m04:56:11[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'RAG security threats privacy leakage adversarial retrieval'[0m
+[2m04:56:11[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'incremental indexing corpus freshness streaming updates production RAG'[0m
+[2m04:56:12[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'incremental indexing corpus freshness streaming updates production RAG'[0m
+[2m04:56:16[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'long context versus RAG hybrid retrieval augmented generation benchmark'[0m
+[2m04:56:16[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'observability monitoring evaluation pipeline "retrieval augmented" systems'[0m
+[2m04:56:19[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'prompt injection retrieved documents RAG security survey'[0m
+[2m04:56:19[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'observability monitoring evaluation pipeline "retrieval augmented" systems'[0m
+[2m04:56:23[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'incremental indexing corpus freshness streaming updates production RAG'[0m
+[2m04:56:23[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m452[0m
+[2m04:56:23[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m303[0m
+[2m04:56:23[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m50[0m
+[2m04:56:23[0m [1mindexing_papers               [0m [36mcomponent[0m=[35mknowledge_base[0m [36mcount[0m=[35m48[0m
+[2m04:56:26[0m [1mindexing_done                 [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnew_chunks[0m=[35m150[0m [36mnew_papers[0m=[35m48[0m [36mtotal_index_size[0m=[35m314[0m
+[2m04:56:26[0m [1mretrieve_for_questions        [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnum_questions[0m=[35m17[0m [36mtotal_unique_papers[0m=[35m56[0m
+[2m04:56:26[0m [1mkb_filter                     [0m [36mcomponent[0m=[35mpipeline[0m [36mkb_total_indexed[0m=[35m98[0m [36mrelevant_papers[0m=[35m56[0m [36mtotal_papers[0m=[35m50[0m
+[2m04:56:26[0m [1mreading_start                 [0m [36magent[0m=[35mReader[0m [36mnum_papers[0m=[35m56[0m
+[2m04:56:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:29[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1827[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:29[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2199[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:29[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1973[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:30[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2099[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:30[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:30[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1780[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:30[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2359[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:33[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:34[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2329[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:34[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:34[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1908[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:34[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:34[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2233[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:34[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:35[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2998[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:35[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:38[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2091[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:38[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:38[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2158[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:38[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:38[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2150[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:38[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:39[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2582[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:39[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:41[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1818[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:41[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:42[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2272[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:42[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:43[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2271[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:43[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:43[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1983[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:43[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:43[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2701[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:43[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:46[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2442[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:46[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:47[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1960[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:47[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:47[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2718[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:47[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:48[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2195[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:48[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:50[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1743[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:50[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:50[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2262[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:50[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:50[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1897[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:50[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:52[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2651[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:52[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:52[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2520[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:52[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:53[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2538[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:53[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:54[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1978[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:54[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:55[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2123[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:56[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2238[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:56[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:57[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2010[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:57[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2295[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:56:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2041[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:56:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:00[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2209[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:00[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:01[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1856[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:01[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:02[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2592[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:02[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1965[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2187[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2583[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:05[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1853[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:05[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2454[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:07[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1881[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2038[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2161[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:10[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2272[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:10[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:11[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2218[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:11[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:14[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2694[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:14[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:14[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2354[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:14[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:14[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2290[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:14[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mPaperNote[0m
+[2m04:57:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2373[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:17[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2488[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:18[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2522[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:18[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2368[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:18[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2359[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m04:57:18[0m [1mreading_done                  [0m [36magent[0m=[35mReader[0m [36mkept[0m=[35m56[0m [36mtotal[0m=[35m56[0m
+[2m04:57:18[0m [1mwriting                       [0m [36magent[0m=[35mWriter[0m [36mnum_notes[0m=[35m60[0m
+[2m04:57:18[0m [1mgenerating_structured         [0m [36magent[0m=[35mWriter[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) for large '[0m [36mmodel[0m=[35mResearchReport[0m
+[2m04:58:40[0m [1mstructured_output             [0m [36mjson_len[0m=[35m50286[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchReport[0m
+[2m04:58:40[0m [1mwriting_done                  [0m [36magent[0m=[35mWriter[0m [36msections[0m=[35m17[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models: Architectures, Training, and Trustworthy Deployment'[0m
+[2m04:58:40[0m [1mevaluating                    [0m [36magent[0m=[35mCritic[0m [36mtitle[0m=[35m'Recent Advances in Retrieval-Augmented Generation for Large Language Models: Architectures, Training, and Trustworthy Deployment'[0m
+[2m04:58:40[0m [1mgenerating_structured         [0m [36magent[0m=[35mCritic[0m [36mmessage_preview[0m=[35m'## Original Research Question\nWhat are the recent advances in retrieval-augmented generation (RAG) f'[0m [36mmodel[0m=[35mCriticFeedback[0m
+[2m04:58:55[0m [1mstructured_output             [0m [36mjson_len[0m=[35m9571[0m [36mmodel[0m=[35mgpt-4o[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m04:59:18[0m [1mstructured_output             [0m [36mjson_len[0m=[35m5198[0m [36mmodel[0m=[35mclaude-sonnet-4-6-20250514[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m04:59:18[0m [1mcross_evaluation              [0m [36magent[0m=[35mCritic[0m [36mmax_spread[0m=[35m1.0[0m [36mmerged_overall[0m=[35m8.15[0m [36mprimary_overall[0m=[35m8.325[0m [36msecondary_overall[0m=[35m8.0[0m [36mspread[0m=[35m{'coverage': 0.6999999999999993, 'depth': 0.20000000000000018, 'coherence': 1.0, 'accuracy': 0.1999999999999993}[0m
+[2m04:59:18[0m [1mevaluation_done               [0m [36maccuracy[0m=[35m8.4[0m [36magent[0m=[35mCritic[0m [36mcoherence[0m=[35m8.5[0m [36mcoverage[0m=[35m7.8[0m [36mcross_model[0m=[35mTrue[0m [36mdepth[0m=[35m7.9[0m [36mis_satisfactory[0m=[35mTrue[0m [36moverall[0m=[35m8.15[0m
+[2m04:59:18[0m [1miteration_end                 [0m [36mcomponent[0m=[35mpipeline[0m [36mis_satisfactory[0m=[35mTrue[0m [36miteration[0m=[35m1[0m [36mkb_filtered[0m=[35mTrue[0m [36moverall_score[0m=[35m8.15[0m [36mpapers_retrieved[0m=[35m50[0m [36mpapers_to_read[0m=[35m56[0m [36mtotal_notes[0m=[35m60[0m
+[2m04:59:18[0m [1mpipeline_converged            [0m [36mcomponent[0m=[35mpipeline[0m [36miterations[0m=[35m2[0m
+
+Pipeline: 98 papers, 415s
+Reference Recall: 21.4% (3/14)
+
+Found: ['Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks', 'Active Retrieval Augmented Generation', 'A Survey on Hallucination in Large Language Models']
+Missed: ['Dense Passage Retrieval for Open-Domain Question Answering', 'REALM: Retrieval-Augmented Language Model Pre-Training', 'Improving Language Models by Retrieving from Trillions of Tokens', 'Atlas: Few-shot Learning with Retrieval Augmented Language Models', 'Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering']
+
+============================================================
+Benchmark: agents
+Question: What are the recent advances in tool-using capabilities of large language models?
+Essential papers: 9
+============================================================
+
+[2m04:59:18[0m [1mmulti_llm_critic              [0m [36magent[0m=[35mCritic[0m [36mprimary[0m=[35mgpt-4o[0m [36msecondary[0m=[35mclaude-sonnet-4-6-20250514[0m
+[2m04:59:18[0m [1mpipeline_start                [0m [36mcomponent[0m=[35mpipeline[0m [36mquestion[0m=[35m'What are the recent advances in tool-using capabilities of large language models?'[0m
+[2m04:59:18[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m0[0m
+[2m04:59:18[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mFalse[0m [36miteration[0m=[35m0[0m
+[2m04:59:18[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in tool-using capabilities of large language models?'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m04:59:25[0m [1mstructured_output             [0m [36mjson_len[0m=[35m3316[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m04:59:25[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m12[0m [36msub_questions[0m=[35m5[0m
+[2m04:59:25[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m12[0m
+[2m04:59:25[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool use" large language models APIs plugins external tools "LLM agents"'[0m
+[2m04:59:25[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool-augmented" "language models" programmatic tools API calling'[0m
+[2m04:59:25[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"function calling" "large language models" tool usage API calling'[0m
+[2m04:59:25[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"tool-augmented" "language models" programmatic tools API calling'[0m
+[2m04:59:25[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"function calling" "large language models" tool usage API calling'[0m
+[2m04:59:26[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"tool use" large language models APIs plugins external tools "LLM agents"'[0m
+[2m04:59:36[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"tool-augmented" "language models" programmatic tools API calling'[0m
+[2m04:59:36[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"toolformer" "language models" teaching models to use tools'[0m
+[2m04:59:36[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"function calling" "large language models" tool usage API calling'[0m
+[2m04:59:36[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM agents" planning execution tools code interpreters toolchains'[0m
+[2m04:59:36[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"tool use" large language models APIs plugins external tools "LLM agents"'[0m
+[2m04:59:36[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool use" "LLM agents" benchmark evaluation reasoning with tools'[0m
+[2m04:59:37[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"toolformer" "language models" teaching models to use tools'[0m
+[2m04:59:38[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"LLM agents" planning execution tools code interpreters toolchains'[0m
+[2m04:59:38[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented generation" tools APIs "tool use"'[0m
+[2m04:59:38[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"tool use" "LLM agents" benchmark evaluation reasoning with tools'[0m
+[2m04:59:38[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"ReAct" reasoning acting language models tools environment'[0m
+[2m04:59:38[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"retrieval-augmented generation" tools APIs "tool use"'[0m
+[2m04:59:38[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"ReAct" reasoning acting language models tools environment'[0m
+[2m04:59:47[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"toolformer" "language models" teaching models to use tools'[0m
+[2m04:59:47[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"AutoGPT" "tool use" language model agents planning environments'[0m
+[2m04:59:49[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"ReAct" reasoning acting language models tools environment'[0m
+[2m04:59:49[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM agent" "tool-using" frameworks LangChain semantic tools'[0m
+[2m04:59:49[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"AutoGPT" "tool use" language model agents planning environments'[0m
+[2m04:59:49[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool-augmented" LLMs safety reliability hallucinated tool calls'[0m
+[2m04:59:50[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"retrieval-augmented generation" tools APIs "tool use"'[0m
+[2m04:59:50[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"evaluation" "tool use" large language models benchmark'[0m
+[2m04:59:51[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"LLM agent" "tool-using" frameworks LangChain semantic tools'[0m
+[2m04:59:51[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"evaluation" "tool use" large language models benchmark'[0m
+[2m04:59:51[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"tool-augmented" LLMs safety reliability hallucinated tool calls'[0m
+[2m05:00:01[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"evaluation" "tool use" large language models benchmark'[0m
+[2m05:00:01[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m120[0m
+[2m05:00:01[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m110[0m
+[2m05:00:01[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m50[0m
+[2m05:00:01[0m [1mloading_embedding_model       [0m [36mmodel[0m=[35mBAAI/bge-small-en-v1.5[0m
+[2m05:00:01[0m [1mindexing_papers               [0m [36mcomponent[0m=[35mknowledge_base[0m [36mcount[0m=[35m50[0m
+[2m05:00:05[0m [1mindexing_done                 [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnew_chunks[0m=[35m142[0m [36mnew_papers[0m=[35m50[0m [36mtotal_index_size[0m=[35m142[0m
+[2m05:00:05[0m [1mretrieve_for_questions        [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnum_questions[0m=[35m5[0m [36mtotal_unique_papers[0m=[35m27[0m
+[2m05:00:05[0m [1mkb_filter                     [0m [36mcomponent[0m=[35mpipeline[0m [36mkb_total_indexed[0m=[35m50[0m [36mrelevant_papers[0m=[35m27[0m [36mtotal_papers[0m=[35m50[0m
+[2m05:00:05[0m [1mreading_start                 [0m [36magent[0m=[35mReader[0m [36mnum_papers[0m=[35m27[0m
+[2m05:00:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2243[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2484[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:09[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2074[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:09[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:10[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1967[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:10[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2339[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:13[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2382[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:13[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:15[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2531[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:15[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:15[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2175[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:15[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2032[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:16[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:17[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2343[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:17[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:19[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2491[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:19[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:20[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2211[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:20[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:20[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1479[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:20[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:21[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2052[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:21[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:23[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2391[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:23[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:25[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2359[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:25[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:25[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2545[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:25[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:26[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2459[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:26[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:27[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1868[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:27[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:28[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2426[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:28[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:29[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2301[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:31[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2302[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:31[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:00:31[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2303[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:31[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2292[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2263[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1976[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:35[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2403[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:00:35[0m [1mlow_relevance                 [0m [36magent[0m=[35mReader[0m [36mpaper[0m=[35m'Planning in the Wild: Modeling Tools for PDDL'[0m [36mscore[0m=[35m0.1[0m
+[2m05:00:35[0m [1mreading_done                  [0m [36magent[0m=[35mReader[0m [36mkept[0m=[35m26[0m [36mtotal[0m=[35m27[0m
+[2m05:00:35[0m [1mwriting                       [0m [36magent[0m=[35mWriter[0m [36mnum_notes[0m=[35m26[0m
+[2m05:00:35[0m [1mgenerating_structured         [0m [36magent[0m=[35mWriter[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mResearchReport[0m
+[2m05:01:20[0m [1mstructured_output             [0m [36mjson_len[0m=[35m32801[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchReport[0m
+[2m05:01:20[0m [1mwriting_done                  [0m [36magent[0m=[35mWriter[0m [36msections[0m=[35m5[0m [36mtitle[0m=[35m'Recent Advances in Tool-Using Capabilities of Large Language Models'[0m
+[2m05:01:20[0m [1mevaluating                    [0m [36magent[0m=[35mCritic[0m [36mtitle[0m=[35m'Recent Advances in Tool-Using Capabilities of Large Language Models'[0m
+[2m05:01:20[0m [1mgenerating_structured         [0m [36magent[0m=[35mCritic[0m [36mmessage_preview[0m=[35m'## Original Research Question\nWhat are the recent advances in tool-using capabilities of large langu'[0m [36mmodel[0m=[35mCriticFeedback[0m
+[2m05:01:40[0m [1mstructured_output             [0m [36mjson_len[0m=[35m9812[0m [36mmodel[0m=[35mgpt-4o[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m05:02:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m5707[0m [36mmodel[0m=[35mclaude-sonnet-4-6-20250514[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m05:02:04[0m [1mcross_evaluation              [0m [36magent[0m=[35mCritic[0m [36mmax_spread[0m=[35m1.0[0m [36mmerged_overall[0m=[35m7.45[0m [36mprimary_overall[0m=[35m7.5[0m [36msecondary_overall[0m=[35m7.375[0m [36mspread[0m=[35m{'coverage': 0.5, 'depth': 0.0, 'coherence': 0.0, 'accuracy': 1.0}[0m
+[2m05:02:04[0m [1mevaluation_done               [0m [36maccuracy[0m=[35m8.0[0m [36magent[0m=[35mCritic[0m [36mcoherence[0m=[35m8.0[0m [36mcoverage[0m=[35m6.8[0m [36mcross_model[0m=[35mTrue[0m [36mdepth[0m=[35m7.0[0m [36mis_satisfactory[0m=[35mFalse[0m [36moverall[0m=[35m7.45[0m
+[2m05:02:04[0m [1miteration_end                 [0m [36mcomponent[0m=[35mpipeline[0m [36mis_satisfactory[0m=[35mFalse[0m [36miteration[0m=[35m0[0m [36mkb_filtered[0m=[35mTrue[0m [36moverall_score[0m=[35m7.45[0m [36mpapers_retrieved[0m=[35m50[0m [36mpapers_to_read[0m=[35m27[0m [36mtotal_notes[0m=[35m26[0m
+[2m05:02:04[0m [1miteration_start               [0m [36mcomponent[0m=[35mpipeline[0m [36miteration[0m=[35m1[0m
+[2m05:02:04[0m [1mplanning                      [0m [36magent[0m=[35mPlanner[0m [36mhas_feedback[0m=[35mTrue[0m [36miteration[0m=[35m1[0m
+[2m05:02:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mPlanner[0m [36mmessage_preview[0m=[35m'Research question: What are the recent advances in tool-using capabilities of large language models?'[0m [36mmodel[0m=[35mResearchPlan[0m
+[2m05:02:18[0m [1mstructured_output             [0m [36mjson_len[0m=[35m8841[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchPlan[0m
+[2m05:02:18[0m [1mplan_generated                [0m [36magent[0m=[35mPlanner[0m [36mqueries[0m=[35m25[0m [36msub_questions[0m=[35m14[0m
+[2m05:02:18[0m [1mretrieval_start               [0m [36magent[0m=[35mRetriever[0m [36mnum_queries[0m=[35m25[0m
+[2m05:02:18[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'Toolformer ReAct WebGPT HuggingGPT Voyager Gorilla AutoGPT BabyAGI LangChain AutoGen "tool use"'[0m
+[2m05:02:18[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"large language model" function calling API OpenAI Anthropic Google PaLM "Model Context Protocol" Azure "tool calling"'[0m
+[2m05:02:18[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM agents" LangChain LangGraph AutoGen "Semantic Kernel" LlamaIndex Haystack framework survey'[0m
+[2m05:02:18[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'Toolformer ReAct WebGPT HuggingGPT Voyager Gorilla AutoGPT BabyAGI LangChain AutoGen "tool use"'[0m
+[2m05:02:18[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"LLM agents" LangChain LangGraph AutoGen "Semantic Kernel" LlamaIndex Haystack framework survey'[0m
+[2m05:02:18[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"large language model" function calling API OpenAI Anthropic Google PaLM "Model Context Protocol" Azure "tool calling"'[0m
+[2m05:02:29[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"LLM agents" LangChain LangGraph AutoGen "Semantic Kernel" LlamaIndex Haystack framework survey'[0m
+[2m05:02:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool representation" "tool schema" automatic tool description "embedding" tool retrieval "language models"'[0m
+[2m05:02:29[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'Toolformer ReAct WebGPT HuggingGPT Voyager Gorilla AutoGPT BabyAGI LangChain AutoGen "tool use"'[0m
+[2m05:02:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'Gorilla "API calling" embedding-based tool selection "large language models"'[0m
+[2m05:02:29[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"large language model" function calling API OpenAI Anthropic Google PaLM "Model Context Protocol" Azure "tool calling"'[0m
+[2m05:02:29[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"embodied agents" "large language models" robotics API navigation manipulation simulator tools'[0m
+[2m05:02:29[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"tool representation" "tool schema" automatic tool description "embedding" tool retrieval "language models"'[0m
+[2m05:02:30[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'Gorilla "API calling" embedding-based tool selection "large language models"'[0m
+[2m05:02:30[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"embodied agents" "large language models" robotics API navigation manipulation simulator tools'[0m
+[2m05:02:40[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"tool representation" "tool schema" automatic tool description "embedding" tool retrieval "language models"'[0m
+[2m05:02:40[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" robot control API skills "tool use"'[0m
+[2m05:02:40[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'Gorilla "API calling" embedding-based tool selection "large language models"'[0m
+[2m05:02:40[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"long-term memory" "LLM agents" vector store episodic memory personal profile scratchpad privacy'[0m
+[2m05:02:40[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"embodied agents" "large language models" robotics API navigation manipulation simulator tools'[0m
+[2m05:02:40[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"memory tools" "language model" agents vector database logging'[0m
+[2m05:02:41[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"long-term memory" "LLM agents" vector store episodic memory personal profile scratchpad privacy'[0m
+[2m05:02:42[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"LLM" robot control API skills "tool use"'[0m
+[2m05:02:42[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" tool use latency cost parallel calls batching caching'[0m
+[2m05:02:42[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"memory tools" "language model" agents vector database logging'[0m
+[2m05:02:42[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool-using agents" scalability systems evaluation latency throughput'[0m
+[2m05:02:42[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"LLM" tool use latency cost parallel calls batching caching'[0m
+[2m05:02:44[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"tool-using agents" scalability systems evaluation latency throughput'[0m
+[2m05:02:44[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"prompt injection" benchmark tool-using agents security evaluation'[0m
+[2m05:02:45[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"prompt injection" benchmark tool-using agents security evaluation'[0m
+[2m05:02:45[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" "tool use" capability-based security access control sandboxing auditing'[0m
+[2m05:02:46[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"LLM" "tool use" capability-based security access control sandboxing auditing'[0m
+[2m05:02:52[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"long-term memory" "LLM agents" vector store episodic memory personal profile scratchpad privacy'[0m
+[2m05:02:52[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool-using" language models safety robustness red-teaming'[0m
+[2m05:02:53[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"LLM" tool use latency cost parallel calls batching caching'[0m
+[2m05:02:53[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool-augmented" reinforcement learning "API feedback" large language models'[0m
+[2m05:02:54[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"tool-using" language models safety robustness red-teaming'[0m
+[2m05:02:54[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"program synthesis" "tool calling" large language model agents DSL library functions'[0m
+[2m05:02:54[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"program synthesis" "tool calling" large language model agents DSL library functions'[0m
+[2m05:02:55[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"tool-augmented" reinforcement learning "API feedback" large language models'[0m
+[2m05:02:55[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" web browsing tools GUI automation benchmark browser agent'[0m
+[2m05:02:55[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"LLM" web browsing tools GUI automation benchmark browser agent'[0m
+[2m05:02:57[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"LLM" "tool use" capability-based security access control sandboxing auditing'[0m
+[2m05:02:57[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM web agents" GUI agents browser automation survey'[0m
+[2m05:02:58[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"LLM web agents" GUI agents browser automation survey'[0m
+[2m05:02:58[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" SQL tools database agents data engineering workflow automation'[0m
+[2m05:02:59[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"LLM" SQL tools database agents data engineering workflow automation'[0m
+[2m05:02:59[0m [1marxiv_search                  [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" enterprise workflow automation APIs orchestration agent tools'[0m
+[2m05:03:01[0m [1marxiv_results                 [0m [36mcount[0m=[35m20[0m [36mquery[0m=[35m'"LLM" enterprise workflow automation APIs orchestration agent tools'[0m
+[2m05:03:01[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool learning" large language models unseen tools documentation grounding'[0m
+[2m05:03:02[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"tool learning" large language models unseen tools documentation grounding'[0m
+[2m05:03:05[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"program synthesis" "tool calling" large language model agents DSL library functions'[0m
+[2m05:03:05[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"LLM" tool hallucination argument formatting error recovery benchmark'[0m
+[2m05:03:06[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"LLM" tool hallucination argument formatting error recovery benchmark'[0m
+[2m05:03:06[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"LLM" web browsing tools GUI automation benchmark browser agent'[0m
+[2m05:03:06[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"tool use" evaluation metric taxonomy tool selection argument correctness latency cost robustness'[0m
+[2m05:03:07[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"tool use" evaluation metric taxonomy tool selection argument correctness latency cost robustness'[0m
+[2m05:03:12[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"tool learning" large language models unseen tools documentation grounding'[0m
+[2m05:03:12[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"test-time planning" search verifier "tool-using" language models'[0m
+[2m05:03:14[0m [1msemantic_scholar_results      [0m [36mcount[0m=[35m19[0m [36mquery[0m=[35m'"test-time planning" search verifier "tool-using" language models'[0m
+[2m05:03:14[0m [1msemantic_scholar_search       [0m [36mmax_results[0m=[35m20[0m [36mquery[0m=[35m'"Model Context Protocol" MCPAgentBench tool discovery ranking retrieval'[0m
+[2m05:03:15[0m [1msemantic_scholar_rate_limited [0m [36mquery[0m=[35m'"Model Context Protocol" MCPAgentBench tool discovery ranking retrieval'[0m
+[2m05:03:16[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"LLM" tool hallucination argument formatting error recovery benchmark'[0m
+[2m05:03:17[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"tool use" evaluation metric taxonomy tool selection argument correctness latency cost robustness'[0m
+[2m05:03:26[0m [1msemantic_scholar_retry_failed [0m [36mquery[0m=[35m'"Model Context Protocol" MCPAgentBench tool discovery ranking retrieval'[0m
+[2m05:03:26[0m [1mraw_results                   [0m [36magent[0m=[35mRetriever[0m [36mtotal[0m=[35m199[0m
+[2m05:03:26[0m [1mafter_dedup                   [0m [36magent[0m=[35mRetriever[0m [36mcount[0m=[35m198[0m
+[2m05:03:26[0m [1mretrieval_done                [0m [36magent[0m=[35mRetriever[0m [36mfinal_count[0m=[35m50[0m
+[2m05:03:26[0m [1mindexing_papers               [0m [36mcomponent[0m=[35mknowledge_base[0m [36mcount[0m=[35m50[0m
+[2m05:03:29[0m [1mindexing_done                 [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnew_chunks[0m=[35m147[0m [36mnew_papers[0m=[35m50[0m [36mtotal_index_size[0m=[35m289[0m
+[2m05:03:29[0m [1mretrieve_for_questions        [0m [36mcomponent[0m=[35mknowledge_base[0m [36mnum_questions[0m=[35m14[0m [36mtotal_unique_papers[0m=[35m50[0m
+[2m05:03:29[0m [1mkb_filter                     [0m [36mcomponent[0m=[35mpipeline[0m [36mkb_total_indexed[0m=[35m100[0m [36mrelevant_papers[0m=[35m50[0m [36mtotal_papers[0m=[35m50[0m
+[2m05:03:29[0m [1mreading_start                 [0m [36magent[0m=[35mReader[0m [36mnum_papers[0m=[35m50[0m
+[2m05:03:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:29[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:32[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2228[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:32[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2206[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:33[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2274[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:33[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:33[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2530[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:33[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:34[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2074[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:34[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:37[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2139[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:37[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:37[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2663[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:37[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:38[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2147[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:38[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:38[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2622[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:38[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:38[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2196[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:38[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:41[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2415[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:41[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:42[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2051[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:42[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:42[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2391[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:42[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:43[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2645[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:43[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:43[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2185[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:43[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:45[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2207[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:45[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:46[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2273[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:46[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:46[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2064[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:46[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:47[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2188[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:47[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:47[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2352[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:47[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:49[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2467[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:49[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2295[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2073[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2449[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2449[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:51[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:54[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2702[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:54[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2001[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2396[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2226[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2034[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:55[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2125[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2377[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:03:59[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2463[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:03:59[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:00[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2071[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:00[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:03[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2609[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:03[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:04[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2035[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:04[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:05[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2284[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:05[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:06[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2140[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:06[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:06[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2804[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:06[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:07[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2227[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:07[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2626[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:07[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:08[0m [1mstructured_output             [0m [36mjson_len[0m=[35m1997[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:08[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:11[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2500[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:11[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2705[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2158[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:12[0m [1mgenerating_structured         [0m [36magent[0m=[35mReader[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mPaperNote[0m
+[2m05:04:12[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2294[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:13[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2288[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2382[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:16[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2690[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:17[0m [1mstructured_output             [0m [36mjson_len[0m=[35m2101[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mPaperNote[0m
+[2m05:04:17[0m [1mlow_relevance                 [0m [36magent[0m=[35mReader[0m [36mpaper[0m=[35m'Video-T1: Test-Time Scaling for Video Generation'[0m [36mscore[0m=[35m0.2[0m
+[2m05:04:17[0m [1mreading_done                  [0m [36magent[0m=[35mReader[0m [36mkept[0m=[35m49[0m [36mtotal[0m=[35m50[0m
+[2m05:04:17[0m [1mwriting                       [0m [36magent[0m=[35mWriter[0m [36mnum_notes[0m=[35m55[0m
+[2m05:04:17[0m [1mgenerating_structured         [0m [36magent[0m=[35mWriter[0m [36mmessage_preview[0m=[35m'## Research Question\nWhat are the recent advances in tool-using capabilities of large language model'[0m [36mmodel[0m=[35mResearchReport[0m
+[2m05:07:23[0m [1mstructured_output             [0m [36mjson_len[0m=[35m48367[0m [36mmodel[0m=[35mgpt-4o-mini[0m [36mtool[0m=[35mResearchReport[0m
+[2m05:07:23[0m [1mwriting_done                  [0m [36magent[0m=[35mWriter[0m [36msections[0m=[35m14[0m [36mtitle[0m=[35m'Recent Advances in Tool-Using Capabilities of Large Language Models'[0m
+[2m05:07:23[0m [1mevaluating                    [0m [36magent[0m=[35mCritic[0m [36mtitle[0m=[35m'Recent Advances in Tool-Using Capabilities of Large Language Models'[0m
+[2m05:07:23[0m [1mgenerating_structured         [0m [36magent[0m=[35mCritic[0m [36mmessage_preview[0m=[35m'## Original Research Question\nWhat are the recent advances in tool-using capabilities of large langu'[0m [36mmodel[0m=[35mCriticFeedback[0m
+[2m05:07:40[0m [1mstructured_output             [0m [36mjson_len[0m=[35m10503[0m [36mmodel[0m=[35mgpt-4o[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m05:08:22[0m [1mstructured_output             [0m [36mjson_len[0m=[35m7044[0m [36mmodel[0m=[35mclaude-sonnet-4-6-20250514[0m [36mtool[0m=[35mCriticFeedback[0m
+[2m05:08:22[0m [1mcross_evaluation              [0m [36magent[0m=[35mCritic[0m [36mmax_spread[0m=[35m0.5[0m [36mmerged_overall[0m=[35m7.5[0m [36mprimary_overall[0m=[35m7.5[0m [36msecondary_overall[0m=[35m7.5[0m [36mspread[0m=[35m{'coverage': 0.0, 'depth': 0.5, 'coherence': 0.0, 'accuracy': 0.5}[0m
+[2m05:08:22[0m [1mevaluation_done               [0m [36maccuracy[0m=[35m7.8[0m [36magent[0m=[35mCritic[0m [36mcoherence[0m=[35m8.0[0m [36mcoverage[0m=[35m7.0[0m [36mcross_model[0m=[35mTrue[0m [36mdepth[0m=[35m7.2[0m [36mis_satisfactory[0m=[35mFalse[0m [36moverall[0m=[35m7.5[0m
+[2m05:08:22[0m [1miteration_end                 [0m [36mcomponent[0m=[35mpipeline[0m [36mis_satisfactory[0m=[35mFalse[0m [36miteration[0m=[35m1[0m [36mkb_filtered[0m=[35mTrue[0m [36moverall_score[0m=[35m7.5[0m [36mpapers_retrieved[0m=[35m50[0m [36mpapers_to_read[0m=[35m50[0m [36mtotal_notes[0m=[35m55[0m
+
+Pipeline: 100 papers, 544s
+Reference Recall: 0.0% (0/9)
+
+Found: []
+Missed: ['ReAct: Synergizing Reasoning and Acting in Language Models', 'Toolformer: Language Models Can Teach Themselves to Use Tools', 'Self-Refine: Iterative Refinement with Self-Feedback', 'Reflexion: Language Agents with Verbal Reinforcement Learning', 'Chain-of-Thought Prompting Elicits Reasoning in Large Language Models']
+
+============================================================
+REFERENCE RECALL SUMMARY
+============================================================
+  rag       : 21.4% (3/14)
+  agents    : 0.0% (0/9)
+
+  Average: 10.7%
+
+Results saved to: /Users/lxl/.openclaw/code/research-agent/experiments/results/reference_recall.json
