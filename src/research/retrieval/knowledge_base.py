@@ -11,9 +11,8 @@ KnowledgeBase — 论文知识库，连接 RAG 组件和 Pipeline
   3. Reader 只精读检索到的论文，而非全部
 
 设计决策:
-  - 以 abstract 为文本源: 当前阶段没有 PDF 全文，abstract 足够支撑
-  - 使用 chunking 模块: 虽然 abstract 短，但保持架构一致性，
-    后续接 PDF 全文时同一套 KnowledgeBase 直接复用
+  - 优先全文: paper.full_text 有值时用全文，否则降级到 abstract
+  - 使用 chunking 模块: 对全文尤其重要，长文档切分后独立检索
   - 跨迭代累积: Pipeline 的多轮自进化中，知识库持续扩展，不丢弃
 """
 
@@ -75,10 +74,11 @@ class KnowledgeBase:
 
         self._logger.info("indexing_papers", count=len(new_papers))
 
-        # 1. Chunk: 将每篇论文的 abstract 切分
+        # 1. Chunk: 将每篇论文的文本切分（优先全文，降级到 abstract）
         all_chunks: list[Chunk] = []
         for paper in new_papers:
-            text = f"{paper.title}\n\n{paper.abstract}"
+            body = paper.full_text if paper.full_text else paper.abstract
+            text = f"{paper.title}\n\n{body}"
             chunks = self._chunker.chunk(text, paper.paper_id)
             all_chunks.extend(chunks)
             self._paper_map[paper.paper_id] = paper

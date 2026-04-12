@@ -83,6 +83,35 @@ class KnowledgeBaseConfig(BaseModel):
     )
 
 
+class PDFConfig(BaseModel):
+    """PDF 全文处理配置"""
+
+    enabled: bool = Field(
+        default=False,
+        description="是否启用 PDF 全文提取（关闭则仅用 abstract）",
+    )
+    max_pages: int = Field(
+        default=30,
+        ge=1,
+        le=100,
+        description="每篇 PDF 最多提取的页数",
+    )
+    max_text_length: int = Field(
+        default=50000,
+        ge=1000,
+        description="提取后全文的最大字符数（截断保护）",
+    )
+    download_timeout: float = Field(
+        default=30.0,
+        description="PDF 下载超时（秒）",
+    )
+    max_concurrent: int = Field(
+        default=3,
+        ge=1,
+        description="最大并发下载数",
+    )
+
+
 class PipelineConfig(BaseModel):
     """Pipeline 总配置 — 一次实验的完整参数"""
 
@@ -102,6 +131,7 @@ class PipelineConfig(BaseModel):
     retrieval: RetrievalConfig = Field(default_factory=RetrievalConfig)
     rerank: RerankConfig = Field(default_factory=RerankConfig)
     knowledge_base: KnowledgeBaseConfig = Field(default_factory=KnowledgeBaseConfig)
+    pdf: PDFConfig = Field(default_factory=PDFConfig)
 
     # 自进化
     max_iterations: int = Field(

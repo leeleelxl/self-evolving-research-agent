@@ -31,6 +31,10 @@ class Paper(BaseModel):
     source: Literal["semantic_scholar", "arxiv"]
     citations: int = 0
     pdf_url: str | None = None
+    full_text: str | None = Field(
+        default=None,
+        description="PDF 全文（提取后填入），为 None 时降级到 abstract",
+    )
 
 
 class Chunk(BaseModel):

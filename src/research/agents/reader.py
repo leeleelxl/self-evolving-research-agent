@@ -2,13 +2,14 @@
 Reader Agent — 论文精读与结构化信息提取
 
 职责:
-1. 对每篇论文的 abstract（后续可扩展到全文）做 LLM 调用
+1. 对每篇论文做 LLM 调用（优先全文，降级到 abstract）
 2. 提取结构化笔记 (PaperNote)
 3. 评估与研究问题的相关度
 4. 并发处理，错误隔离
 
-当前阶段基于 abstract 做精读。后续加入 PDF 全文后效果会更好，
-但 abstract 已经足够支撑 MVP 和自进化实验。
+支持两种模式:
+- Full-text: paper.full_text 有值时，使用 PDF 提取的全文（截断保护）
+- Abstract-only: 降级模式，仅用 abstract
 """
 
 from __future__ import annotations
@@ -22,7 +23,8 @@ from research.core.models import Paper, PaperNote
 SYSTEM_PROMPT = """\
 You are the Reader Agent in an academic research system.
 
-Your job is to read an academic paper's abstract and extract structured information. \
+Your job is to read an academic paper and extract structured information. \
+You may receive either a full paper text or just an abstract. \
 Be concise but accurate. Focus on what the paper actually says, not what you think it should say.
 
 For relevance scoring:
@@ -41,7 +43,8 @@ READ_PROMPT_TEMPLATE = """\
 **Title:** {title}
 **Authors:** {authors}
 **Year:** {year}
-**Abstract:** {abstract}
+
+{content_section}
 
 Extract a structured PaperNote with:
 1. core_contribution: One sentence summarizing the main contribution
@@ -53,6 +56,9 @@ Extract a structured PaperNote with:
 
 Set paper_id to "{paper_id}" and title to "{title}".
 """
+
+# 全文模式下，截断到此长度（约 12k tokens），避免超出 context window
+_MAX_FULL_TEXT_CHARS = 30000
 
 
 class ReaderAgent(BaseAgent):
@@ -109,13 +115,22 @@ class ReaderAgent(BaseAgent):
         return notes
 
     async def _read_paper(self, paper: Paper, question: str) -> PaperNote:
-        """精读单篇论文 → 结构化笔记"""
+        """精读单篇论文 → 结构化笔记
+
+        有全文则用全文（截断保护），无全文则降级到 abstract。
+        """
+        if paper.full_text:
+            text = paper.full_text[:_MAX_FULL_TEXT_CHARS]
+            content_section = f"**Full Text (extracted from PDF):**\n{text}"
+        else:
+            content_section = f"**Abstract:** {paper.abstract}"
+
         prompt = READ_PROMPT_TEMPLATE.format(
             question=question,
             title=paper.title,
-            authors=", ".join(paper.authors[:5]),  # 最多 5 个作者
+            authors=", ".join(paper.authors[:5]),
             year=paper.year,
-            abstract=paper.abstract,
+            content_section=content_section,
             paper_id=paper.paper_id,
         )
         return await self.generate_structured(prompt, PaperNote)

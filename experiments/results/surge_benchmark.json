@@ -1,0 +1,98 @@
+{
+  "experiment": "surge_benchmark_comparison",
+  "timestamp": "2026-04-12T15:30:48.046466",
+  "question": "What are the recent advances in retrieval-augmented generation (RAG) for large language models?",
+  "ground_truth_papers": 20,
+  "methodology": {
+    "coverage": "Reference recall against curated RAG essential papers (20 papers)",
+    "doc_relevance": "Hybrid citation verification (embedding grounding)",
+    "logic": "Critic coherence score mapped from 0-10 to 0-5 scale",
+    "contradiction": "NLI-based contradiction detection (unique to ReSearch v2)",
+    "note": "SurGE uses 205 surveys with full reference lists; we use domain-expert curated list. Coverage numbers are not directly comparable due to different ground truth sizes, but relative positioning is informative."
+  },
+  "pipeline": {
+    "iterations": 2,
+    "sections": 17,
+    "references": 48,
+    "papers": 95,
+    "elapsed_seconds": 424.9
+  },
+  "our_metrics": {
+    "coverage": 0.25,
+    "doc_relevance": 1.0,
+    "contradiction_rate": 0.0109,
+    "logic": 4.0,
+    "sections": 17,
+    "critic_overall": 7.55
+  },
+  "surge_baselines": {
+    "RAG (SurGE)": {
+      "coverage": 0.0214,
+      "doc_relevance": 0.2857,
+      "sec_relevance": 0.2502,
+      "sent_relevance": 0.25,
+      "structure_quality": 0.683,
+      "heading_recall": 0.79,
+      "rouge_l": 0.1519,
+      "bleu": 10.38,
+      "logic": 4.67
+    },
+    "AutoSurvey": {
+      "coverage": 0.0351,
+      "doc_relevance": 0.3617,
+      "sec_relevance": 0.4935,
+      "sent_relevance": 0.487,
+      "structure_quality": 1.39,
+      "heading_recall": 0.97,
+      "rouge_l": 0.1578,
+      "bleu": 10.44,
+      "logic": 4.74
+    },
+    "StepSurvey": {
+      "coverage": 0.063,
+      "doc_relevance": 0.4576,
+      "sec_relevance": 0.4571,
+      "sent_relevance": 0.4636,
+      "structure_quality": 1.195,
+      "heading_recall": 0.976,
+      "rouge_l": 0.159,
+      "bleu": 12.02,
+      "logic": 4.85
+    }
+  },
+  "coverage_detail": {
+    "coverage": 0.25,
+    "found": 5,
+    "total": 20,
+    "found_titles": [
+      "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+      "Dense Passage Retrieval for Open-Domain Question Answering",
+      "REALM: Retrieval-Augmented Language Model Pre-Training",
+      "Active Retrieval Augmented Generation",
+      "Corrective Retrieval Augmented Generation"
+    ],
+    "missed_titles": [
+      "Improving Language Models by Retrieving from Trillions of Tokens",
+      "Atlas: Few-shot Learning with Retrieval Augmented Language Models",
+      "Leveraging Passage Retrieval with Generative Models for Open Domain Question Answering",
+      "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+      "ColBERT: Efficient and Effective Passage Search via Contextualized Late Interaction",
+      "Unsupervised Dense Information Retrieval with Contrastive Learning",
+      "A Survey on Hallucination in Large Language Models",
+      "FActScore: Fine-grained Atomic Evaluation of Factual Precision",
+      "Lost in the Middle: How Language Models Use Long Contexts",
+      "Precise Zero-Shot Dense Retrieval without Relevance Labels",
+      "Attention Is All You Need",
+      "BERT: Pre-training of Deep Bidirectional Transformers",
+      "Language Models are Few-Shot Learners",
+      "Generative Language Models for Paragraph-Level Question Generation",
+      "When Not to Trust Language Models: Investigating Effectiveness of Parametric and Non-Parametric Memories"
+    ]
+  },
+  "citation_verification": {
+    "grounding_rate": 1.0,
+    "contradiction_rate": 0.0109,
+    "citations_checked": 275,
+    "contradictions": 3
+  }
+}

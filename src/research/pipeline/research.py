@@ -37,6 +37,7 @@ from research.core.models import (
     ResearchReport,
 )
 from research.retrieval.knowledge_base import KnowledgeBase
+from research.retrieval.pdf import fetch_full_texts
 
 logger = structlog.get_logger()
 
@@ -108,6 +109,10 @@ class ResearchPipeline:
                 # 收集论文（用于 post-hoc 引用验证）
                 for p in papers:
                     all_papers_map[p.paper_id] = p
+
+                # ── Step 2.5: PDF 全文提取（启用时） ──
+                if self.config.pdf.enabled:
+                    await fetch_full_texts(papers, self.config.pdf)
 
                 # ── Step 3: KnowledgeBase 过滤 ──
                 papers_to_read = self._filter_by_knowledge_base(papers, plan)

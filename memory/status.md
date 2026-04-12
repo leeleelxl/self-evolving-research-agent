@@ -1,36 +1,57 @@
 # 当前状态
 
-> 更新时间：2026-04-09
+> 更新时间：2026-04-12
 
-## 阶段：KnowledgeBase 集成完成，RAG 组件全部接入 Pipeline
+## 阶段：SurGE 对标完成，全部核心功能闭环
 
-- 5 Agent 全部实现，Pipeline 端到端跑通
-- **KnowledgeBase 接入 Pipeline**：RAG 组件不再孤立，真正参与检索-精读流程
-- 自进化验证通过：7.8 → 8.0（+0.2），queries 3x 增长
-- 消融实验完成：5 组 HotpotQA（50 samples），用真实 embedding（BGE-small）
-- KB 消融实验完成：精读量 -58%，质量持平
-- 55 tests（新增 10 个 KB 测试），8 篇知识文档 → 9 篇
-- 错误处理 + 优雅降级：Agent 重试、Pipeline 单轮失败不崩溃
-- Prompt 优化：Critic accuracy 校准、Planner query 去重
+- 5 Agent Pipeline + KnowledgeBase + Multi-LLM Critic + PDF 全文 + Hybrid 引用验证 + SurGE 对标
+- 自进化 3 次重复验证：Δ=+0.30±0.19（全部为正）
+- 消融实验：5 组 HotpotQA + KB 消融 + Multi-LLM 验证 + PDF 消融 + 引用验证三方法对比 + SurGE 对标
+- 80 tests，9 篇知识文档
+- 错误处理 + 优雅降级
 
 ## 核心数据（面试直接用）
 
-### 自进化
-- Round 0: overall=7.8 → Round 1: overall=8.0 (Δ+0.2)
-- Queries: 8 → 24（3x 增长，定向补充缺失方向）
-- Notes: 45 → 95（累积）
+### Hybrid 引用验证（Embedding + NLI）
+- Embedding-only: 100% grounding（过宽松，无法区分话题相关 vs 真实支撑）
+- NLI-only: 4.3% grounding（过严格，NLI 区分 entailment 和 paraphrase）
+- **Hybrid: 100% grounding + 4.8% contradiction 检测（10/208 引用矛盾）**
+- 关键 insight: NLI 不适合替代 embedding 做 grounding，但矛盾检测是独特能力
+- 模型: DeBERTa-v3-base cross-encoder，句子级推理
 
-### KnowledgeBase 集成效果
+### PDF 全文 vs Abstract-only（消融）
+- Abstract-only: overall=7.2（depth=6.9）
+- Full-text: overall=7.9（depth=7.8）
+- **Δ=+0.7，depth +0.9 提升最大**
+- PDF 提取成功率 96.7%（58/60）
+- 耗时 3x（435s → 1252s），可优化
+
+### 自进化（3 次重复，Multi-LLM Critic）
+- Overall: 7.79 ± 0.07（系统稳定）
+- Evolution Δ: +0.30 ± 0.19（3/3 全部为正）
+- Cross-model spread: accuracy 最不稳定（1.4），coherence 最稳定（0.3）
+
+### KnowledgeBase 集成
 - Without KB: Reader 读 50 篇，overall=8.05
-- With KB: Reader 读 21 篇（-58%），overall=8.0，coherence +0.3
-- 结论：精读量大幅减少，质量持平，coherence 反而提升
+- With KB: Reader 读 21 篇（-58%），overall=8.0
+- 精读量大幅减少，质量持平
 
-### 消融实验（BGE-small embedding, 50 samples）
+### Multi-LLM 交叉评估
+- GPT-4o vs Claude: overall 差 ~1.0（Claude 更严）
+- 同家族模型（gpt-4o vs gpt-4o-mini）分数完全一致 → 同家族 Multi-LLM 无意义
+- accuracy 跨模型分歧最大 → 已知局限
+
+### 消融实验（BGE-small, 50 samples）
 - Best: fixed × hybrid = F1 0.740
-- Hybrid > Dense > Sparse（RRF 融合效果最好）
-- Embedding 质量对 Dense 影响 +36%
+- Hybrid > Dense > Sparse
+
+### SurGE Benchmark 对标
+- Coverage: 25.0% vs 最强基线 StepSurvey 6.3%（**4x**）
+- Logic: 4.00/5 vs StepSurvey 4.85/5（略低，改进方向）
+- 独有能力: NLI 矛盾引用检测（1.1%），SurGE 基线无此维度
+- 注意: ground truth 规模不同（我们 20 篇 vs SurGE ~100 篇/综述），绝对值不直接可比
 
 ## 下一步
-
-- P2 可选优化：CLI 改进、扩大实验样本量、PDF 全文集成
-- 面试准备：整理高频问题和答案
+- README 更新（PDF + Hybrid 引用验证 + SurGE 数据）
+- PDF 耗时优化（选择性下载/缓存）
+- GitHub 发布
