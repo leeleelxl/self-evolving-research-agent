@@ -1,0 +1,36 @@
+{
+  "experiment": "bootstrap_ci_posthoc",
+  "timestamp": "2026-04-14T11:59:12.084643",
+  "method": "paired_bootstrap_ci (n_bootstrap=10000, alpha=0.05, seed=42)",
+  "caveat": "小样本（n<10）的 bootstrap CI 数学上受限于观测值的 [min, max]。CI 不含 0 只能说明所有观测方向一致，不等价于大样本下的严格显著性检验。大样本（n≥30）验证是未来工作（见 README 已知局限）。",
+  "analyses": {
+    "self_evolution": {
+      "source": "self_evolution_repeated.json",
+      "evolution_delta": {
+        "values": [
+          0.33,
+          0.47,
+          0.1
+        ],
+        "n": 3,
+        "mean": 0.3,
+        "ci_95_low": 0.1,
+        "ci_95_high": 0.47,
+        "format": "+0.30 (95% CI: [+0.10, +0.47])",
+        "is_significant": true
+      },
+      "overall": {
+        "values": [
+          7.75,
+          7.874999999999999,
+          7.75
+        ],
+        "n": 3,
+        "mean": 7.7917,
+        "ci_95_low": 7.75,
+        "ci_95_high": 7.875,
+        "format": "+7.79 (95% CI: [+7.75, +7.87])"
+      }
+    }
+  }
+}

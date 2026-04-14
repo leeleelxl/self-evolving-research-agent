@@ -58,13 +58,41 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 | **Overall** | **7.79 ± 0.07** | — |
 | **Evolution Δ** | **+0.30 ± 0.19** | [+0.33, +0.47, +0.10] |
 
+**Bootstrap 95% 置信区间**（post-hoc 分析，paired bootstrap, n_bootstrap=10000, seed=42）：
+
+| 指标 | Mean | 95% CI | 显著性 |
+|------|:----:|:------:|:------:|
+| Evolution Δ | +0.30 | **[+0.10, +0.47]** | CI 不含 0 |
+| Overall | 7.79 | [7.75, 7.87] | — |
+
 关键发现：
-- **自进化 Δ 全部为正**（3/3 runs），mean=+0.30
+- **自进化 Δ 全部为正**（3/3 runs），95% CI **[+0.10, +0.47]** 不含 0
 - Overall 方差极小（±0.07），系统输出稳定
 - Accuracy 方差最大（±0.35），与 cross-model 分歧分析一致
 
-> _数据源：`experiments/results/self_evolution_repeated.json`。_
-> _统计局限：n=3 std/mean 比接近 1，详见 [已知局限 #2](#已知局限)。_
+> _数据源：`experiments/results/self_evolution_repeated.json` + `experiments/results/bootstrap_ci_posthoc.json`。_
+> _**统计诚实声明：** n=3 的 bootstrap CI 数学上受限于观测值 [min, max]，"CI 不含 0" 仅说明 3 次实验方向一致，不等价大样本显著性检验。严格显著性验证（n≥30 + paired t-test）是未来工作（见 [已知局限 #2](#已知局限)）。_
+
+### Agent IO 观察：自进化真实性证据
+
+分数只是表象，真正证明"自进化 work"要看 Planner 的 queries 是否真 diverge：
+
+**单次 trace_demo 实证（trace_level=full）**（同一问题跑 2 轮，`experiments/results/trace_demo.json`）：
+
+| | Round 0 | Round 1 | 新增 | 重复 |
+|:-:|:-:|:-:|:-:|:-:|
+| queries 数 | 6 | 38 | **32 新** | 0 |
+| 涵盖方向 | 基础 RAG 架构 | + 多模态 / 代码 / 多语言 / 长上下文 / 安全 / MLOps / 个性化 / 经典论文溯源 | — | — |
+
+**Round 1 的 38 个 queries 零重复**，且**完全响应了 Critic 提出的 25 条 missing_aspects**（如主动搜 "Lewis 2020 / REALM / RETRO / Atlas / FiD" 补经典论文、"KILT / NQ / HotpotQA" 补 benchmark 覆盖）。
+
+查看方式：
+```bash
+python experiments/inspect_agent_io.py experiments/results/trace_demo.json --diff-queries
+python experiments/inspect_agent_io.py experiments/results/trace_demo.json --agent Critic
+```
+
+> _自动化回归：`tests/test_pipeline_integration.py::test_self_evolution_actually_diverges` 在 `pytest -m integration` 时真跑 API 验证此行为。_
 
 ### Multi-LLM 交叉评估
 
