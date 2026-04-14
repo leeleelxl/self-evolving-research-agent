@@ -2,73 +2,71 @@
 
 > 更新时间：2026-04-14（session 收尾）
 
-## 阶段：P7 完成，诚实面对 Writer 系统性缺陷，明天修复
+## 项目定位（明确）
 
-评分轨迹：55/90 (起始) → 63 (Wave 1) → 68 (P5) → 71 (P2+P6) → **~72 (P7)**，🟢 **强推级**
+**ReSearch v2 = 学术综述生成系统**。用户给主题，输出研究者能真用的综述。
 
-## 今日完成
+**对标**：STORM (stanford-oval/storm, 13k stars)。
 
-- **P0**: Agent IO 可观测化（AgentTrace + inspect_agent_io.py + trace_demo）
-- **P1**: 真 API E2E 集成测试（2 个 integration tests）
-- **P3**: Bootstrap 95% CI（Evolution Δ=+0.30 [+0.10, +0.47]）
-- **P4**: NLI Calibration → 发现 precision=0%（诚实披露）
-- **P5**: Attribution Method Pivot（NLI → LLM-judge）
-- **P6**: Attribution Calibration（multi-class 62.5%, recall=100%）
-- **P2**: Pipeline 集成 Citation Verification + async 重构
-- **P7**: 重复 smoke test n=3 → **Writer 60.5% 错配，CI [56.2%, 66.7%]**
+**不是**：研究平台、技术 showcase、方法论 testbed（之前 spin 过，被用户拆穿）。
 
-## 明天主任务：P8 修复 Writer Attribution 问题
+## 当前状态：核心能力不可用
 
-**为什么必须做**：用户质疑"这个实验的价值就是判定 writer agent 不可靠？" — 确实是。
-Writer 60% 错配是**硬伤不是亮点**，光发现不修等于 spin。
+**Writer Agent 60.5% 引用错配**（P7 n=3 CI [56.2%, 66.7%] 确认）。
 
-**修复策略**（按 ROI 排序，先做策略 1）：
+这意味着**生成的综述引用一半以上是错的，研究者不能直接用**。这是项目当前的致命硬伤。
 
-1. **Structured citation prompt**（~1h）
-   - Writer prompt 强制每条声称 quote abstract 具体表述
-   - 当前 writer.py 让 Writer 自由写，改为"只能用 abstract 明确提到的内容"
+## 今日完成的技术基础（支撑明天修复）
 
-2. **Reader-Writer contract**（~2h）
-   - Writer 只能用 Reader note.core_contribution 里的 claim
-   - Prompt 明确禁止使用 note 中未出现的方法名
+- Hybrid citation verifier（Attribution LLM-judge）
+- Pipeline 集成 + async 重构
+- n=3 repeated smoke test 框架（`experiments/p2_repeated_smoke_test.py`）
+- Bootstrap CI（`src/research/evaluation/statistics.py`）
+- Agent IO 追踪（用于验证 Agent 真实行为）
 
-3. **Self-check via Attribution**（~3h）
-   - Writer 生成后自己跑 attribution，mismatch > threshold 就 revise
+这些**基础设施**让明天修复 Writer 后**能立刻量化验证**效果。
 
-**验证方法**：复用 `experiments/p2_repeated_smoke_test.py` 跑 n=3，对比 CI。
+## 明天主任务：P8 修复 Writer（生死任务）
 
-**成功标准**：mismatch rate 60% → 20-30%
+**不是 feature work**，是**不修这个项目就不可用**。
 
-## 核心数据（面试可讲）
+**方案**：策略 1 + 策略 2 + 策略 3（详见 `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/project_apr14_writer_fix_plan.md`）
 
-### 自进化（3 次重复, Multi-LLM Critic）
-- Overall 7.79 ± 0.07, **Evolution Δ = +0.30, 95% CI [+0.10, +0.47]**
-- Round 0 (6 queries) → Round 1 (38 queries, 0 重复) — 真 diverge
+1. **Reader Claim Contract**（~2h）— Writer 只能用 Reader note 的 claim，禁止编造方法名
+2. **Structured Citation Format**（~1h）— 每条引用显式引用 note 内容
+3. **Attribution Self-Check Loop**（~3h）— Writer 自检 mismatch > 25% 就 revise
 
-### PDF 全文消融
-- Abstract 7.2 → Full-text 7.9, **Δ+0.7, depth +0.9**
-- 提取率 96.7%
+**验证标准**（硬指标，不是 spin）：
+- ✅ Mismatch rate CI 上界 < 30%（从 [56.2%, 66.7%]）
+- ✅ 至少 1 个 section 做到 100% matching
+- ✅ 抽样 5 条 matching 引用给人读，觉得"能用"
 
-### SurGE 外部对标
-- Coverage 25.0% vs 最强基线 6.3%（4x，有 methodology caveat）
+**修不到的处理**：诚实记录，考虑换 Writer 模型（gpt-4o-mini → gpt-4o），或缩小范围。
 
-### Hybrid 引用验证（v6, n=3）
-- **Writer 60.5% attribution 错配, CI [56.2%, 66.7%]** ← 硬伤待修复
-- NLI 矛盾 precision=0%（已 deprecate）
-- Attribution multi-class agreement 62.5%
+## 其他技术能力（已验证稳定）
 
-## 技术栈（已实现）
+- **自进化机制**: Round 0 (6 queries) → Round 1 (38 queries, 0 重复)，3 次重复 Δ=+0.30 [+0.10, +0.47]
+- **Multi-LLM Critic**: GPT-4o + Claude 交叉评估 + spread 分歧度
+- **PDF 全文**: 提取率 96.7%, overall Δ+0.7
+- **SurGE 对标**: Coverage 25% vs 最强基线 6.3%（有 methodology caveat）
+- **RAG Ablation**: Hybrid best F1=0.740
 
-Python 3.11+ | OpenAI SDK (中转站) | Multi-LLM: GPT-4o + Claude | FAISS + BM25 | 
-Semantic Scholar + arXiv | fastembed BGE-small | sentence-transformers (optional) | 
-pypdf | Pydantic v2 | structlog | pytest (96 unit + 20 integration)
+## Next Session 启动 checklist
 
-## Next Session 启动检查
+1. **先读**：
+   - 本文件（status.md）
+   - memory/tasks.md
+   - `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/project_apr14_writer_fix_plan.md`
+   - `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/feedback_avoid_spinning.md`（硬纪律）
+2. **核查**：
+   - `git log -1` 最新 commit 应是 "保存 session 收尾状态"
+   - `conda run -n base python -m pytest -m "not integration" -q` 应 96 passed
+3. **开工**：直接改 `src/research/agents/writer.py` 做策略 1
+4. **验证**：跑 `experiments/p2_repeated_smoke_test.py` 看 mismatch CI 对比
 
-1. 读此文件（status.md）
-2. 读 `memory/tasks.md`
-3. 读 `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/project_apr14_writer_fix_plan.md`
-4. 读 `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/feedback_avoid_spinning.md`
-5. 检查 git log：最新 commit 应是 `e07b6f8 feat: P7 P2 Smoke Test n=3 + Bootstrap CI`
-6. 跑 `conda run -n base python -m pytest -m "not integration" -q` 确认 96 tests 通过
-7. 开始 P8 策略 1（writer.py prompt）
+## 硬纪律（切勿违反）
+
+- ❌ 不要把 Writer 60% 错配再包装成任何亮点
+- ❌ 不要扩大"research platform"叙事
+- ❌ 不要在解决问题前先优化 README 叙事
+- ✅ 先改代码 → 跑实验 → 看真实 IO → 再看能不能讲

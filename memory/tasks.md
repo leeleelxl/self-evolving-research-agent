@@ -2,55 +2,60 @@
 
 > 更新时间：2026-04-14（session 收尾）
 
-## ✅ P0 核心系统（全部完成）
+## 项目定位（明确）
 
-| # | 任务 | 状态 |
-|---|------|:----:|
-| 1-15 | 5 Agent + KB + PDF + 错误处理 + Prompt | ✅ |
+**学术综述生成系统**（对标 STORM）。不是研究平台，不是 showcase。
 
-## ✅ P1 实验验证（全部完成）
+## ✅ 已完成（技术基础，不是亮点）
 
-| # | 任务 | 状态 |
-|---|------|:----:|
-| 16-20 | 端到端 + 自进化 + RAG/KB/PDF 消融 + README | ✅ |
-
-## ✅ P2 架构升级 + 诚实度（全部完成）
-
-| # | 任务 | 状态 | 成果 |
+| # | 任务 | 状态 | 备注 |
 |---|------|:----:|------|
-| Wave 1 | 诚实度修复（Limitations + Opt-in + 数据溯源） | ✅ | 诚实定位 5→7 |
-| P0 | Agent IO 可观测化（AgentTrace + inspect 工具） | ✅ | 发现 38 queries 0 重复 |
-| P1 | 真 API E2E 集成测试 | ✅ | 消除 anti-overselling -1 |
-| P3 | Bootstrap 95% CI | ✅ | Evolution Δ +0.30 [+0.10, +0.47] |
-| P4 | NLI Calibration | ✅ | precision=0% 诚实披露 |
-| P5 | Attribution Method Pivot | ✅ | NLI → LLM-judge |
+| Wave 1 | Limitations + Opt-in + 数据溯源 | ✅ | 诚实度修复 |
+| P0 | Agent IO 可观测化 | ✅ | 验证工具 |
+| P1 | E2E 集成测试 | ✅ | 工程质量 |
+| P3 | Bootstrap CI | ✅ | 统计工具 |
+| P4 | NLI Calibration → precision=0% | ✅ | 否定发现 |
+| P5 | NLI → Attribution pivot | ✅ | 代码重构 |
 | P6 | Attribution Calibration | ✅ | multi-class 62.5% |
-| **P2** | Pipeline 集成 Citation Verification | ✅ | + async 重构修 bug |
-| **P7** | n=3 重复 smoke test + CI | ✅ | Writer 60.5% [56.2, 66.7] 确认 |
+| P2 | Pipeline 集成 + async | ✅ | 发现 Writer 错配 |
+| P7 | n=3 CI 确认 | ✅ | Writer 60.5% [56.2, 66.7] |
 
-## 🔥 P8 明天做 — 修复 Writer Attribution
+## 🔴 P8 明天做 — 修复 Writer（生死任务）
 
-**优先级**: 最高（硬伤不是亮点，光诊断不修 = spin）
+**Why this is critical**: 项目是做综述生成。Writer 60% 错配 = 综述不可用 = 项目无法使用。
 
 | 步骤 | 内容 | 成本 |
 |------|------|:----:|
-| 8.1 | Writer prompt 加 structured citation 约束 | 1h |
-| 8.2 | Reader-Writer contract（禁止 Writer 编造方法名）| 2h |
-| 8.3 | 跑 p2_repeated_smoke_test.py n=3 验证修复效果 | 1h (实验) |
-| 8.4 | 如果 mismatch 仍 > 40%，做 Self-check via Attribution | 3h |
-| 8.5 | README 更新 "修复前 60% → 修复后 X%" 对比 | 0.5h |
+| 8.1 | Reader Claim Contract：改 writer.py prompt 禁止编造方法名 | 2h |
+| 8.2 | Structured Citation Format：每条引用显式引用 note 内容 | 1h |
+| 8.3 | 跑 p2_repeated_smoke_test.py n=3 看 mismatch CI | 1h (实验) |
+| 8.4 | 如 8.1+8.2 不够，加 Attribution Self-Check Loop | 3h |
+| 8.5 | 如都不够，换 Writer 模型（gpt-4o-mini → gpt-4o） | 1h + API $ |
 
-**成功标准**: mismatch rate 60% → 20-30%
-**面试叙事**: 从 "发现问题" → "诊断 + 修复 + 验证" 完整闭环
+**硬成功标准**：
+- Mismatch rate CI 上界 < 30%
+- 至少 1 个 section 100% matching
+- 抽样 5 条 matching 引用真研究者觉得能用
 
-## 🟡 P9 可选优化（时间允许）
+**硬失败处理**：
+- 诚实记录"这路径走不通"
+- 不要 spin 为亮点
+- 考虑换模型或缩小 domain
 
-| # | 任务 | 价值 |
+## 🟡 P9 延后（修好 Writer 后再考虑）
+
+| # | 任务 | 前提 |
 |---|------|------|
-| P9.1 | Streamlit demo + README GIF | 面试第一印象 +1 |
-| P9.2 | 内容场景 vertical demo（给小红书/快手叙事） | 核心 3 家平均 +0.5 |
-| P9.3 | 自进化扩 n=3 → n=10 | 更强的 CI |
+| P9.1 | 对标 STORM 的 perspective-guided writing | Writer 可用 |
+| P9.2 | outline-driven RAG（STORM 的另一个核心） | Writer 可用 |
+| P9.3 | Streamlit demo | Writer 可用 |
+| P9.4 | 自进化 n 扩 | 低优 |
 
-## 🟢 P2 完成后可以 stop 并转面试准备
+## 纪律提醒
 
-当前 72/90 强推级已够。P8 修完 Writer 后 ~74/90。继续刷分边际递减。
+**避免的反模式**（今天被用户拆穿过）：
+- ❌ 修完 Writer 前不要做其他 feature
+- ❌ 不要再写 README 把 60% 错配包装成亮点
+- ❌ 不要把项目重新定位成"研究平台" 绕开 Writer 问题
+
+**工作流**：先改代码 → 跑真实验 → 看 IO → 再决定叙事。
