@@ -16,7 +16,7 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 
 - **自进化机制**：Critic Agent 评分 → 反馈驱动检索策略改进 → 3 次重复实验 Δ=+0.30±0.19（全部为正）
 - **PDF 全文精读**：自动下载 + 提取 PDF 全文 → overall Δ+0.7, depth +0.9（消融验证）
-- **Hybrid 引用验证**：Embedding grounding + NLI 矛盾检测，发现 4.8% 矛盾引用（DeBERTa-v3 cross-encoder）
+- **Hybrid 引用验证 + Calibration**：Embedding grounding + NLI 矛盾检测，配独立 LLM-rater calibration 揭示 NLI precision=0%（真实诚实发现，详见下文）
 - **Multi-LLM 交叉评估**：GPT-4o + Claude 双模型 Critic，记录分歧度量化评估置信度
 - **5 Agent 协作**：Planner / Retriever / Reader / Writer / Critic 各司其职
 - **KnowledgeBase RAG 集成**：chunking → embedding → hybrid index，精读量 -58% 质量持平
@@ -132,18 +132,39 @@ python experiments/inspect_agent_io.py experiments/results/trace_demo.json --age
 
 ### 三方法对比实验
 
-| 方法 | Grounding Rate | 矛盾检测 | 耗时 | 适用场景 |
-|------|:-------------:|:--------:|:----:|---------|
+| 方法 | Grounding Rate | 矛盾"检测"* | 耗时 | 适用场景 |
+|------|:-------------:|:----------:|:----:|---------|
 | Embedding only | 100% | — | 41s | 过于宽松，无法区分话题相关 vs 真实支撑 |
-| NLI only | 4.3% | 4.8% | 367s | 过于严格，NLI entailment ≠ paraphrase |
-| **Hybrid** | **100%** | **4.8%** | 407s | **Embedding grounding + NLI contradiction** |
+| NLI only | 4.3% | 4.8% (未 calibrate) | 367s | 过于严格，NLI entailment ≠ paraphrase |
+| **Hybrid** | **100%** | 4.8% (calibrate 后 precision=0%) | 407s | Embedding grounding 有效，NLI 矛盾模块**未达可用** |
+
+*"矛盾检测"原以为是亮点，calibration 后发现是假阳性。详见下文。
 
 **设计来自实验发现**（不是拍脑袋）：
 - NLI 模型严格区分"逻辑蕴含"和"语义相似" — 综述改述论文内容时，NLI 判 neutral 而非 entailment
-- 因此 NLI 不适合做 grounding（过严），但矛盾检测能力无可替代
-- Hybrid = 取两者之长：embedding 衡量话题支撑 + NLI（DeBERTa-v3-base）检测矛盾引用
+- 因此 NLI 不适合做 grounding（过严）
+- Hybrid 初衷 = 取两者之长：embedding 衡量话题支撑 + NLI（DeBERTa-v3-base）检测矛盾引用
 
-> 在 208 条引用中检测到 10 条矛盾引用 (4.8%)，包括同一篇论文在多个 section 被反复误引。
+### Calibration 揭示 NLI 矛盾检测实际失效
+
+用独立 LLM rater (gpt-4o, single-rater) 对 24 个 (section, paper) 对做人工级标注，对比 NLI 的 contradiction 判定：
+
+| 指标 | 结果 | 含义 |
+|------|:---:|------|
+| **Precision** | **0%** (0/4) | NLI 判为矛盾的 4 条，全部不是真矛盾 |
+| **Recall** | **0%** (0/1) | Rater 找到的 1 条真矛盾，NLI 没检测到 |
+| Confusion matrix | TP=0, FP=4, FN=1, TN=19 | — |
+| Rater 标签分布 | contra=1, support=10, neutral=13 | 真实分布 |
+
+**失败模式分析**：
+- **False Positives**：NLI 把"section 展开讨论超出 abstract 原话"误判为 contradiction（实际是 neutral/support）。例如同一篇 "Optimizing LLM RAG Pipeline" 被 3 个 section 引用，NLI 全判矛盾，rater 全判 neutral/support
+- **False Negative**：真矛盾是 paper_id 错配（section 把 FAIR-RAG 的特性归给另一篇讲 Indonesian QA 的论文）—— 这是跨论文张冠李戴，NLI 本来就不是为此设计
+
+**诚实声明**：原来宣传的"4.8% 矛盾检测能力"被 calibration 否证。这**不是降低项目价值，而是 calibration 的核心价值**——不做这一步就永远以为 4.8% 是真能力。
+
+> _数据源：`experiments/results/nli_calibration.json` + `experiments/calibration/nli_calibration_sample.csv`（可被人工 re-review）。_
+> _Rater: gpt-4o 单 LLM rater（不是人），避免 Claude 作 rater 的相关性偏差。严格 calibration 需多人工 rater + Cohen's κ。_
+> _改进方向（见已知局限 #5）：换 DeBERTa-large / 加 embedding pre-filter / 专为学术文本 fine-tune NLI。_
 
 ## SurGE Benchmark 外部对标
 
@@ -259,7 +280,7 @@ Python 3.11+ | OpenAI/Anthropic SDK | FAISS + BM25 | Semantic Scholar API | arXi
 
 4. **引用验证阈值敏感性未分析** — Embedding grounding 阈值 0.3、NLI entailment 阈值 0.5 基于经验设定，未做 sweep。100% grounding rate 可能对阈值敏感。**改进方向**：sweep 阈值 0.1-0.7 看指标变化。
 
-5. **NLI 矛盾检测未人工 calibrate** — 4.8% contradiction rate 来自 DeBERTa-v3 模型输出，未抽样人工标注验证 precision/recall。不确定"4.8% 矛盾"里有多少是真矛盾 vs 模型误判。**改进方向**：人工标 30-50 条，对比 NLI 输出。
+5. **NLI 矛盾检测 calibration 后确认不可用** — 原宣传"4.8% 矛盾检测"被独立 LLM rater calibration 否证：Precision=0%, Recall=0% (24 样本，gpt-4o rater)。失败模式：NLI 把"topic-unrelated 或 scope-mismatch"误判为 contradiction 而非 neutral。**改进方向**：换 DeBERTa-large / 加 embedding pre-filter / 专为学术文本 fine-tune。Calibration 脚本 `experiments/calibrate_nli.py`。
 
 6. **仅支持英文学术文献** — BGE-small-en 和 SurGE 对标限定英文；Semantic Scholar / arXiv 偏 CS/AI 领域；中文文献、非学术文本、多模态内容均未验证。
 
