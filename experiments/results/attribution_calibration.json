@@ -1,0 +1,300 @@
+{
+  "experiment": "attribution_calibration",
+  "timestamp": "2026-04-14T18:38:14.676743",
+  "judge": {
+    "model": "claude-sonnet-4-6-20250514",
+    "method": "single-LLM judge (claude independent from gpt-4o rater)"
+  },
+  "ground_truth_source": {
+    "experiment": "P4 nli_calibration",
+    "rater_model": "gpt-4o",
+    "caveat": "single-LLM rater, not human"
+  },
+  "n_valid": 24,
+  "n_errors": 0,
+  "confusion_matrix": {
+    "tp": 1,
+    "fp": 8,
+    "fn": 0,
+    "tn": 15
+  },
+  "precision": 0.1111,
+  "recall": 1.0,
+  "f1": 0.2,
+  "multi_class_agreement": 0.625,
+  "attribution_label_distribution": {
+    "mismatched": 9,
+    "partial": 6,
+    "matching": 9
+  },
+  "nli_comparison": {
+    "nli_precision": 0.0,
+    "nli_recall": 0.0
+  },
+  "results": [
+    {
+      "paper_id": "e2907d8a966ba44022c76ddc17d9d0a1ce5b9205",
+      "paper_title": "End-to-End Table Question Answering via Retrieval-Augmented Generation",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section appears to cite this table QA RAG paper only via an internal identifier without describing its content, while the abstract is specifically about T-RAG for table question answering. There is topical overlap in RAG/QA but no explicit claim in the section about this particular work that could be checked against the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The cited abstract is about T-RAG for end-to-end table question answering, jointly fine-tuning a dense table retriever with BART. The section instead attributes graph-based RAG behavior and specifically names TREX, which is a different method and research direction not supported by this abstract.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "036155ed8ec0b922e62741444b1dc4a011390116",
+      "paper_title": "Optimizing LLM Based Retrieval Augmented Generation Pipelines in the Financial Domain",
+      "section_title": "Retrieval Mechanisms and Their Impact on Performance and Efficiency",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section claims the paper finds that retrieval configuration can matter more than the LLM backbone and that retrieval decisions are often the dominant factor in answer quality. The abstract only states that it benchmarks LLMs, multiple retrieval scenarios, and discusses impact and recommendations, without explicitly claiming retrieval is more important than the LLM choice, so this is a plausible but not directly entailed interpretation.",
+      "attribution_label": "partial",
+      "attribution_confidence": 0.93,
+      "attribution_reasoning": "The cited paper’s abstract clearly supports that it benchmarks 6 LLMs across 15 retrieval scenarios in the financial domain and studies how RAG components affect answer quality, which aligns with the claim that retrieval configuration can strongly impact performance. However, the section extends beyond the abstract by asserting the stronger comparative conclusion that retrieval matters more than the LLM backbone, which is not explicitly stated in the abstract.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "036155ed8ec0b922e62741444b1dc4a011390116",
+      "paper_title": "Optimizing LLM Based Retrieval Augmented Generation Pipelines in the Financial Domain",
+      "section_title": "Training Objectives, Optimization Strategies, and Learning Paradigms for RAG",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section attributes to the cited paper (arxiv:2601.05264v1) a focus on training/optimization of RAG, especially joint consideration of retrieval accuracy and system-level behavior, whereas the abstract describes a benchmarking/analysis study of RAG components in the financial domain. While both concern RAG system design, the specific claims about training strategies and treating retrieval as a black box are not entailed by the abstract, nor explicitly contradicted, so the relationship is neutral.",
+      "attribution_label": "partial",
+      "attribution_confidence": 0.97,
+      "attribution_reasoning": "The cited paper’s abstract supports the high-level claim that RAG optimization should consider multiple pipeline components and system-level behavior rather than treating retrieval as fixed, based on its benchmarking of retrieval scenarios, prompts, and models in financial-domain RAG. However, the section extrapolates to broader training/optimization claims and deployment practices that are not explicitly stated in the abstract.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "036155ed8ec0b922e62741444b1dc4a011390116",
+      "paper_title": "Optimizing LLM Based Retrieval Augmented Generation Pipelines in the Financial Domain",
+      "section_title": "Applications and Domain-Specific Adaptations of RAG",
+      "rater_label": "support",
+      "rater_reasoning": "The section describes a financial RAG benchmark that systematically varies retrievers, prompts, and LLMs, and concludes that retrieval configuration and prompt design can matter as much as model choice, providing practical recommendations. This matches the abstract’s description of benchmarking multiple LLMs across many retrieval scenarios and prompts in financial datasets, analyzing the impact of each component and formulating recommendations for RAG system design.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.97,
+      "attribution_reasoning": "The section attributes to this paper a systematic financial-domain RAG benchmark that varies retrievers, prompts, and LLMs, and says it finds retrieval configuration and prompt design are highly influential while offering practical recommendations. These claims align closely with the abstract's description of benchmarking 6 LLMs across 15 retrieval scenarios and 9 prompts on financial datasets, discussing component impacts and formulating design recommendations.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "b7f8f3cf8bde1ae6990999a7386299e876aaaf04",
+      "paper_title": "Hybrid Retrieval-Augmented Generation (RAG) Systems with Embedding Vector Databases",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section describes TREX and other RAG-stack architectures, while the cited paper’s abstract is about hybrid retrieval with embedding vector databases and does not mention modular stacks, iterative/agentic controllers, or graph-based RAG. They are on related topics (RAG systems) but the specific claims about TREX and stack layers are neither entailed by nor contradicted by the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section attributes a modular-stack paper ('Engineering the RAG Stack') with layers like ingestion, indexing, retrieval, fusion, generation, and orchestration, which is not described in this abstract. The cited abstract is about hybrid RAG with embedding vector databases and dense+keyword retrieval, so this is a clear paper-level misattribution.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "4b13672e7e5b4e31a5cd09d68924a8e61697d047",
+      "paper_title": "Retrieval Augmented Question Answering: When Should LLMs Admit Ignorance?",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "support",
+      "rater_reasoning": "The section says the paper proposes adaptive prompting for long-context LLMs by splitting retrieved information into chunks and processing them sequentially, maintaining or improving QA accuracy while reducing token usage. The abstract describes exactly such an adaptive prompting strategy with chunking and sequential prompting that matches standard prompting performance while using fewer tokens, so the survey’s description is well supported.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.97,
+      "attribution_reasoning": "The cited sentence attributes to this paper that sequentially processing retrieved chunks instead of a monolithic long context can match QA accuracy while using fewer tokens. The abstract explicitly describes an adaptive prompting strategy that splits retrieved information into smaller chunks, sequentially prompts the LLM, and matches standard prompting performance with fewer tokens.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "b7f8f3cf8bde1ae6990999a7386299e876aaaf04",
+      "paper_title": "Hybrid Retrieval-Augmented Generation (RAG) Systems with Embedding Vector Databases",
+      "section_title": "Applications and Domain-Specific Adaptations of RAG",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section attributes to the cited paper a \"three-phase financial QA pipeline\" with domain-tuned dense embeddings, hybrid retrieval, DPO-aligned generators, and seven benchmarks, but the abstract only generally describes hybrid RAG with vector databases across multiple domains and does not mention a specific three-phase financial QA pipeline or DPO. The topics are related (hybrid RAG, financial services among domains) but the detailed claims in the section are not directly entailed by the abstract, nor clearly contradicted.",
+      "attribution_label": "partial",
+      "attribution_confidence": 0.94,
+      "attribution_reasoning": "The section’s finance-focused claims generally align with the abstract’s broad description of hybrid RAG using dense + keyword retrieval for enterprise domains including financial services, and with improvements in accuracy/relevance/factuality. However, the section adds specific details such as a financial benchmark, prompt variation effects, and practical recommendations that are not explicitly supported by the abstract.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "8c4b0f3f69e1ed36f371d91dfab7e0d9f909311c",
+      "paper_title": "REAR: A Relevance-Aware Retrieval-Augmented Framework for Open-Domain Question Answering",
+      "section_title": "Training Objectives, Optimization Strategies, and Learning Paradigms for RAG",
+      "rater_label": "support",
+      "rater_reasoning": "The section accurately describes REAR as introducing a relevance assessment module with bi-granularity relevance fusion and noise-resistant training to produce calibrated relevance scores and reshape evidence, which is consistent with the abstract’s focus on an assessment module and improved training with bi-granularity relevance fusion and noise-resistant training for better use of retrieved documents.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.94,
+      "attribution_reasoning": "The section’s claims about REAR align closely with the abstract: it introduces a relevance assessment module, uses bi-granularity relevance fusion and noise-resistant training, and improves how evidence is presented/utilized in open-domain QA. The wording about producing calibrated relevance scores and reshaping the evidence distribution is a mild paraphrase, but it does not attribute clearly unsupported or wrong-paper features.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "4996c27ee9436405c4b19012b4dfe12caf4d26e0",
+      "paper_title": "Optimizing open-domain question answering with graph-based retrieval augmented generation",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "support",
+      "rater_reasoning": "The section describes TREX as combining graph-based indexing with vector retrieval and supporting both fact-oriented and thematic queries, which is directly stated in the abstract. There is no conflict; the section’s summary is a compressed restatement of the abstract’s claims.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.96,
+      "attribution_reasoning": "The section attributes to TREX that it combines graph-based indexing with vector retrieval and is aimed at handling both fact-oriented and thematic/open-domain QA queries. These claims are directly supported by the abstract, which explicitly introduces TREX as combining graph-based indexing and vector-based retrieval for OLTP-style and OLAP-style open-domain QA.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "012ece081e9befeb7693fa43f14999abb8c0d633",
+      "paper_title": "Retrieval Augmented Generation with Synergizing Reasoning and Acting Prompt Engineering for Indonesian Open-Domain Question Answering",
+      "section_title": "Training Objectives, Optimization Strategies, and Learning Paradigms for RAG",
+      "rater_label": "contradiction",
+      "rater_reasoning": "The section attributes specific properties to the cited paper (FAIR-RAG with checklist-based Structured Evidence Assessment and Adaptive Query Refinement agents for multi-hop QA), but the abstract is about Indonesian open-domain QA using ReAct prompting, BM25 vs dense retrieval, and Gemma models, with no mention of FAIR-RAG, checklists, or multi-stage supervision. Thus the section’s description contradicts the actual content of the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section attributes specific methods and findings—especially FAIR-RAG with Structured Evidence Assessment and Adaptive Query Refinement—to the cited paper, but the abstract is about Indonesian open-domain QA using BM25 vs dense retrievers, Gemma models, and ReAct prompt engineering. These are clearly different contributions, indicating a wrong-paper attribution.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "8c4b0f3f69e1ed36f371d91dfab7e0d9f909311c",
+      "paper_title": "REAR: A Relevance-Aware Retrieval-Augmented Framework for Open-Domain Question Answering",
+      "section_title": "Retrieval Mechanisms and Their Impact on Performance and Efficiency",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section attributes findings about BM25 being the most effective retriever in a dynamic legal RAG system and hybrid retrieval trade-offs, but the cited paper’s abstract (REAR) focuses on relevance-aware utilization of retrieved documents in open-domain QA and does not mention BM25, hybrid vs dense/sparse, legal domain, or those specific findings, so the relationship is topical but not entailed or contradicted.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section attributes domain-specific findings about hybrid vs. sparse/dense retrieval in finance, legal, and Indonesian QA to the cited paper, but the abstract is about REAR, a relevance-aware RAG architecture with an assessment module for open-domain QA. None of the cited claims about retrieval taxonomies, BM25 superiority, or hybrid pipeline benchmarks appear in the abstract.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "4996c27ee9436405c4b19012b4dfe12caf4d26e0",
+      "paper_title": "Optimizing open-domain question answering with graph-based retrieval augmented generation",
+      "section_title": "Retrieval Mechanisms and Their Impact on Performance and Efficiency",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section cites this paper only indirectly through the RAG taxonomy, while the abstract specifically discusses benchmarking graph-based RAG and introducing TREX. The section’s concrete claims (about hybrid dense+sparse retrieval and BM25 vs dense in specific domains) are not stated or entailed in the abstract, nor do they contradict it, so the relation is neutral.",
+      "attribution_label": "partial",
+      "attribution_confidence": 0.96,
+      "attribution_reasoning": "The cited abstract is about benchmarking graph-based RAG and introducing TREX, a graph+vector retrieval method for open-domain QA. The section correctly places the paper within retrieval-strategy taxonomy (including graph-based retrieval), but it does not discuss this paper’s actual contributions and instead uses the citation only as broad support for a general taxonomy claim.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "8bbfa19b5ef55c22b773cee948a664f0b514e0a0",
+      "paper_title": "Leveraging long context in retrieval augmented language models for medical question answering",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "support",
+      "rater_reasoning": "The section correctly describes BriefContext as using a map–reduce style architecture where long retrieved contexts are split, processed (implicitly in parallel), and then aggregated to mitigate the lost-in-the-middle issue in medical QA, which aligns with the abstract’s description of a map-reduce strategy to combat the lost-in-the-middle problem for medical question answering.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section’s claims tied to this paper align with the abstract: it attributes BriefContext to a map–reduce architecture for long retrieved contexts in medical QA and says it mitigates lost-in-the-middle effects. These are directly supported by the abstract, which explicitly presents BriefContext as a map-reduce strategy for medical QA to combat the lost-in-the-middle problem.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "4b13672e7e5b4e31a5cd09d68924a8e61697d047",
+      "paper_title": "Retrieval Augmented Question Answering: When Should LLMs Admit Ignorance?",
+      "section_title": "Retrieval Mechanisms and Their Impact on Performance and Efficiency",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section attributes to this paper that BM25 is the most effective retriever in a dynamic legal RAG system and discusses retrieval method comparisons, whereas the abstract is about adaptive prompting and chunking for retrieval-augmented QA and LLMs admitting ignorance, without any mention of BM25, sparse vs. dense retrieval comparisons, or a legal RAG system. The topics are related to RAG and QA but the specific claims made in the section are not entailed by nor contradicted by the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.96,
+      "attribution_reasoning": "The section attributes to this paper findings about financial RAG benchmarks, retrieval configuration effects, and BM25 performance in legal summarization, but the abstract is about adaptive prompting over retrieved chunks and when LLMs should admit ignorance in open-domain QA. These are specific claims from a different research direction, indicating paper misattribution.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "arxiv:2601.05264v1",
+      "paper_title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+      "section_title": "Retrieval Mechanisms and Their Impact on Performance and Efficiency",
+      "rater_label": "support",
+      "rater_reasoning": "The section attributes to the cited paper a taxonomy of RAG retrieval strategies (sparse, dense, hybrid, multi-hop, graph-based, learned indices, reranking, filtering), which is consistent with the abstract’s description of providing a unified taxonomy and detailed overview of modern RAG architectures and retrieval strategies; no conflicting claims are made.",
+      "attribution_label": "partial",
+      "attribution_confidence": 0.92,
+      "attribution_reasoning": "The section’s citation to this paper is broadly aligned: the abstract explicitly says it provides a unified taxonomy of RAG architectures and retrieval strategies, so attributing a spectrum of retrieval approaches to it is reasonable. However, the section adds specifics such as reranking/filtering and frames these as part of the paper’s identified taxonomy in more detail than the abstract supports, so the claim is somewhat broader than what can be verified from the abstract alone.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "arxiv:2601.05264v1",
+      "paper_title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+      "section_title": "Applications and Domain-Specific Adaptations of RAG",
+      "rater_label": "support",
+      "rater_reasoning": "The section describes the cited paper as a RAG stack review that synthesizes patterns from industrial applications and emphasizes provenance, trust, and domain adaptation as core design dimensions. The abstract states that the paper is a comprehensive review of RAG architectures, consolidates techniques into a unified taxonomy, analyzes implications for trust and alignment, and serves as a practical framework for resilient, secure, domain-adaptable systems, which aligns with the section’s characterization.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.95,
+      "attribution_reasoning": "The section attributes to the cited paper a high-level synthesis of industrial applications and an emphasis on provenance/trust/domain adaptation in production RAG systems. The abstract explicitly describes a comprehensive review of academic and industrial deployments, trust and alignment implications, and a framework for resilient, secure, domain-adaptable RAG systems.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "arxiv:2601.05264v1",
+      "paper_title": "Engineering the RAG Stack: A Comprehensive Review of the Architecture and Trust Frameworks for Retrieval-Augmented Generation Systems",
+      "section_title": "Training Objectives, Optimization Strategies, and Learning Paradigms for RAG",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section attributes to the cited paper a specific emphasis that RAG training should consider not only generation quality but also retrieval accuracy and system-level behavior, whereas the abstract only broadly describes a comprehensive review and trust/alignment frameworks without explicitly discussing training objectives or treating retrieval as a black box. The topics are related (RAG architectures and trust), but the concrete training-focused claims are not clearly entailed nor contradicted by the abstract.",
+      "attribution_label": "partial",
+      "attribution_confidence": 0.89,
+      "attribution_reasoning": "The cited review abstract supports broad claims that RAG evaluation/training should consider system-level behavior, trust/alignment, and a unified view of architectures and retrieval strategies. But the section goes beyond the abstract by asserting specific conclusions about training practice—e.g., that many deployments treat retrieval as a fixed black box—which are not explicitly stated in the abstract.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "e2907d8a966ba44022c76ddc17d9d0a1ce5b9205",
+      "paper_title": "End-to-End Table Question Answering via Retrieval-Augmented Generation",
+      "section_title": "Retrieval Mechanisms and Their Impact on Performance and Efficiency",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section claims that a three-phase financial QA pipeline fine-tunes dense models and combines them with sparse retrieval, which consistently outperforms dense-only and sparse-only baselines. The cited paper’s abstract, however, is about T-RAG for table QA, using a dense vector index jointly fine-tuned with BART, and does not mention finance, three-phase design, or comparisons to sparse-only/dense-only hybrids; the topics are related (retrieval-augmented QA with dense indices) but the specific hybrid setup and financial benchmarks are not entailed by the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section attributes to this paper a hybrid dense+sparse retrieval framework for healthcare/legal/technical support/finance with latency/accuracy trade-offs, but the abstract is specifically about T-RAG for end-to-end table question answering using a jointly fine-tuned dense vector index and BART. These are clearly different methods and domains, indicating a wrong-paper attribution rather than a mild scope extension.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "arxiv:2510.22344v1",
+      "paper_title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+      "section_title": "Evaluation, Benchmarks, and Metrics for RAG Performance and Faithfulness",
+      "rater_label": "support",
+      "rater_reasoning": "The section accurately describes that FAIR-RAG is evaluated on multi-hop datasets such as HotpotQA, 2WikiMultiHopQA, and MusiQue, and that it reports substantial F1 gains over strong baselines, which is consistent with the abstract stating experiments on these benchmarks and significant outperformance of strong baselines. The emphasis on evidence sufficiency and faithfulness is also aligned with the abstract’s focus on ensuring sufficient evidence and strictly faithful generation.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.95,
+      "attribution_reasoning": "The section’s FAIR-RAG description aligns with the abstract: it evaluates on HotpotQA, 2WikiMultiHopQA, and MusiQue, reports substantial gains over strong baselines, and emphasizes evidence sufficiency/faithful generation rather than only answer correctness. While the abstract does not use the exact phrase 'iterative RAG baselines,' it does describe comparison to strong baselines in a multi-hop RAG setting, so the attribution is supported.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "arxiv:2412.05838v1",
+      "paper_title": "A Collaborative Multi-Agent Approach to Retrieval-Augmented Generation Across Diverse Data",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section describes FAIR-RAG as an evidence-driven, iterative RAG pipeline with structured evidence assessment and adaptive query refinement, but the cited abstract instead presents a collaborative multi-agent RAG system specialized for diverse data sources; both concern advanced RAG architectures but the specific mechanisms and modules mentioned in the section are not supported or contradicted by the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section attributes specific methods and claims—especially 'Engineering the RAG Stack,' 'FAIR-RAG,' adaptive prompting, BriefContext, and TREX—to the cited paper, but the abstract is about a collaborative multi-agent RAG system for heterogeneous data sources (relational/NoSQL/document databases). These named architectures and contributions do not appear in the abstract and indicate the section is discussing different papers.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "e2907d8a966ba44022c76ddc17d9d0a1ce5b9205",
+      "paper_title": "End-to-End Table Question Answering via Retrieval-Augmented Generation",
+      "section_title": "Training Objectives, Optimization Strategies, and Learning Paradigms for RAG",
+      "rater_label": "support",
+      "rater_reasoning": "The section accurately describes T-RAG as an end-to-end table QA model that jointly fine-tunes a dense table retriever with a BART generator, and notes state-of-the-art performance over two-stage baselines, all of which are explicitly stated or clearly implied by the abstract.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.97,
+      "attribution_reasoning": "The section’s T-RAG description aligns with the abstract: it says T-RAG jointly fine-tunes a dense table retriever and a BART generator end-to-end for table QA, and reports state-of-the-art gains over two-stage baselines. These claims are directly supported by the abstract’s description of a jointly fine-tuned dense index with BART and state-of-the-art performance on end-to-end Table QA and retrieval tasks.",
+      "attribution_mismatched": false
+    },
+    {
+      "paper_id": "d4041fe1f883e77d747f434be6d2a1137ced5d52",
+      "paper_title": "Retrieval-Augmented Generation for Knowledge-Driven Question Answering in Traditional Chinese Medicinal Diets",
+      "section_title": "Applications and Domain-Specific Adaptations of RAG",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section text around the truncated citation does not clearly describe this specific paper, and the cited paper is about a RAG QA system for traditional Chinese medicinal diets, not legal/regulatory RAG with BM25 and NER. They are related by RAG in specialized domains but there is no direct entailment or conflict between the description and the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section discusses finance/corporate-reporting RAG studies, including annual reports, financial benchmarks, and SEC 10-K retrieval optimization, while the cited paper is about a RAG QA system for traditional Chinese medicinal diets. These are specific application domains and contributions that clearly do not match this abstract.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "arxiv:2412.05838v1",
+      "paper_title": "A Collaborative Multi-Agent Approach to Retrieval-Augmented Generation Across Diverse Data",
+      "section_title": "Applications and Domain-Specific Adaptations of RAG",
+      "rater_label": "neutral",
+      "rater_reasoning": "The section cites this paper as a generic RAG stack/industrial applications review emphasizing provenance and trust, while the abstract actually describes a collaborative multi-agent RAG system across heterogeneous data sources. These are related in topic (RAG architectures) but the specific claims in the section are not directly supported nor clearly contradicted by the abstract.",
+      "attribution_label": "mismatched",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section attributes finance/corporate-reporting RAG studies, benchmarks, and domain-specific findings, whereas the cited paper is about a collaborative multi-agent RAG architecture for heterogeneous data sources (relational, NoSQL, document systems). These are clearly different contributions and application domains, indicating a paper-ID misattribution rather than a mild scope extension.",
+      "attribution_mismatched": true
+    },
+    {
+      "paper_id": "arxiv:2510.22344v1",
+      "paper_title": "FAIR-RAG: Faithful Adaptive Iterative Refinement for Retrieval-Augmented Generation",
+      "section_title": "Architectural Designs and Variants of Retrieval-Augmented Generation",
+      "rater_label": "support",
+      "rater_reasoning": "The section’s description of FAIR-RAG as an evidence-driven pipeline with a Structured Evidence Assessment module and an Adaptive Query Refinement agent that decomposes questions into checklists, marks supported facts, identifies gaps, and issues targeted follow-up queries matches the abstract’s description of SEA and the Adaptive Query Refinement agent and their iterative refinement cycle. There is no conflict and the main functional claims are directly entailed by the abstract.",
+      "attribution_label": "matching",
+      "attribution_confidence": 0.98,
+      "attribution_reasoning": "The section’s FAIR-RAG description closely matches the abstract: it names Structured Evidence Assessment and Adaptive Query Refinement, describes decomposition into checklists, identification of supported facts and gaps, and iterative targeted follow-up retrieval until evidence is sufficient. These are the core contributions presented in the abstract.",
+      "attribution_mismatched": false
+    }
+  ]
+}

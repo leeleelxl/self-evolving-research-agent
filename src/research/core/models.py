@@ -252,3 +252,11 @@ class PipelineResult(BaseModel):
         default_factory=list,
         description="每次 Agent 调用的完整 IO 记录，用于验证 Agent 是否按预期行动",
     )
+    citation_verification: dict[str, Any] | None = Field(
+        default=None,
+        description=(
+            "可选的引用质量验证结果（当 PipelineConfig.verify_citations=True 时填充）。"
+            "含 overall_grounding_rate / overall_mismatch_rate / sections / "
+            "method (embedding/attribution/hybrid) 等字段。"
+        ),
+    )

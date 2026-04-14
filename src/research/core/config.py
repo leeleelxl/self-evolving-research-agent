@@ -161,3 +161,27 @@ class PipelineConfig(BaseModel):
             "full=全部 Agent 完整 output（研究项目推荐）"
         ),
     )
+
+    # 引用验证（opt-in）
+    verify_citations: bool = Field(
+        default=False,
+        description=(
+            "是否启用引用质量验证。启用后 Pipeline 末尾跑 CitationVerifier，"
+            "结果写入 PipelineResult.citation_verification。"
+            "Hybrid 方法会调用独立 LLM judge（attribution），有 API 成本。"
+        ),
+    )
+    citation_verification_method: Literal["embedding", "attribution", "hybrid"] = Field(
+        default="hybrid",
+        description=(
+            "引用验证方法: embedding (快速非 LLM) / attribution (LLM-judge) / "
+            "hybrid (embedding grounding + attribution, 推荐)"
+        ),
+    )
+    citation_verification_judge: str = Field(
+        default="claude-sonnet-4-6-20250514",
+        description=(
+            "Attribution LLM judge 模型（走中转站 OpenAI API）。"
+            "推荐用和主 Pipeline Critic 不同的模型避免相关性偏差。"
+        ),
+    )

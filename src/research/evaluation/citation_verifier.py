@@ -250,6 +250,123 @@ class CitationVerifier:
             "citations": citations,
         }
 
+    async def verify_async(self, result: PipelineResult) -> dict:
+        """Async 版本的 verify()，Pipeline.run() 在 async loop 里调用此方法
+
+        纯 embedding/nli 模式下和 sync verify() 行为一致（只是 await 一层）；
+        attribution/hybrid 模式下会原生 await LLM judge，避免 asyncio.run 冲突。
+        """
+        report = result.report
+        paper_map = {p.paper_id: p for p in result.papers}
+
+        all_scores: list[float] = []
+        num_grounded = 0
+        num_mismatched = 0
+        num_missing = 0
+        section_results = []
+
+        for section in report.sections:
+            section_detail = await self._verify_section_async(section, paper_map)
+            section_results.append(section_detail)
+
+            for cite in section_detail["citations"]:
+                if cite["status"] == "missing":
+                    num_missing += 1
+                else:
+                    all_scores.append(cite["score"])
+                    if cite["grounded"]:
+                        num_grounded += 1
+                    if cite.get("mismatched", False):
+                        num_mismatched += 1
+
+        num_checked = len(all_scores)
+        overall_rate = num_grounded / num_checked if num_checked > 0 else 0.0
+        avg_score = float(np.mean(all_scores)) if all_scores else 0.0
+        mismatch_rate = num_mismatched / num_checked if num_checked > 0 else 0.0
+
+        return {
+            "method": self._method,
+            "sections": section_results,
+            "overall_grounding_rate": round(overall_rate, 4),
+            "overall_avg_score": round(avg_score, 4),
+            "overall_mismatch_rate": round(mismatch_rate, 4),
+            "num_citations_checked": num_checked,
+            "num_citations_grounded": num_grounded,
+            "num_citations_ungrounded": num_checked - num_grounded,
+            "num_citations_mismatched": num_mismatched,
+            "num_citations_missing": num_missing,
+            "threshold": (
+                self._grounding_threshold
+                if self._method in ("embedding", "hybrid", "attribution")
+                else self._entailment_threshold
+            ),
+        }
+
+    async def _verify_section_async(
+        self,
+        section: ReportSection,
+        paper_map: dict[str, Paper],
+    ) -> dict:
+        """async 版本：attribution / hybrid 模式下走 async LLM judge"""
+        if not section.cited_papers:
+            return {
+                "section_title": section.section_title,
+                "grounding_rate": 0.0,
+                "citations": [],
+            }
+
+        citations = []
+        grounded_count = 0
+
+        for paper_id in section.cited_papers:
+            paper = paper_map.get(paper_id)
+            if paper is None:
+                citations.append({
+                    "paper_id": paper_id,
+                    "status": "missing",
+                    "score": 0.0,
+                    "grounded": False,
+                })
+                continue
+
+            # Attribution/Hybrid 走 async LLM judge；其他走 sync
+            if self._method == "attribution":
+                cite_result = await self._verify_one_attribution_async(section, paper)
+            elif self._method == "hybrid":
+                emb_result = self._verify_one_embedding(section, paper)
+                attr_result = await self._verify_one_attribution_async(section, paper)
+                cite_result = {
+                    "paper_id": paper.paper_id,
+                    "title": paper.title[:80],
+                    "status": "checked",
+                    "score": emb_result["score"],
+                    "grounded": emb_result["grounded"],
+                    "mismatched": attr_result.get("mismatched", False),
+                    "embedding_similarity": emb_result["score"],
+                    "attribution_label": attr_result.get("attribution_label", ""),
+                    "attribution_confidence": attr_result.get("attribution_confidence", 0.0),
+                    "attribution_reasoning": attr_result.get("attribution_reasoning", ""),
+                }
+            elif self._method == "embedding":
+                cite_result = self._verify_one_embedding(section, paper)
+            else:  # nli
+                cite_result = self._verify_one_nli(section, paper)
+
+            if cite_result["grounded"]:
+                grounded_count += 1
+            citations.append(cite_result)
+
+        valid_count = sum(1 for c in citations if c["status"] == "checked")
+        rate = grounded_count / valid_count if valid_count > 0 else 0.0
+
+        return {
+            "section_title": section.section_title,
+            "grounding_rate": round(rate, 4),
+            "num_cited": len(section.cited_papers),
+            "num_grounded": grounded_count,
+            "citations": citations,
+        }
+
     # ── Embedding 模式 ──
 
     def _verify_one_embedding(self, section: ReportSection, paper: Paper) -> dict:
@@ -338,49 +455,63 @@ class CitationVerifier:
 
     # ── Attribution 模式（新，pivot 自 NLI）──
 
-    def _verify_one_attribution(self, section: ReportSection, paper: Paper) -> dict:
-        """Attribution 验证: LLM-judge 检测 paper_id 错配
+    # Attribution prompt 作为类常量
+    _ATTRIBUTION_PROMPT_TEMPLATE = (
+        "You are a citation accuracy rater for academic surveys.\n"
+        "Judge the ATTRIBUTION FIDELITY of the section's discussion of the cited paper.\n\n"
+        "SECTION TEXT:\n{section_content}\n\n"
+        "CITED PAPER:\nTitle: {paper_title}\n"
+        "Abstract: {paper_abstract}\n\n"
+        "LABELS (read carefully, these are NOT interchangeable):\n\n"
+        "- matching: The section's specific claims about this paper (named methods, "
+        "reported findings, contributions) are directly supported by the abstract. "
+        "Topic drift alone is OK if no false claims are made.\n\n"
+        "- partial: The section represents the general research direction correctly "
+        "but extends beyond what the abstract explicitly states (common 'scope "
+        "over-claim' in surveys). NOT mismatched — the attribution is broadly "
+        "correct, just less precise. If the section only vaguely references this "
+        "paper within a topic taxonomy, use 'partial'.\n\n"
+        "- mismatched: The section attributes SPECIFIC technical features, named "
+        "methods (e.g. 'FAIR-RAG', 'BriefContext'), or specific quantitative findings "
+        "to this paper that CLEARLY belong to a DIFFERENT research direction. This "
+        "is paper_id misattribution — the description fits a different paper. "
+        "Requires clear evidence the section is confusing this paper with another. "
+        "Generic topic overlap or scope extension is NOT mismatched.\n\n"
+        "- unverifiable: The abstract is too short or vague to judge fidelity.\n\n"
+        "CRITICAL: Reserve 'mismatched' for paper_id errors where specific named "
+        "methods/findings are attributed to the wrong paper. Scope extensions, "
+        "topic overlap discussions, or 'section discusses X while abstract discusses Y' "
+        "should be 'partial' (or 'matching' if the attribution itself isn't wrong).\n"
+    )
 
-        针对的错误类型（~40% 真实错误大头）:
-        - Section 把别论文的技术特征归给这篇论文（e.g. 把 FAIR-RAG 特性归给讲 Indonesian QA 的论文）
-
-        NLI 抓不到这种跨论文错配（只看一对文本内部关系），
-        LLM-judge 能判断 "section 描述的内容和 abstract 声明的能力是否吻合"。
-        """
-        import asyncio
-
+    async def _verify_one_attribution_async(
+        self, section: ReportSection, paper: Paper
+    ) -> dict:
+        """Attribution LLM-judge 原生 async 实现（Pipeline.run() 在 async loop 里用）"""
         from pydantic import BaseModel, Field
 
         class AttributionJudgment(BaseModel):
             label: str = Field(
                 description=(
                     "'matching': section claims align with abstract; "
-                    "'mismatched': section attributes tech/findings NOT in this abstract (wrong paper); "
-                    "'partial': scope mismatch, some claims match some don't; "
-                    "'unverifiable': abstract too short/vague to judge"
+                    "'mismatched': section attributes tech/findings NOT in this abstract; "
+                    "'partial': scope over-claim; "
+                    "'unverifiable': abstract too short"
                 )
             )
             reasoning: str = Field(description="1-2 sentence justification")
             confidence: float = Field(ge=0, le=1)
 
-        prompt = (
-            "Judge whether the SECTION TEXT accurately attributes its claims to the CITED PAPER.\n\n"
-            f"SECTION TEXT:\n{section.content[:2000]}\n\n"
-            f"CITED PAPER:\nTitle: {paper.title}\n"
-            f"Abstract: {paper.abstract[:1500]}\n\n"
-            "Labels:\n"
-            "- matching: claims align with abstract\n"
-            "- mismatched: section attributes tech/findings NOT in this abstract\n"
-            "- partial: some match, some don't (scope mismatch)\n"
-            "- unverifiable: abstract too short/vague\n"
+        prompt = self._ATTRIBUTION_PROMPT_TEMPLATE.format(
+            section_content=section.content[:2000],
+            paper_title=paper.title,
+            paper_abstract=paper.abstract[:1500],
         )
 
         try:
-            judgment = asyncio.run(
-                self._judge_client.generate_structured(
-                    messages=[{"role": "user", "content": prompt}],
-                    response_model=AttributionJudgment,
-                )
+            judgment = await self._judge_client.generate_structured(
+                messages=[{"role": "user", "content": prompt}],
+                response_model=AttributionJudgment,
             )
             mismatched = judgment.label == "mismatched"
             score = judgment.confidence if judgment.label == "matching" else 0.0
@@ -397,7 +528,9 @@ class CitationVerifier:
                 "attribution_reasoning": judgment.reasoning,
             }
         except Exception as e:
-            logger.warning("attribution_judge_failed", paper_id=paper.paper_id, error=str(e)[:200])
+            logger.warning(
+                "attribution_judge_failed", paper_id=paper.paper_id, error=str(e)[:200]
+            )
             return {
                 "paper_id": paper.paper_id,
                 "title": paper.title[:80],
@@ -408,6 +541,16 @@ class CitationVerifier:
                 "attribution_label": "error",
                 "attribution_reasoning": str(e)[:200],
             }
+
+    def _verify_one_attribution(self, section: ReportSection, paper: Paper) -> dict:
+        """Sync 包装器：给 experiments/ 脚本用（不在 async loop 里时）
+
+        在 async context 里不能用此方法（会抛 'cannot be called from a running event loop'），
+        async 上下文请直接 await _verify_one_attribution_async 或用 verify_async()。
+        """
+        import asyncio
+
+        return asyncio.run(self._verify_one_attribution_async(section, paper))
 
     # ── Hybrid 模式（v4: embedding + attribution，不含 NLI）──
 

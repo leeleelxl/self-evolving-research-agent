@@ -287,13 +287,46 @@ class ResearchPipeline:
                 references=[],
             )
 
-        return PipelineResult(
+        result = PipelineResult(
             report=report,
             evolution_log=self._evolution_log,
             total_iterations=len(self._evolution_log),
             papers=list(all_papers_map.values()),
             agent_traces=self._agent_traces,
         )
+
+        # ── Step 7 (opt-in): 引用质量验证 ──
+        if self.config.verify_citations:
+            try:
+                from research.evaluation.citation_verifier import CitationVerifier
+
+                self.logger.info(
+                    "citation_verification_start",
+                    method=self.config.citation_verification_method,
+                    judge_model=self.config.citation_verification_judge,
+                )
+                verifier = CitationVerifier(
+                    method=self.config.citation_verification_method,
+                    attribution_judge_model=self.config.citation_verification_judge,
+                )
+                # Pipeline.run() 在 async loop 里 → 必须用 verify_async()，
+                # 不能用 sync verify()（它内部 asyncio.run 会冲突）
+                result.citation_verification = await verifier.verify_async(result)
+                self.logger.info(
+                    "citation_verification_done",
+                    method=self.config.citation_verification_method,
+                    grounding_rate=result.citation_verification.get("overall_grounding_rate"),
+                    mismatch_rate=result.citation_verification.get("overall_mismatch_rate"),
+                    n_checked=result.citation_verification.get("num_citations_checked"),
+                )
+            except Exception as e:
+                self.logger.error(
+                    "citation_verification_failed",
+                    error=str(e)[:300],
+                )
+                # 不影响主结果，保留 None
+
+        return result
 
     def _filter_by_knowledge_base(
         self,

@@ -16,7 +16,7 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 
 - **自进化机制**：Critic Agent 评分 → 反馈驱动检索策略改进 → 3 次重复实验 Δ=+0.30±0.19（全部为正）
 - **PDF 全文精读**：自动下载 + 提取 PDF 全文 → overall Δ+0.7, depth +0.9（消融验证）
-- **Hybrid 引用验证 (v5, attribution-based)**：Embedding grounding + LLM-judge Attribution 检测 paper_id 错配。NLI 矛盾检测 v4 被 calibration 否证 (precision=0%)，v5 pivot 到抓真实错误大头（paper_id 错配 ~40%）
+- **Hybrid 引用验证 (v6, Pipeline 集成)**：Embedding grounding + LLM-judge Attribution 检测 paper_id 错配。Pipeline 集成 (`verify_citations=True`) 后发现 **Writer 69.1% 引用有模板化错配问题**，是 meta-verifier 揭示生成系统深层缺陷的典型案例。演化历程：NLI (precision=0%) → Attribution pivot (recall=100%) → Pipeline 集成发现 Writer 缺陷
 - **Multi-LLM 交叉评估**：GPT-4o + Claude 双模型 Critic，记录分歧度量化评估置信度
 - **5 Agent 协作**：Planner / Retriever / Reader / Writer / Critic 各司其职
 - **KnowledgeBase RAG 集成**：chunking → embedding → hybrid index，精读量 -58% 质量持平
@@ -138,7 +138,29 @@ python experiments/inspect_agent_io.py experiments/results/trace_demo.json --age
 | v2 | NLI only (grounding) | 4.3% grounding（过严格） | NLI entailment ≠ paraphrase |
 | v3 | Embedding + NLI 矛盾检测 | README 吹"4.8% 矛盾" | 未 calibrate |
 | v4 (P4) | 独立 LLM-rater calibration | NLI 矛盾 **precision=0%** | NLI 失败，被迫 pivot |
-| **v5 (current)** | **Embedding + LLM-judge Attribution** | 抓真实错误大头（paper_id 错配） | 见下文 |
+| v5 (P5+P6) | Embedding + LLM-judge Attribution | Attribution calibration multi-class 62.5% + recall=100% | Claude vs gpt-4o rater 定义分歧 |
+| **v6 (P2, current)** | **Pipeline 集成 async Attribution** | **发现 Writer 69.1% 引用有模板化错配问题** | **见下方 "Pipeline 集成发现"** |
+
+### Pipeline 集成发现（P2，2026-04-14）
+
+Attribution 集成到 Pipeline 后（`PipelineConfig(verify_citations=True)`），对真实 Pipeline 输出跑一次验证（5 sections, 110 引用）：
+
+| 指标 | 数据 |
+|------|:---:|
+| Attribution 成功率 | **109/110 (99%)** |
+| **Mismatch rate** | **69.1% (76/110)** |
+| Matching | 18 |
+| Partial (scope over-claim) | 16 |
+| Mismatched (paper_id 错配) | 76 |
+
+**关键发现**：这不是 Attribution 误判，是 **Writer Agent 系统性质量缺陷**。
+
+例如 section "Architectural Patterns and Frameworks for Modern RAG" 用**同一段模板化描述**（"broad architectural review/taxonomy of RAG families, fusion mechanisms, orchestration patterns"）引用了多篇完全不同的论文：FAIR-RAG（特定 agentic 方法）、CIIR@LiveRAG（multi-agent 系统）、Reinforced-IR（self-boosting 框架）、**RAGSum**（code comment generation，完全不相关话题）。
+
+**这是 Pipeline 集成才能发现的 end-to-end insight** —— 独立跑 Attribution 只能说"模型能力如何"，集成到 Pipeline 才能说"生成系统质量如何"。
+
+> _数据源: `experiments/results/p2_smoke_test.json`_
+> _Async 重构要点: `CitationVerifier.verify_async()` 原生 async，Pipeline 用 `await verifier.verify_async(result)` 避免 asyncio loop 嵌套冲突。_
 
 ### v4→v5 Pivot: 从"矛盾检测"到"Attribution 错配检测"
 
@@ -244,6 +266,16 @@ from research.core.config import PipelineConfig, PDFConfig
 from research.pipeline.research import ResearchPipeline
 cfg = PipelineConfig(pdf=PDFConfig(enabled=True))
 asyncio.run(ResearchPipeline(cfg).run('你的研究问题'))
+"
+
+# 运行 + 启用引用质量验证（opt-in，Pipeline 末尾跑 Attribution LLM judge）
+python -c "
+import asyncio
+from research.core.config import PipelineConfig
+from research.pipeline.research import ResearchPipeline
+cfg = PipelineConfig(verify_citations=True)  # citation_verification_method='hybrid' 默认
+result = asyncio.run(ResearchPipeline(cfg).run('你的研究问题'))
+print(result.citation_verification)  # 含 mismatch_rate / attribution_label 分布
 "
 
 # 测试（80 tests）
