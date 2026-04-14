@@ -1,57 +1,74 @@
 # 当前状态
 
-> 更新时间：2026-04-12
+> 更新时间：2026-04-14（session 收尾）
 
-## 阶段：SurGE 对标完成，全部核心功能闭环
+## 阶段：P7 完成，诚实面对 Writer 系统性缺陷，明天修复
 
-- 5 Agent Pipeline + KnowledgeBase + Multi-LLM Critic + PDF 全文 + Hybrid 引用验证 + SurGE 对标
-- 自进化 3 次重复验证：Δ=+0.30±0.19（全部为正）
-- 消融实验：5 组 HotpotQA + KB 消融 + Multi-LLM 验证 + PDF 消融 + 引用验证三方法对比 + SurGE 对标
-- 80 tests，9 篇知识文档
-- 错误处理 + 优雅降级
+评分轨迹：55/90 (起始) → 63 (Wave 1) → 68 (P5) → 71 (P2+P6) → **~72 (P7)**，🟢 **强推级**
 
-## 核心数据（面试直接用）
+## 今日完成
 
-### Hybrid 引用验证（Embedding + NLI）
-- Embedding-only: 100% grounding（过宽松，无法区分话题相关 vs 真实支撑）
-- NLI-only: 4.3% grounding（过严格，NLI 区分 entailment 和 paraphrase）
-- **Hybrid: 100% grounding + 4.8% contradiction 检测（10/208 引用矛盾）**
-- 关键 insight: NLI 不适合替代 embedding 做 grounding，但矛盾检测是独特能力
-- 模型: DeBERTa-v3-base cross-encoder，句子级推理
+- **P0**: Agent IO 可观测化（AgentTrace + inspect_agent_io.py + trace_demo）
+- **P1**: 真 API E2E 集成测试（2 个 integration tests）
+- **P3**: Bootstrap 95% CI（Evolution Δ=+0.30 [+0.10, +0.47]）
+- **P4**: NLI Calibration → 发现 precision=0%（诚实披露）
+- **P5**: Attribution Method Pivot（NLI → LLM-judge）
+- **P6**: Attribution Calibration（multi-class 62.5%, recall=100%）
+- **P2**: Pipeline 集成 Citation Verification + async 重构
+- **P7**: 重复 smoke test n=3 → **Writer 60.5% 错配，CI [56.2%, 66.7%]**
 
-### PDF 全文 vs Abstract-only（消融）
-- Abstract-only: overall=7.2（depth=6.9）
-- Full-text: overall=7.9（depth=7.8）
-- **Δ=+0.7，depth +0.9 提升最大**
-- PDF 提取成功率 96.7%（58/60）
-- 耗时 3x（435s → 1252s），可优化
+## 明天主任务：P8 修复 Writer Attribution 问题
 
-### 自进化（3 次重复，Multi-LLM Critic）
-- Overall: 7.79 ± 0.07（系统稳定）
-- Evolution Δ: +0.30 ± 0.19（3/3 全部为正）
-- Cross-model spread: accuracy 最不稳定（1.4），coherence 最稳定（0.3）
+**为什么必须做**：用户质疑"这个实验的价值就是判定 writer agent 不可靠？" — 确实是。
+Writer 60% 错配是**硬伤不是亮点**，光发现不修等于 spin。
 
-### KnowledgeBase 集成
-- Without KB: Reader 读 50 篇，overall=8.05
-- With KB: Reader 读 21 篇（-58%），overall=8.0
-- 精读量大幅减少，质量持平
+**修复策略**（按 ROI 排序，先做策略 1）：
 
-### Multi-LLM 交叉评估
-- GPT-4o vs Claude: overall 差 ~1.0（Claude 更严）
-- 同家族模型（gpt-4o vs gpt-4o-mini）分数完全一致 → 同家族 Multi-LLM 无意义
-- accuracy 跨模型分歧最大 → 已知局限
+1. **Structured citation prompt**（~1h）
+   - Writer prompt 强制每条声称 quote abstract 具体表述
+   - 当前 writer.py 让 Writer 自由写，改为"只能用 abstract 明确提到的内容"
 
-### 消融实验（BGE-small, 50 samples）
-- Best: fixed × hybrid = F1 0.740
-- Hybrid > Dense > Sparse
+2. **Reader-Writer contract**（~2h）
+   - Writer 只能用 Reader note.core_contribution 里的 claim
+   - Prompt 明确禁止使用 note 中未出现的方法名
 
-### SurGE Benchmark 对标
-- Coverage: 25.0% vs 最强基线 StepSurvey 6.3%（**4x**）
-- Logic: 4.00/5 vs StepSurvey 4.85/5（略低，改进方向）
-- 独有能力: NLI 矛盾引用检测（1.1%），SurGE 基线无此维度
-- 注意: ground truth 规模不同（我们 20 篇 vs SurGE ~100 篇/综述），绝对值不直接可比
+3. **Self-check via Attribution**（~3h）
+   - Writer 生成后自己跑 attribution，mismatch > threshold 就 revise
 
-## 下一步
-- README 更新（PDF + Hybrid 引用验证 + SurGE 数据）
-- PDF 耗时优化（选择性下载/缓存）
-- GitHub 发布
+**验证方法**：复用 `experiments/p2_repeated_smoke_test.py` 跑 n=3，对比 CI。
+
+**成功标准**：mismatch rate 60% → 20-30%
+
+## 核心数据（面试可讲）
+
+### 自进化（3 次重复, Multi-LLM Critic）
+- Overall 7.79 ± 0.07, **Evolution Δ = +0.30, 95% CI [+0.10, +0.47]**
+- Round 0 (6 queries) → Round 1 (38 queries, 0 重复) — 真 diverge
+
+### PDF 全文消融
+- Abstract 7.2 → Full-text 7.9, **Δ+0.7, depth +0.9**
+- 提取率 96.7%
+
+### SurGE 外部对标
+- Coverage 25.0% vs 最强基线 6.3%（4x，有 methodology caveat）
+
+### Hybrid 引用验证（v6, n=3）
+- **Writer 60.5% attribution 错配, CI [56.2%, 66.7%]** ← 硬伤待修复
+- NLI 矛盾 precision=0%（已 deprecate）
+- Attribution multi-class agreement 62.5%
+
+## 技术栈（已实现）
+
+Python 3.11+ | OpenAI SDK (中转站) | Multi-LLM: GPT-4o + Claude | FAISS + BM25 | 
+Semantic Scholar + arXiv | fastembed BGE-small | sentence-transformers (optional) | 
+pypdf | Pydantic v2 | structlog | pytest (96 unit + 20 integration)
+
+## Next Session 启动检查
+
+1. 读此文件（status.md）
+2. 读 `memory/tasks.md`
+3. 读 `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/project_apr14_writer_fix_plan.md`
+4. 读 `/Users/lxl/.claude/projects/-Users-lxl--openclaw-code-research-agent/memory/feedback_avoid_spinning.md`
+5. 检查 git log：最新 commit 应是 `e07b6f8 feat: P7 P2 Smoke Test n=3 + Bootstrap CI`
+6. 跑 `conda run -n base python -m pytest -m "not integration" -q` 确认 96 tests 通过
+7. 开始 P8 策略 1（writer.py prompt）

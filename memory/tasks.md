@@ -1,53 +1,56 @@
 # 任务看板
 
-> 更新时间：2026-04-12
+> 更新时间：2026-04-14（session 收尾）
 
-## P0 — 核心系统 ✅ 全部完成
-
-| # | 任务 | 状态 |
-|---|------|------|
-| 1 | 架构设计文档 | ✅ |
-| 2 | Agent 基类 + Pipeline 框架 | ✅ |
-| 3 | Semantic Scholar / arXiv 检索工具 | ✅ |
-| 4 | PlannerAgent | ✅ |
-| 5 | RetrieverAgent | ✅ |
-| 6 | CriticAgent | ✅ |
-| 7 | ReaderAgent | ✅ |
-| 8 | WriterAgent | ✅ |
-| 9 | Pipeline 集成（5 Agent 编排） | ✅ |
-| 10 | Chunk 策略（fixed/semantic/recursive） | ✅ |
-| 11 | FAISS + BM25 索引 + Hybrid (RRF) | ✅ |
-| 12 | LLM Reranker | ✅ |
-| 13 | **KnowledgeBase — RAG 接入 Pipeline** | ✅ |
-| 14 | **错误处理 + 优雅降级** | ✅ |
-| 15 | **Prompt 优化（Critic + Planner）** | ✅ |
-
-## P1 — 实验验证 ✅ 全部完成
+## ✅ P0 核心系统（全部完成）
 
 | # | 任务 | 状态 |
-|---|------|------|
-| 16 | 端到端 Pipeline 跑通 | ✅ |
-| 17 | 自进化效果验证（7.8 → 8.0, Δ+0.2） | ✅ |
-| 18 | RAG 消融实验（5 组 HotpotQA） | ✅ |
-| 19 | **KB 消融实验（精读量 -58%，质量持平）** | ✅ |
-| 20 | README 填入真实数据 | ✅ |
+|---|------|:----:|
+| 1-15 | 5 Agent + KB + PDF + 错误处理 + Prompt | ✅ |
 
-## P1.5 — PDF 全文集成 ✅ 完成
+## ✅ P1 实验验证（全部完成）
 
 | # | 任务 | 状态 |
-|---|------|------|
-| 21 | PDF 下载 + 文本提取模块 | ✅ |
-| 22 | Reader/KnowledgeBase 全文接入 | ✅ |
-| 23 | PDF 消融实验（Δ+0.7, depth +0.9） | ✅ |
+|---|------|:----:|
+| 16-20 | 端到端 + 自进化 + RAG/KB/PDF 消融 + README | ✅ |
 
-## P2 — 后续优化
+## ✅ P2 架构升级 + 诚实度（全部完成）
 
-| # | 任务 | 状态 |
+| # | 任务 | 状态 | 成果 |
+|---|------|:----:|------|
+| Wave 1 | 诚实度修复（Limitations + Opt-in + 数据溯源） | ✅ | 诚实定位 5→7 |
+| P0 | Agent IO 可观测化（AgentTrace + inspect 工具） | ✅ | 发现 38 queries 0 重复 |
+| P1 | 真 API E2E 集成测试 | ✅ | 消除 anti-overselling -1 |
+| P3 | Bootstrap 95% CI | ✅ | Evolution Δ +0.30 [+0.10, +0.47] |
+| P4 | NLI Calibration | ✅ | precision=0% 诚实披露 |
+| P5 | Attribution Method Pivot | ✅ | NLI → LLM-judge |
+| P6 | Attribution Calibration | ✅ | multi-class 62.5% |
+| **P2** | Pipeline 集成 Citation Verification | ✅ | + async 重构修 bug |
+| **P7** | n=3 重复 smoke test + CI | ✅ | Writer 60.5% [56.2, 66.7] 确认 |
+
+## 🔥 P8 明天做 — 修复 Writer Attribution
+
+**优先级**: 最高（硬伤不是亮点，光诊断不修 = spin）
+
+| 步骤 | 内容 | 成本 |
+|------|------|:----:|
+| 8.1 | Writer prompt 加 structured citation 约束 | 1h |
+| 8.2 | Reader-Writer contract（禁止 Writer 编造方法名）| 2h |
+| 8.3 | 跑 p2_repeated_smoke_test.py n=3 验证修复效果 | 1h (实验) |
+| 8.4 | 如果 mismatch 仍 > 40%，做 Self-check via Attribution | 3h |
+| 8.5 | README 更新 "修复前 60% → 修复后 X%" 对比 | 0.5h |
+
+**成功标准**: mismatch rate 60% → 20-30%
+**面试叙事**: 从 "发现问题" → "诊断 + 修复 + 验证" 完整闭环
+
+## 🟡 P9 可选优化（时间允许）
+
+| # | 任务 | 价值 |
 |---|------|------|
-| 24 | **Hybrid 引用验证（Emb+NLI, 4.8% 矛盾检测）** | ✅ |
-| 25 | **SurGE benchmark 外部对标（Coverage 4x 最强基线）** | ✅ |
-| 26 | 接入 sentence-transformers 真实 embedding | 🔲 |
-| 27 | 扩大消融样本量（50→200 samples） | 🔲 |
-| 28 | 自进化 5 轮对比实验 | 🔲 |
-| 29 | GitHub 发布 | 🔲 |
-| 30 | CLI 体验提升 | 🔲 |
+| P9.1 | Streamlit demo + README GIF | 面试第一印象 +1 |
+| P9.2 | 内容场景 vertical demo（给小红书/快手叙事） | 核心 3 家平均 +0.5 |
+| P9.3 | 自进化扩 n=3 → n=10 | 更强的 CI |
+
+## 🟢 P2 完成后可以 stop 并转面试准备
+
+当前 72/90 强推级已够。P8 修完 Writer 后 ~74/90。继续刷分边际递减。
