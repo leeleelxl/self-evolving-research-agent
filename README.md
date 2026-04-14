@@ -16,7 +16,7 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 
 - **自进化机制**：Critic Agent 评分 → 反馈驱动检索策略改进 → 3 次重复实验 Δ=+0.30±0.19（全部为正）
 - **PDF 全文精读**：自动下载 + 提取 PDF 全文 → overall Δ+0.7, depth +0.9（消融验证）
-- **Hybrid 引用验证 (v6, Pipeline 集成)**：Embedding grounding + LLM-judge Attribution 检测 paper_id 错配。Pipeline 集成 (`verify_citations=True`) 后发现 **Writer 69.1% 引用有模板化错配问题**，是 meta-verifier 揭示生成系统深层缺陷的典型案例。演化历程：NLI (precision=0%) → Attribution pivot (recall=100%) → Pipeline 集成发现 Writer 缺陷
+- **Hybrid 引用验证 (v6, Pipeline 集成 + n=3 CI)**：Embedding grounding + LLM-judge Attribution 检测 paper_id 错配。Pipeline 集成 3 次重复实验发现 **Writer 60.5% 引用系统性错配，95% CI [56.2%, 66.7%]**（3 runs 高度一致，非随机抖动），典型模式是 LLM 用"FAIR-RAG / MultiRAG / Auto-RAG"等模板化方法名张冠李戴。演化历程：NLI (precision=0%) → Attribution pivot (recall=100%) → Pipeline 集成 + CI 确认
 - **Multi-LLM 交叉评估**：GPT-4o + Claude 双模型 Critic，记录分歧度量化评估置信度
 - **5 Agent 协作**：Planner / Retriever / Reader / Writer / Critic 各司其职
 - **KnowledgeBase RAG 集成**：chunking → embedding → hybrid index，精读量 -58% 质量持平
@@ -141,25 +141,30 @@ python experiments/inspect_agent_io.py experiments/results/trace_demo.json --age
 | v5 (P5+P6) | Embedding + LLM-judge Attribution | Attribution calibration multi-class 62.5% + recall=100% | Claude vs gpt-4o rater 定义分歧 |
 | **v6 (P2, current)** | **Pipeline 集成 async Attribution** | **发现 Writer 69.1% 引用有模板化错配问题** | **见下方 "Pipeline 集成发现"** |
 
-### Pipeline 集成发现（P2，2026-04-14）
+### Pipeline 集成发现 — Writer 系统性 Attribution 错配（P2 + P7，n=3）
 
-Attribution 集成到 Pipeline 后（`PipelineConfig(verify_citations=True)`），对真实 Pipeline 输出跑一次验证（5 sections, 110 引用）：
+Attribution 集成到 Pipeline 后（`PipelineConfig(verify_citations=True)`），跑 3 次完整 pipeline（5 sections / run, 共 258 引用），带 95% Bootstrap CI：
 
-| 指标 | 数据 |
-|------|:---:|
-| Attribution 成功率 | **109/110 (99%)** |
-| **Mismatch rate** | **69.1% (76/110)** |
-| Matching | 18 |
-| Partial (scope over-claim) | 16 |
-| Mismatched (paper_id 错配) | 76 |
+| Attribution 标签 | Run 1 | Run 2 | Run 3 | **Mean (95% CI)** |
+|----------------|:----:|:----:|:----:|:----:|
+| **Mismatched** (paper_id 错配) | 58.7% | 56.2% | 66.7% | **60.5% [56.2, 66.7]** |
+| Matching | 32.0% | 28.1% | 20.7% | 26.9% [20.7, 32.0] |
+| Partial (scope over-claim) | 9.3% | 15.6% | 12.6% | 12.5% [9.3, 15.6] |
+| Citations checked | 75 | 96 | 87 | — |
 
-**关键发现**：这不是 Attribution 误判，是 **Writer Agent 系统性质量缺陷**。
+**结论：Writer 60.5% 引用存在 attribution 错配，95% CI 下界 56.2% >> 30%，是系统性问题而非随机抖动**。
 
-例如 section "Architectural Patterns and Frameworks for Modern RAG" 用**同一段模板化描述**（"broad architectural review/taxonomy of RAG families, fusion mechanisms, orchestration patterns"）引用了多篇完全不同的论文：FAIR-RAG（特定 agentic 方法）、CIIR@LiveRAG（multi-agent 系统）、Reinforced-IR（self-boosting 框架）、**RAGSum**（code comment generation，完全不相关话题）。
+**典型错配模式**（从 3 个 run 的 Attribution judge reasoning）：
 
-**这是 Pipeline 集成才能发现的 end-to-end insight** —— 独立跑 Attribution 只能说"模型能力如何"，集成到 Pipeline 才能说"生成系统质量如何"。
+Writer 反复在 section 中声称 paper 实现了 **"FAIR-RAG / SEA (Structured Evidence Assessment) / Iterative Refinement / MultiRAG / HopRAG / Auto-RAG"** 等具体方法名，但这些方法实际属于其他论文。例如：
+- Run 1: 把 FAIR-RAG 特征归给 Vendi-RAG / RAG-Gym
+- Run 2: 把 MultiRAG/HopRAG 归给 Mindscape-RAG / VideoRAG
+- Run 3: 把 Auto-RAG/MAIN-RAG 归给 Visual-RAG（text-to-image benchmark）
 
-> _数据源: `experiments/results/p2_smoke_test.json`_
+**这是一个有学术价值的发现**：LLM Writer 有几个"模板化方法名"，会反复张冠李戴到任何被引论文上。**这种系统性错配只有 Pipeline 集成 + meta-verifier + 多次重复才能揭示**。
+
+> _数据源: `experiments/results/p2_repeated_smoke_test.json` (n=3, paired bootstrap CI, seed=42)_
+> _Meta insight: 独立跑 Attribution 只能看 "模型能力"，Pipeline 集成 + n=3 才能看 "生成系统质量"。_
 > _Async 重构要点: `CitationVerifier.verify_async()` 原生 async，Pipeline 用 `await verifier.verify_async(result)` 避免 asyncio loop 嵌套冲突。_
 
 ### v4→v5 Pivot: 从"矛盾检测"到"Attribution 错配检测"

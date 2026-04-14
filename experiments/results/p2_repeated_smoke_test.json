@@ -1,0 +1,190 @@
+{
+  "experiment": "p2_repeated_smoke_test",
+  "timestamp": "2026-04-14T21:02:56.152379",
+  "question": "What are recent advances in retrieval-augmented generation?",
+  "n_runs": 3,
+  "n_successful": 3,
+  "config": {
+    "max_iterations": 1,
+    "verify_citations": true,
+    "citation_verification_method": "hybrid",
+    "judge_model": "claude-sonnet-4-6-20250514",
+    "trace_level": "full"
+  },
+  "mismatch_rate_stats": {
+    "values_per_run": [
+      0.5867,
+      0.5625,
+      0.6667
+    ],
+    "mean": 0.6053,
+    "ci_95_low": 0.5625,
+    "ci_95_high": 0.6667,
+    "format": "+0.6053 (95% CI: [+0.5625, +0.6667])"
+  },
+  "attribution_label_stats": {
+    "matching": {
+      "values_per_run": [
+        0.32,
+        0.28125,
+        0.20689655172413793
+      ],
+      "mean": 0.2694,
+      "ci_low": 0.2069,
+      "ci_high": 0.32
+    },
+    "mismatched": {
+      "values_per_run": [
+        0.5866666666666667,
+        0.5625,
+        0.6666666666666666
+      ],
+      "mean": 0.6053,
+      "ci_low": 0.5625,
+      "ci_high": 0.6667
+    },
+    "n/a": {
+      "values_per_run": [
+        0.0,
+        0.0,
+        0.011494252873563218
+      ],
+      "mean": 0.0038,
+      "ci_low": 0.0,
+      "ci_high": 0.0115
+    },
+    "partial": {
+      "values_per_run": [
+        0.09333333333333334,
+        0.15625,
+        0.12643678160919541
+      ],
+      "mean": 0.1253,
+      "ci_low": 0.0933,
+      "ci_high": 0.1562
+    }
+  },
+  "raw_runs": [
+    {
+      "run_id": 0,
+      "status": "ok",
+      "elapsed_sec": 444.2,
+      "num_sections": 5,
+      "num_papers": 43,
+      "num_citations_checked": 75,
+      "num_mismatched": 44,
+      "mismatch_rate": 0.5867,
+      "attribution_label_distribution": {
+        "partial": 7,
+        "matching": 24,
+        "mismatched": 44
+      },
+      "attribution_valid_count": 75,
+      "attribution_error_count": 0,
+      "mismatched_samples": [
+        {
+          "paper_id": "arxiv:2502.11228v2",
+          "section_title": "",
+          "paper_title": "Vendi-RAG: Adaptively Trading-Off Diversity And Quality Significantly Improves R",
+          "reasoning": "The section attributes specific agentic-orchestration methods—'FAIR-RAG,' an 'Iterative Refinement Cycle,' and a 'Structured Evidence Assessment (SEA) module'—that do not appear in the Vendi-RAG abstract. Vendi-RAG is about iteratively balancing retrieval diversity and answer quality for multi-hop Q",
+          "confidence": 0.98
+        },
+        {
+          "paper_id": "arxiv:2502.13957v2",
+          "section_title": "",
+          "paper_title": "RAG-Gym: Systematic Optimization of Language Agents for Retrieval-Augmented Gene",
+          "reasoning": "The section attributes specific methods and named systems such as Auto-RAG and FAIR-RAG with iterative orchestration features, but the cited abstract is for RAG-Gym, an optimization platform for agentic RAG featuring Re²Search/Re²Search++ and prompt/actor/critic optimization. These are clearly diffe",
+          "confidence": 0.98
+        },
+        {
+          "paper_id": "arxiv:2412.12881v1",
+          "section_title": "",
+          "paper_title": "RAG-Star: Enhancing Deliberative Reasoning with Retrieval Augmented Verification",
+          "reasoning": "The section attributes specific methods like Auto-RAG and FAIR-RAG with iterative agentic retrieval/refinement, while the cited abstract is about RAG-Star: MCTS-based deliberative reasoning with retrieval-augmented verification and refinement. These are clearly different named systems and technical ",
+          "confidence": 0.98
+        }
+      ]
+    },
+    {
+      "run_id": 1,
+      "status": "ok",
+      "elapsed_sec": 554.2,
+      "num_sections": 5,
+      "num_papers": 38,
+      "num_citations_checked": 96,
+      "num_mismatched": 54,
+      "mismatch_rate": 0.5625,
+      "attribution_label_distribution": {
+        "partial": 15,
+        "mismatched": 54,
+        "matching": 27
+      },
+      "attribution_valid_count": 96,
+      "attribution_error_count": 0,
+      "mismatched_samples": [
+        {
+          "paper_id": "arxiv:2512.17220v1",
+          "section_title": "",
+          "paper_title": "Mindscape-Aware Retrieval Augmented Generation for Improved Long Context Underst",
+          "reasoning": "The section attributes specific methods—'FAIR-RAG,' SEA, iterative refinement, MultiRAG, and HopRAG-style reasoning graphs—to the cited paper, but the abstract is about MiA-RAG, which uses hierarchical summarization to build a global 'mindscape' for long-context understanding. These named architectu",
+          "confidence": 0.98
+        },
+        {
+          "paper_id": "arxiv:2502.01549v1",
+          "section_title": "",
+          "paper_title": "VideoRAG: Retrieval-Augmented Generation with Extreme Long-Context Videos",
+          "reasoning": "The section attributes named methods and architectures such as FAIR-RAG, MultiRAG, HopRAG, SEA, and iterative agentic retrieval/reasoning pipelines, none of which appear in the VideoRAG abstract. VideoRAG is specifically about long-context video RAG with a dual-channel architecture for graph-based t",
+          "confidence": 0.98
+        },
+        {
+          "paper_id": "arxiv:2502.20330v2",
+          "section_title": "",
+          "paper_title": "RAPID: Long-Context Inference with Retrieval-Augmented Speculative Decoding",
+          "reasoning": "The section attributes specific architectures and named methods like FAIR-RAG, MultiRAG, and HopRAG, plus a modular/agentic RAG stack discussion, none of which appear in RAPID. RAPID is about long-context inference accelerated by retrieval-augmented speculative decoding with a RAG drafter, so this i",
+          "confidence": 0.99
+        }
+      ]
+    },
+    {
+      "run_id": 2,
+      "status": "ok",
+      "elapsed_sec": 535.1,
+      "num_sections": 5,
+      "num_papers": 50,
+      "num_citations_checked": 87,
+      "num_mismatched": 58,
+      "mismatch_rate": 0.6667,
+      "attribution_label_distribution": {
+        "partial": 11,
+        "matching": 18,
+        "mismatched": 58,
+        "n/a": 1
+      },
+      "attribution_valid_count": 87,
+      "attribution_error_count": 0,
+      "mismatched_samples": [
+        {
+          "paper_id": "arxiv:2504.01346v4",
+          "section_title": "",
+          "paper_title": "RAG over Tables: Hierarchical Memory Index, Multi-Stage Retrieval, and Benchmark",
+          "reasoning": "The section never discusses this cited paper’s table-focused T-RAG framework, hierarchical memory index, multi-stage table retrieval, graph-aware prompting, or the MultiTableQA benchmark. Instead, it attributes agentic/multi-agent RAG papers and specific methods like Auto-RAG, MAIN-RAG, and Collab-R",
+          "confidence": 0.98
+        },
+        {
+          "paper_id": "arxiv:2502.16636v2",
+          "section_title": "",
+          "paper_title": "Visual-RAG: Benchmarking Text-to-Image Retrieval Augmented Generation for Visual",
+          "reasoning": "The section attributes agentic RAG methods such as Auto-RAG, MAIN-RAG, Collab-RAG, and multi-agent orchestration to the cited paper, but the abstract is for Visual-RAG, a benchmark on text-to-image retrieval augmented generation for visually grounded QA. These are clearly different contributions and",
+          "confidence": 0.98
+        },
+        {
+          "paper_id": "arxiv:2210.02928v2",
+          "section_title": "",
+          "paper_title": "MuRAG: Multimodal Retrieval-Augmented Generator for Open Question Answering over",
+          "reasoning": "The section discusses agentic/multi-agent RAG systems such as Auto-RAG, MAIN-RAG, and Collab-RAG with controllers, consensus filtering, and query planning. MuRAG, by contrast, is a multimodal retrieval-augmented generator over images and text; the abstract contains none of these agentic architecture",
+          "confidence": 0.98
+        }
+      ]
+    }
+  ]
+}
