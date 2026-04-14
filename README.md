@@ -63,6 +63,9 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 - Overall 方差极小（±0.07），系统输出稳定
 - Accuracy 方差最大（±0.35），与 cross-model 分歧分析一致
 
+> _数据源：`experiments/results/self_evolution_repeated.json`。_
+> _统计局限：n=3 std/mean 比接近 1，详见 [已知局限 #2](#已知局限)。_
+
 ### Multi-LLM 交叉评估
 
 用不同 LLM 做 Critic 时，各维度分歧度（spread）揭示评估可靠性：
@@ -78,6 +81,8 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 
 ## PDF 全文精读
 
+> ⚠️ **Opt-in 功能（默认关闭）**：PDF 全文带来 +0.7 overall / +0.9 depth 提升，但首次运行耗时 ~3x（下载 + 提取）。默认走 abstract-only 路径以保证快速体验。启用方式见下文 [Quick Start](#quick-start)。
+
 ### 消融实验：Abstract-only vs Full-text
 
 | 模式 | Overall | Depth | Coverage | Coherence | Accuracy |
@@ -90,6 +95,8 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 - **Depth +0.9 提升最大**：全文包含方法细节和实验数据，abstract 中缺失
 - **优雅降级**：下载失败自动退回 abstract，不影响 pipeline
 - 耗时 3x（435s → 1252s），可通过选择性下载高引论文优化
+
+> _聚合规则：表中数字为最后一轮 (Round 1) 的各维度分数，保留 1 位小数（Python `round()`）。逐轮明细见 `experiments/results/pdf_ablation.json`。_
 
 ## Hybrid 引用验证（Embedding + NLI）
 
@@ -125,6 +132,9 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 - **Logic 4.00/5**：略低于 StepSurvey（4.85），内容逻辑衔接是改进方向
 - **独有维度**：NLI 矛盾引用检测 — SurGE 所有基线都没有此能力
 
+> _数据源：`experiments/results/surge_benchmark.json`。_
+> _对比边界：ground truth 规模不一致（我们 20 篇 vs SurGE 每篇综述 ~100 篇），4x 是方向性优势，详见 [已知局限 #3](#已知局限)。_
+
 > 注：Coverage 绝对值不直接可比（SurGE 用完整引用列表 ~100 篇/综述，我们用 20 篇领域核心论文），但相对优势可信。
 
 ## KnowledgeBase 集成效果
@@ -158,14 +168,26 @@ KnowledgeBase 将 RAG 组件（chunking + embedding + indexing）接入 Pipeline
 ## Quick Start
 
 ```bash
-# 安装
+# 安装（核心，含 Pipeline + embedding grounding 引用验证）
 pip install -e ".[dev]"
+
+# 可选：启用 NLI 矛盾检测（额外装 sentence-transformers ~500MB）
+# pip install -e ".[dev,citation-nli]"
 
 # 配置 API Key
 cp .env.example .env  # 编辑 .env 填入 OpenAI API Key
 
-# 运行
+# 运行（默认 abstract-only，快速）
 python -m research "你的研究问题"
+
+# 运行启用 PDF 全文（对应 README "PDF 全文精读" 表格的数据）
+python -c "
+import asyncio
+from research.core.config import PipelineConfig, PDFConfig
+from research.pipeline.research import ResearchPipeline
+cfg = PipelineConfig(pdf=PDFConfig(enabled=True))
+asyncio.run(ResearchPipeline(cfg).run('你的研究问题'))
+"
 
 # 测试（80 tests）
 pytest tests/ -v
@@ -196,6 +218,26 @@ docs/learning/      # Agent 知识学习文档（9 篇）
 ## 技术栈
 
 Python 3.11+ | OpenAI/Anthropic SDK | FAISS + BM25 | Semantic Scholar API | arXiv API | pypdf | sentence-transformers (CrossEncoder) | fastembed (BGE) | Pydantic v2 | structlog | pytest
+
+## 已知局限
+
+> **项目定位：Research-grade prototype，非生产环境验证。** 以下是经过深入思考的已知短板，是项目的真实边界，不是待办列表。
+
+1. **评估依赖 LLM-as-Judge 的固有偏差** — Critic Agent 本身基于 LLM 打分；虽然用 Multi-LLM 交叉（GPT-4o + Claude）+ 非 LLM 引用验证器部分缓解，但评估闭环未完全打破。**改进方向**：引入人类专家评审 sub-sample 做 calibration。
+
+2. **自进化统计强度不足** — n=3 次重复得 Δ=+0.30±0.19，std/mean 比值接近 1，95% CI 可能包含 0。当前样本量只能说明"方向为正"，不能说明"显著为正"。**改进方向**：扩到 n≥10，加 paired bootstrap 置信区间。
+
+3. **SurGE 对标的 ground truth 规模不可直接比** — 我们用 20 篇 curated RAG 核心论文，SurGE 用每篇综述 ~100 篇的完整引用列表。Coverage 25% vs 6.3% 是方向性优势，不是严格对等基准。**改进方向**：下载 SurGE 官方 corpus，在相同 ground truth 上重算。
+
+4. **引用验证阈值敏感性未分析** — Embedding grounding 阈值 0.3、NLI entailment 阈值 0.5 基于经验设定，未做 sweep。100% grounding rate 可能对阈值敏感。**改进方向**：sweep 阈值 0.1-0.7 看指标变化。
+
+5. **NLI 矛盾检测未人工 calibrate** — 4.8% contradiction rate 来自 DeBERTa-v3 模型输出，未抽样人工标注验证 precision/recall。不确定"4.8% 矛盾"里有多少是真矛盾 vs 模型误判。**改进方向**：人工标 30-50 条，对比 NLI 输出。
+
+6. **仅支持英文学术文献** — BGE-small-en 和 SurGE 对标限定英文；Semantic Scholar / arXiv 偏 CS/AI 领域；中文文献、非学术文本、多模态内容均未验证。
+
+7. **RAG 消融样本量小** — HotpotQA dev set 50 samples，F1 差异（如 hybrid 0.740 vs dense 0.707）未做显著性检验。**改进方向**：扩到 200+ samples + paired t-test。
+
+面试可讲：这些局限的每一条我都知道**如何改进 + 为什么现阶段接受**。研究项目的严谨性不是"没有短板"，是"知道自己的短板在哪"。
 
 ## License
 

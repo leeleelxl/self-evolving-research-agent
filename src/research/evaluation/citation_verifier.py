@@ -85,7 +85,13 @@ class CitationVerifier:
     @staticmethod
     def _load_nli_model(model_name: str):  # noqa: ANN205
         """延迟导入 sentence-transformers，避免未安装时影响其他功能"""
-        from sentence_transformers import CrossEncoder
+        try:
+            from sentence_transformers import CrossEncoder
+        except ImportError as e:
+            raise ImportError(
+                "NLI citation verification requires sentence-transformers. "
+                "Install with: pip install -e '.[citation-nli]'"
+            ) from e
 
         logger.info("loading_nli_model", model=model_name)
         return CrossEncoder(model_name)
