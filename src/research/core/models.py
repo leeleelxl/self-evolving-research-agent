@@ -218,8 +218,28 @@ class EvolutionRecord(BaseModel):
     )
 
 
+class AgentTrace(BaseModel):
+    """单次 Agent 调用的完整 IO 记录 — Agent 项目的核心证据
+
+    做 Agent 项目时，聚合数字（分数、计数）能说谎：
+    - "自进化 Δ+0.30" 可能来自 Critic 随机抖动，非真进化
+    - "queries 从 8→38" 可能是同义词换皮，非真 diverge
+    - "100% grounding" 可能因 Reader 只是 paraphrase abstract
+
+    必须保存每次 Agent 调用的完整文本 IO，才能验证 Agent 是否按预期行动。
+    """
+
+    agent_name: Literal["Planner", "Retriever", "Reader", "Writer", "Critic"]
+    iteration: int = Field(description="属于哪一轮自进化迭代")
+    input_summary: str = Field(description="输入的简要描述，如 'question + feedback'")
+    output: dict[str, Any] = Field(
+        description="Agent 的完整结构化输出（Pydantic .model_dump()）",
+    )
+    timestamp_ms: int = Field(description="调用开始时的毫秒时间戳")
+
+
 class PipelineResult(BaseModel):
-    """Pipeline 的最终输出 — 包含报告和进化过程"""
+    """Pipeline 的最终输出 — 包含报告、进化过程、Agent IO 追踪"""
 
     report: ResearchReport
     evolution_log: list[EvolutionRecord] = Field(default_factory=list)
@@ -227,4 +247,8 @@ class PipelineResult(BaseModel):
     papers: list[Paper] = Field(
         default_factory=list,
         description="Pipeline 中索引的所有论文（用于 post-hoc 引用质量验证）",
+    )
+    agent_traces: list[AgentTrace] = Field(
+        default_factory=list,
+        description="每次 Agent 调用的完整 IO 记录，用于验证 Agent 是否按预期行动",
     )

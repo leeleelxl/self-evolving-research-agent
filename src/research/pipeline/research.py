@@ -19,6 +19,9 @@
 
 from __future__ import annotations
 
+import time
+from typing import Any
+
 import structlog
 
 from research.agents.critic import CriticAgent
@@ -28,6 +31,7 @@ from research.agents.retriever import RetrieverAgent
 from research.agents.writer import WriterAgent
 from research.core.config import PipelineConfig
 from research.core.models import (
+    AgentTrace,
     CriticFeedback,
     EvolutionRecord,
     Paper,
@@ -72,12 +76,59 @@ class ResearchPipeline:
         self._kb_enabled = self.config.knowledge_base.enabled
 
         self._evolution_log: list[EvolutionRecord] = []
+        self._agent_traces: list[AgentTrace] = []
+
+    def _record_trace(
+        self,
+        agent_name: str,
+        iteration: int,
+        input_summary: str,
+        output: dict[str, Any],
+    ) -> None:
+        """记录单次 Agent 调用的完整 IO，用于事后验证 Agent 是否按预期行动
+
+        trace_level 控制粒度:
+        - minimal: 只记录 Planner + Critic（决策证据）
+        - standard: + Reader 的精简字段
+        - full: 所有 Agent 完整 output
+        """
+        level = self.config.trace_level
+
+        if level == "minimal" and agent_name not in ("Planner", "Critic"):
+            return
+
+        # standard 模式下 Reader 输出精简（不存 methodology/key_findings/limitations 全文）
+        if level == "standard" and agent_name == "Reader" and "notes" in output:
+            output = {
+                "notes": [
+                    {
+                        "paper_id": n["paper_id"],
+                        "title": n["title"],
+                        "core_contribution": n["core_contribution"],
+                        "relevance_score": n["relevance_score"],
+                        "relevance_reason": n["relevance_reason"],
+                    }
+                    for n in output["notes"]
+                ],
+                "kept": output.get("kept", len(output.get("notes", []))),
+            }
+
+        self._agent_traces.append(
+            AgentTrace(
+                agent_name=agent_name,  # type: ignore[arg-type]
+                iteration=iteration,
+                input_summary=input_summary,
+                output=output,
+                timestamp_ms=int(time.time() * 1000),
+            )
+        )
 
     async def run(self, question: str) -> PipelineResult:
         """执行完整的研究 Pipeline"""
         self.logger.info("pipeline_start", question=question)
 
         self._evolution_log = []
+        self._agent_traces = []
         all_notes: list[PaperNote] = []
         all_papers_map: dict[str, Paper] = {}  # 跨轮累积所有论文
         seen_paper_ids: set[str] = set()  # 跨轮去重
@@ -93,6 +144,16 @@ class ResearchPipeline:
                 plan = await self._planner.run(
                     question, feedback, iteration, previous_queries,
                 )
+                self._record_trace(
+                    agent_name="Planner",
+                    iteration=iteration,
+                    input_summary=(
+                        f"question='{question[:80]}', "
+                        f"has_feedback={feedback is not None}, "
+                        f"previous_queries={len(previous_queries)}"
+                    ),
+                    output=plan.model_dump(),
+                )
 
                 # 记录本轮的 query（供下一轮去重）
                 for sq in plan.search_strategy.queries:
@@ -100,6 +161,24 @@ class ResearchPipeline:
 
                 # ── Step 2: 检索 ──
                 papers = await self._retriever.run(plan)
+                self._record_trace(
+                    agent_name="Retriever",
+                    iteration=iteration,
+                    input_summary=f"{len(plan.search_strategy.queries)} queries",
+                    output={
+                        "papers": [
+                            {
+                                "paper_id": p.paper_id,
+                                "title": p.title,
+                                "year": p.year,
+                                "citations": p.citations,
+                                "has_pdf_url": p.pdf_url is not None,
+                            }
+                            for p in papers
+                        ],
+                        "total": len(papers),
+                    },
+                )
 
                 # 检索到 0 篇 → 跳过本轮，保留已有数据
                 if not papers:
@@ -119,6 +198,19 @@ class ResearchPipeline:
 
                 # ── Step 4: 精读（只读 KB 筛选后的论文） ──
                 notes = await self._reader.run(papers_to_read, question)
+                self._record_trace(
+                    agent_name="Reader",
+                    iteration=iteration,
+                    input_summary=(
+                        f"{len(papers_to_read)} papers to read, "
+                        f"pdf_enabled={self.config.pdf.enabled}"
+                    ),
+                    output={
+                        "notes": [n.model_dump() for n in notes],
+                        "kept": len(notes),
+                        "filtered_out": len(papers_to_read) - len(notes),
+                    },
+                )
 
                 # 跨轮去重：只保留新论文的笔记
                 new_notes = []
@@ -130,9 +222,24 @@ class ResearchPipeline:
 
                 # ── Step 5: 写作（用所有轮次的笔记） ──
                 report = await self._writer.run(all_notes, plan)
+                self._record_trace(
+                    agent_name="Writer",
+                    iteration=iteration,
+                    input_summary=f"{len(all_notes)} total notes (new={len(new_notes)})",
+                    output=report.model_dump(),
+                )
 
                 # ── Step 6: 评估 ──
                 feedback = await self._critic.run(report, question)
+                self._record_trace(
+                    agent_name="Critic",
+                    iteration=iteration,
+                    input_summary=(
+                        f"report: {len(report.sections)} sections, "
+                        f"{len(report.references)} refs"
+                    ),
+                    output=feedback.model_dump(),
+                )
 
                 # ── 记录进化数据 ──
                 self._evolution_log.append(
@@ -185,6 +292,7 @@ class ResearchPipeline:
             evolution_log=self._evolution_log,
             total_iterations=len(self._evolution_log),
             papers=list(all_papers_map.values()),
+            agent_traces=self._agent_traces,
         )
 
     def _filter_by_knowledge_base(

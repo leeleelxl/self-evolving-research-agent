@@ -150,3 +150,14 @@ class PipelineConfig(BaseModel):
     # 检索
     max_papers_per_query: int = Field(default=20, description="每个 query 最多返回的论文数")
     max_papers_total: int = Field(default=50, description="单轮迭代最多保留的论文总数")
+
+    # Agent IO 追踪
+    trace_level: Literal["minimal", "standard", "full"] = Field(
+        default="full",
+        description=(
+            "Agent IO 追踪粒度: "
+            "minimal=仅存 Planner/Critic 的决策文本; "
+            "standard=含 Reader 的 core_contribution/relevance_reason; "
+            "full=全部 Agent 完整 output（研究项目推荐）"
+        ),
+    )
