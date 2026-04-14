@@ -152,7 +152,7 @@ class TestNLIMode:
 
         assert report["method"] == "nli"
         assert report["num_citations_grounded"] == 1
-        assert report["overall_contradiction_rate"] == 0.0
+        assert report["overall_mismatch_rate"] == 0.0
         cite = report["sections"][0]["citations"][0]
         assert cite["grounded"] is True
         assert "nli_probs" in cite
@@ -175,10 +175,10 @@ class TestNLIMode:
             report = verifier.verify(result)
 
         assert report["num_citations_grounded"] == 0
-        assert report["num_citations_contradicted"] == 1
-        assert report["overall_contradiction_rate"] > 0
+        assert report["num_citations_mismatched"] == 1
+        assert report["overall_mismatch_rate"] > 0
         cite = report["sections"][0]["citations"][0]
-        assert cite["contradicted"] is True
+        assert cite["mismatched"] is True
 
     def test_nli_verify_neutral(self) -> None:
         """NLI 判断为 neutral 时不 grounded 也不 contradicted"""
@@ -197,7 +197,7 @@ class TestNLIMode:
             report = verifier.verify(result)
 
         assert report["num_citations_grounded"] == 0
-        assert report["num_citations_contradicted"] == 0
+        assert report["num_citations_mismatched"] == 0
 
     def test_nli_missing_paper(self) -> None:
         """NLI 模式下缺失论文的处理"""
@@ -231,66 +231,156 @@ class TestNLIMode:
 # ── 方法选择测试 ──
 
 
-class TestHybridMode:
-    def test_hybrid_grounding_from_embedding_contradiction_from_nli(self) -> None:
-        """Hybrid: grounding 来自 embedding, contradiction 来自 NLI"""
-        paper = _make_paper("p1", abstract="RAG combines retrieval and generation for QA tasks")
+class TestAttributionMode:
+    """Attribution 模式：LLM-judge 检测 paper_id 错配（pivot 自 NLI v4）"""
+
+    def _mock_judge_matching(self, verifier: CitationVerifier) -> None:
+        """让 LLM judge 总返回 matching"""
+        from unittest.mock import AsyncMock
+
+        async def fake_generate(messages, response_model):
+            return response_model(
+                label="matching",
+                reasoning="Abstract supports the section's claims.",
+                confidence=0.85,
+            )
+
+        verifier._judge_client = MagicMock()
+        verifier._judge_client.generate_structured = AsyncMock(side_effect=fake_generate)
+
+    def _mock_judge_mismatched(self, verifier: CitationVerifier) -> None:
+        """让 LLM judge 总返回 mismatched（paper_id 错配）"""
+        from unittest.mock import AsyncMock
+
+        async def fake_generate(messages, response_model):
+            return response_model(
+                label="mismatched",
+                reasoning="Section attributes features that don't match this abstract.",
+                confidence=0.9,
+            )
+
+        verifier._judge_client = MagicMock()
+        verifier._judge_client.generate_structured = AsyncMock(side_effect=fake_generate)
+
+    def test_attribution_matching_not_mismatched(self) -> None:
+        paper = _make_paper("p1", abstract="RAG for QA with dense retrieval")
         section = ReportSection(
             section_title="RAG",
-            content="RAG integrates retrieval with generation to answer questions. This approach has shown great promise in recent years.",
+            content="This paper proposes RAG for question answering.",
             cited_papers=["p1"],
         )
         result = _make_pipeline_result([section], [paper])
 
-        # Mock NLI: 无矛盾
-        mock_nli = MagicMock()
+        with patch.object(CitationVerifier, "_load_judge_client", return_value=MagicMock()):
+            verifier = CitationVerifier(method="attribution")
+            self._mock_judge_matching(verifier)
+            report = verifier.verify(result)
 
-        def predict_no_contradiction(pairs, apply_softmax=True):
-            n = len(pairs)
-            return np.array([[0.05, 0.15, 0.80]] * n)  # neutral
+        assert report["method"] == "attribution"
+        assert report["num_citations_mismatched"] == 0
+        cite = report["sections"][0]["citations"][0]
+        assert cite["mismatched"] is False
+        assert cite["attribution_label"] == "matching"
+        assert cite["grounded"] is True  # matching/partial 都算 grounded
 
-        mock_nli.predict.side_effect = predict_no_contradiction
+    def test_attribution_detects_paper_id_mismatch(self) -> None:
+        """真实场景: section 把 FAIR-RAG 的特性归给讲 Indonesian QA 的论文 (P4 FN 案例)"""
+        paper = _make_paper("p1", abstract="Indonesian open-domain QA with BM25 and Gemma")
+        section = ReportSection(
+            section_title="Training",
+            content="FAIR-RAG introduces checklist-based structured evidence assessment for multi-hop QA.",
+            cited_papers=["p1"],
+        )
+        result = _make_pipeline_result([section], [paper])
 
-        with patch.object(CitationVerifier, "_load_nli_model", return_value=mock_nli):
+        with patch.object(CitationVerifier, "_load_judge_client", return_value=MagicMock()):
+            verifier = CitationVerifier(method="attribution")
+            self._mock_judge_mismatched(verifier)
+            report = verifier.verify(result)
+
+        assert report["num_citations_mismatched"] == 1
+        assert report["overall_mismatch_rate"] > 0
+        cite = report["sections"][0]["citations"][0]
+        assert cite["mismatched"] is True
+        assert cite["attribution_label"] == "mismatched"
+
+
+class TestHybridMode:
+    """Hybrid 模式 v4: embedding grounding + attribution 错配检测"""
+
+    def test_hybrid_returns_both_embedding_and_attribution(self) -> None:
+        paper = _make_paper("p1", abstract="Dense retrieval with contrastive learning")
+        section = ReportSection(
+            section_title="Retrieval",
+            content="Dense retrieval uses contrastive training for better recall.",
+            cited_papers=["p1"],
+        )
+        result = _make_pipeline_result([section], [paper])
+
+        from unittest.mock import AsyncMock
+
+        async def fake_generate(messages, response_model):
+            return response_model(
+                label="matching",
+                reasoning="ok",
+                confidence=0.8,
+            )
+
+        with patch.object(CitationVerifier, "_load_judge_client", return_value=MagicMock()):
             verifier = CitationVerifier(method="hybrid")
+            verifier._judge_client = MagicMock()
+            verifier._judge_client.generate_structured = AsyncMock(side_effect=fake_generate)
             report = verifier.verify(result)
 
         assert report["method"] == "hybrid"
         cite = report["sections"][0]["citations"][0]
-        # Grounding 由 embedding 决定（高相似度应 grounded）
-        assert cite["grounded"] is True or cite["grounded"] is False  # 取决于实际 embedding
-        # Contradiction 由 NLI 决定
-        assert cite["contradicted"] is False
-        # 应同时有 embedding 和 NLI 的信息
-        assert "embedding_similarity" in cite
-        assert "nli_probs" in cite
+        assert "embedding_similarity" in cite  # embedding 部分
+        assert "attribution_label" in cite  # attribution 部分
+        assert cite["mismatched"] is False
 
-    def test_hybrid_detects_contradiction(self) -> None:
-        """Hybrid: embedding grounded 但 NLI 检测到矛盾"""
-        paper = _make_paper("p1", abstract="Method X improves accuracy by 20%")
+    def test_hybrid_mismatched_from_attribution(self) -> None:
+        """Hybrid: embedding 看起来话题相关, 但 attribution 检测出 paper_id 错配"""
+        paper = _make_paper("p1", abstract="A study on graph neural networks")
         section = ReportSection(
-            section_title="Results",
-            content="Method X actually decreases accuracy by 15% compared to the baseline. The results are disappointing overall.",
+            section_title="GNN",
+            content="This paper proposes a novel GNN architecture with attention.",
             cited_papers=["p1"],
         )
         result = _make_pipeline_result([section], [paper])
 
-        # Mock NLI: 强矛盾
-        mock_nli = MagicMock()
+        from unittest.mock import AsyncMock
 
-        def predict_contradiction(pairs, apply_softmax=True):
-            n = len(pairs)
-            return np.array([[0.85, 0.05, 0.10]] * n)  # contradiction
+        async def fake_generate(messages, response_model):
+            return response_model(
+                label="mismatched",
+                reasoning="section claims don't belong to this paper",
+                confidence=0.9,
+            )
 
-        mock_nli.predict.side_effect = predict_contradiction
-
-        with patch.object(CitationVerifier, "_load_nli_model", return_value=mock_nli):
-            verifier = CitationVerifier(method="hybrid", contradiction_threshold=0.5)
+        with patch.object(CitationVerifier, "_load_judge_client", return_value=MagicMock()):
+            verifier = CitationVerifier(method="hybrid")
+            verifier._judge_client = MagicMock()
+            verifier._judge_client.generate_structured = AsyncMock(side_effect=fake_generate)
             report = verifier.verify(result)
 
         cite = report["sections"][0]["citations"][0]
-        assert cite["contradicted"] is True
-        assert report["num_citations_contradicted"] == 1
+        assert cite["mismatched"] is True
+        assert report["num_citations_mismatched"] == 1
+
+
+class TestNLIDeprecation:
+    def test_nli_raises_deprecation_warning(self) -> None:
+        mock_nli = MagicMock()
+
+        def predict(pairs, apply_softmax=True):
+            n = len(pairs)
+            return np.array([[0.05, 0.15, 0.80]] * n)
+
+        mock_nli.predict.side_effect = predict
+
+        with patch.object(CitationVerifier, "_load_nli_model", return_value=mock_nli):
+            with pytest.warns(DeprecationWarning, match="precision=0%"):
+                CitationVerifier(method="nli")
 
 
 class TestMethodSelection:

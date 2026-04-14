@@ -16,7 +16,7 @@ ReSearch v2 通过 **Critic Agent 驱动的自进化机制 + PDF 全文精读 + 
 
 - **自进化机制**：Critic Agent 评分 → 反馈驱动检索策略改进 → 3 次重复实验 Δ=+0.30±0.19（全部为正）
 - **PDF 全文精读**：自动下载 + 提取 PDF 全文 → overall Δ+0.7, depth +0.9（消融验证）
-- **Hybrid 引用验证 + Calibration**：Embedding grounding + NLI 矛盾检测，配独立 LLM-rater calibration 揭示 NLI precision=0%（真实诚实发现，详见下文）
+- **Hybrid 引用验证 (v5, attribution-based)**：Embedding grounding + LLM-judge Attribution 检测 paper_id 错配。NLI 矛盾检测 v4 被 calibration 否证 (precision=0%)，v5 pivot 到抓真实错误大头（paper_id 错配 ~40%）
 - **Multi-LLM 交叉评估**：GPT-4o + Claude 双模型 Critic，记录分歧度量化评估置信度
 - **5 Agent 协作**：Planner / Retriever / Reader / Writer / Critic 各司其职
 - **KnowledgeBase RAG 集成**：chunking → embedding → hybrid index，精读量 -58% 质量持平
@@ -130,41 +130,49 @@ python experiments/inspect_agent_io.py experiments/results/trace_demo.json --age
 
 用非 LLM 方法验证 Writer 的每条引用是否真有内容支撑，打破"LLM 评 LLM"闭环。
 
-### 三方法对比实验
+### 架构演化历程（失败→分析→pivot）
 
-| 方法 | Grounding Rate | 矛盾"检测"* | 耗时 | 适用场景 |
-|------|:-------------:|:----------:|:----:|---------|
-| Embedding only | 100% | — | 41s | 过于宽松，无法区分话题相关 vs 真实支撑 |
-| NLI only | 4.3% | 4.8% (未 calibrate) | 367s | 过于严格，NLI entailment ≠ paraphrase |
-| **Hybrid** | **100%** | 4.8% (calibrate 后 precision=0%) | 407s | Embedding grounding 有效，NLI 矛盾模块**未达可用** |
+| 版本 | 方法 | 结果 | 触发变化 |
+|------|------|------|----------|
+| v1 | Embedding only | 100% grounding（过宽松） | 无法区分话题相关 vs 真支持 |
+| v2 | NLI only (grounding) | 4.3% grounding（过严格） | NLI entailment ≠ paraphrase |
+| v3 | Embedding + NLI 矛盾检测 | README 吹"4.8% 矛盾" | 未 calibrate |
+| v4 (P4) | 独立 LLM-rater calibration | NLI 矛盾 **precision=0%** | NLI 失败，被迫 pivot |
+| **v5 (current)** | **Embedding + LLM-judge Attribution** | 抓真实错误大头（paper_id 错配） | 见下文 |
 
-*"矛盾检测"原以为是亮点，calibration 后发现是假阳性。详见下文。
+### v4→v5 Pivot: 从"矛盾检测"到"Attribution 错配检测"
 
-**设计来自实验发现**（不是拍脑袋）：
-- NLI 模型严格区分"逻辑蕴含"和"语义相似" — 综述改述论文内容时，NLI 判 neutral 而非 entailment
-- 因此 NLI 不适合做 grounding（过严）
-- Hybrid 初衷 = 取两者之长：embedding 衡量话题支撑 + NLI（DeBERTa-v3-base）检测矛盾引用
+P4 calibration 分析真实错误类型分布：
 
-### Calibration 揭示 NLI 矛盾检测实际失效
+| 错误类型 | 占比 | NLI 能抓？ | Attribution 能抓？ |
+|---------|:---:|:---------:|:-----------------:|
+| Paper_id 错配（张冠李戴）| ~40% | ❌ NLI 只看一对文本，跨论文错配看不出 | ✅ LLM-judge 专门设计 |
+| Scope mismatch（section 扩展超 abstract）| ~40% | ❌ FP 根源 | ✅ label=partial |
+| 真逻辑矛盾 | ~10% | 🟡 理论能，实践 precision=0% | ✅ label=mismatched |
+| 幻觉引用 | ~10% | — | — (embedding 查 missing) |
 
-用独立 LLM rater (gpt-4o, single-rater) 对 24 个 (section, paper) 对做人工级标注，对比 NLI 的 contradiction 判定：
+**v5 设计**：`method="hybrid"` = Embedding grounding (非 LLM 基线) + Attribution LLM-judge (抓 40% 错误大头)
 
-| 指标 | 结果 | 含义 |
-|------|:---:|------|
-| **Precision** | **0%** (0/4) | NLI 判为矛盾的 4 条，全部不是真矛盾 |
-| **Recall** | **0%** (0/1) | Rater 找到的 1 条真矛盾，NLI 没检测到 |
-| Confusion matrix | TP=0, FP=4, FN=1, TN=19 | — |
-| Rater 标签分布 | contra=1, support=10, neutral=13 | 真实分布 |
+```python
+# v5 API（v4 NLI 矛盾 deprecated）
+verifier = CitationVerifier(
+    method="hybrid",                    # embedding + attribution
+    attribution_judge_model="gpt-4o",   # 独立 judge，避免 Claude-rate-Claude
+)
+```
 
-**失败模式分析**：
-- **False Positives**：NLI 把"section 展开讨论超出 abstract 原话"误判为 contradiction（实际是 neutral/support）。例如同一篇 "Optimizing LLM RAG Pipeline" 被 3 个 section 引用，NLI 全判矛盾，rater 全判 neutral/support
-- **False Negative**：真矛盾是 paper_id 错配（section 把 FAIR-RAG 的特性归给另一篇讲 Indonesian QA 的论文）—— 这是跨论文张冠李戴，NLI 本来就不是为此设计
+### NLI 矛盾模块 Calibration 结果（保留作为 P4 证据）
 
-**诚实声明**：原来宣传的"4.8% 矛盾检测能力"被 calibration 否证。这**不是降低项目价值，而是 calibration 的核心价值**——不做这一步就永远以为 4.8% 是真能力。
+用独立 LLM rater (gpt-4o) 对 24 个 (section, paper) 对做人工级标注：
 
-> _数据源：`experiments/results/nli_calibration.json` + `experiments/calibration/nli_calibration_sample.csv`（可被人工 re-review）。_
-> _Rater: gpt-4o 单 LLM rater（不是人），避免 Claude 作 rater 的相关性偏差。严格 calibration 需多人工 rater + Cohen's κ。_
-> _改进方向（见已知局限 #5）：换 DeBERTa-large / 加 embedding pre-filter / 专为学术文本 fine-tune NLI。_
+| 指标 | NLI 矛盾检测 | 含义 |
+|------|:------:|------|
+| **Precision** | **0%** (0/4) | NLI 判为矛盾的 4 条全是假阳性 |
+| **Recall** | **0%** (0/1) | Rater 找到的 1 条真矛盾是 paper_id 错配，NLI 抓不到 |
+
+> _数据源：`experiments/results/nli_calibration.json` + `experiments/calibration/nli_calibration_sample.csv`。_
+> _Rater: gpt-4o 单 LLM rater（不是人），避免 Claude-rater-of-Claude-Critic 偏差。严格 calibration 需多人工 rater + Cohen's κ。_
+> _这个否定性发现是项目严谨度的核心证据：不做 calibration 就永远以为 4.8% 矛盾检测是真能力。_
 
 ## SurGE Benchmark 外部对标
 
